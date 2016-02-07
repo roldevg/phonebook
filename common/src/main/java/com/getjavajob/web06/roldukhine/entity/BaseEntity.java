@@ -10,7 +10,7 @@ public abstract class BaseEntity {
     public static final long NO_EXIST_ID_ENTITY = 0L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     public long getId() {

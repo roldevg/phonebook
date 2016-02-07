@@ -2,66 +2,64 @@ package com.getjavajob.web06.roldukhine.jpa;
 
 import com.getjavajob.web06.roldukhine.api.CrudDao;
 import com.getjavajob.web06.roldukhine.entity.BaseEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
-@Transactional(readOnly = true)
-public class AbstractDaoJpaImpl<T extends BaseEntity> implements CrudDao<T> {
+@Repository
+public abstract class AbstractDaoJpaImpl<T extends BaseEntity> implements CrudDao<T> {
 
-    private Class T;
+    protected Class<T> entityClass;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
-
-    public AbstractDaoJpaImpl(Class t) {
-        T = t;
+    @SuppressWarnings("unchecked")
+    public AbstractDaoJpaImpl() {
+        ParameterizedType genericSuperclass = (ParameterizedType) (getClass().getGenericSuperclass());
+        this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
     }
 
     @Override
     @Transactional
     public void insert(T entity) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.persist(entity);
+        entityManager.flush();
     }
 
     @Override
     @Transactional
     public void update(T entity) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.merge(entity);
     }
 
     @Override
     @Transactional
     public void delete(T entity) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.find(T, entity.getId());
         entityManager.remove(entity);
     }
 
     @Override
     public T get(long id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        @SuppressWarnings("unchecked") T entity = (T) entityManager.find(T, id);
+        @SuppressWarnings("unchecked") T entity = (T) entityManager.find(entityClass, id);
         return entity;
     }
 
     @Override
+    @Transactional
     public List<T> getAll() {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
         CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
-        @SuppressWarnings("unchecked") Root<T> from = criteriaQuery.from(T);
+        @SuppressWarnings("unchecked") Root<T> from = criteriaQuery.from(entityClass);
 
         CriteriaQuery<Object> select = criteriaQuery.select(from);
         TypedQuery<Object> typedQuery = entityManager.createQuery(select);

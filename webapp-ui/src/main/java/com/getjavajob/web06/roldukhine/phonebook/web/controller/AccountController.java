@@ -1,7 +1,7 @@
 package com.getjavajob.web06.roldukhine.phonebook.web.controller;
 
-import com.getjavajob.web06.roldukhine.entity.UserService;
 import com.getjavajob.web06.roldukhine.entity.User;
+import com.getjavajob.web06.roldukhine.entity.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

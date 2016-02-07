@@ -10,7 +10,8 @@
     <script src="<c:url context="/" value="/webjars/jquery/1.12.0/jquery.min.js"/>"></script>
     <script src="<c:url context="/" value="/webjars/bootstrap/3.3.6/js/bootstrap.js"/>"></script>
 
-    <link rel="stylesheet" href="<c:url context="/" value="/webjars/bootstrap-3-datepicker/1.5.0/dist/css/bootstrap-datepicker3.min.css"/>"/>
+    <link rel="stylesheet"
+          href="<c:url context="/" value="/webjars/bootstrap-3-datepicker/1.5.0/dist/css/bootstrap-datepicker3.min.css"/>"/>
     <script src="<c:url context="/" value="/webjars/bootstrap-3-datepicker/1.5.0/dist/js/bootstrap-datepicker.min.js"/>"></script>
     <script src="<c:url context="/" value="/webjars/bootstrap-3-datepicker/1.5.0/dist/locales/bootstrap-datepicker.ru.min.js"/>"></script>
 
@@ -40,7 +41,7 @@
 
 </head>
 <body>
-<%@include file="/WEB-INF/views/menu.jsp"%>
+<%@include file="/WEB-INF/views/menu.jsp" %>
 
 <div class="head" style="margin-top: 65px;">
     <div class="container">
@@ -111,10 +112,13 @@
                 <c:forEach items="${employeeList}" var="employee">
                     <tr>
                         <td>
-                            <form action="<c:url context="/" value="/employee/edit/${employee.id}"/>" method="get" style="display: inline;">
-                                <button type="submit" class="btn btn-success btn-xs glyphicon glyphicon-pencil"></button>
+                            <form action="<c:url context="/" value="/employee/edit/${employee.id}"/>" method="get"
+                                  style="display: inline;">
+                                <button type="submit"
+                                        class="btn btn-success btn-xs glyphicon glyphicon-pencil"></button>
                             </form>
-                            <form action="<c:url context="/" value="/employee/delete/${employee.id}"/>" method="post" style="display: inline;">
+                            <form action="<c:url context="/" value="/employee/delete/${employee.id}"/>" method="post"
+                                  style="display: inline;">
                                 <button type="submit" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button>
                             </form>
                         </td>

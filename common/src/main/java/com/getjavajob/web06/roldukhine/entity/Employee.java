@@ -35,11 +35,11 @@ public class Employee extends BaseEntity {
     private String note;
 
     @Transient
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manager_id")
     private Employee manager;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private Department department;
 
@@ -49,9 +49,9 @@ public class Employee extends BaseEntity {
     @Column(name = "home_address")
     private String homeAddress;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "employee_to_phone", joinColumns = @JoinColumn(name = "employee_id"),
-    inverseJoinColumns = @JoinColumn(name = "phone_id"))
+            inverseJoinColumns = @JoinColumn(name = "phone_id"))
     private List<Phone> phoneList = new ArrayList<>();
 
     @Column(name = "photo")
