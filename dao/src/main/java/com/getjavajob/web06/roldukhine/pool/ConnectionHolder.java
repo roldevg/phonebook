@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ConnectionHolder {
     private Connection connection;
+
     private AtomicInteger counter = new AtomicInteger();
 
     public ConnectionHolder(Connection connection) {

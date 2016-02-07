@@ -1,10 +1,18 @@
 package com.getjavajob.web06.roldukhine.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "phone")
 public class Phone extends BaseEntity {
+
+    @Column(name = "number")
     private String number;
-    private PhoneType type;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "type")
+    private PhoneType type = PhoneType.WORK;
 
     public String getNumber() {
         return number;
@@ -20,6 +28,10 @@ public class Phone extends BaseEntity {
 
     public void setType(PhoneType type) {
         this.type = type;
+    }
+
+    public int getPhoneTypeTag() {
+        return type.getTag();
     }
 
     @Override

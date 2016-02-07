@@ -1,6 +1,6 @@
 package com.getjavajob.web06.roldukhine.pool;
 
-import com.getjavajob.web06.roldukhine.DaoException;
+import com.getjavajob.web06.roldukhine.exception.DaoException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,12 +12,14 @@ import java.util.concurrent.TimeUnit;
 
 public class ConnectionPool {
 
-    private static final int poolSize = 10;
+    private static final int DEFAULT_SIZE = 10;
+
+    private static final String PROPERTY_URL = "url";
+    private static final String PROPERTY_USER = "user";
+    private static final String PROPERTY_PASSWORD = "password";
 
     private static ConnectionPool instance = new ConnectionPool();
-
-    private BlockingQueue<Connection> pool = new LinkedBlockingQueue<>(poolSize);
-
+    private BlockingQueue<Connection> pool = new LinkedBlockingQueue<>(DEFAULT_SIZE);
     private ThreadLocal<ConnectionHolder> connectionHolder = new ThreadLocal<>();
 
     public static ConnectionPool getInstance() {
@@ -29,11 +31,11 @@ public class ConnectionPool {
             throw new IllegalArgumentException("Properties cannot be null");
         }
 
-        String url = properties.getProperty("url");
-        String user = properties.getProperty("user");
-        String password = properties.getProperty("password");
+        String url = properties.getProperty(PROPERTY_URL);
+        String user = properties.getProperty(PROPERTY_USER);
+        String password = properties.getProperty(PROPERTY_PASSWORD);
 
-        for (int i = 0; i < poolSize; i++) {
+        for (int i = 0; i < DEFAULT_SIZE; i++) {
             Connection connection = createConnection(url, user, password);
             if (connection != null) {
                 pool.offer(connection);
@@ -46,7 +48,6 @@ public class ConnectionPool {
         try {
             connection = DriverManager.getConnection(url, user, password);
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-            connection.setAutoCommit(false);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -60,7 +61,7 @@ public class ConnectionPool {
                 ConnectionHolder holder = new ConnectionHolder(connection);
                 connectionHolder.set(holder);
             } catch (InterruptedException e) {
-                throw new DaoException("Cannot create connection");
+                throw new DaoException("Cannot create connection.");
             }
         }
 
@@ -71,7 +72,6 @@ public class ConnectionPool {
 
     public void release() {
         ConnectionHolder holder = connectionHolder.get();
-
         if (holder == null) {
             return;
         }
@@ -82,26 +82,22 @@ public class ConnectionPool {
         }
 
         holder.getAndDecrement();
-
-        if (holder.getCounter() == 0 && pool.size() < poolSize) {
+        if (holder.getCounter() == 0 && pool.size() < DEFAULT_SIZE) {
             try {
                 pool.put(connection);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new DaoException("Error while releasing connection.");
             }
-
             this.connectionHolder.remove();
         }
     }
 
     public void close() {
-        while (!pool.isEmpty()) {
-            try {
-                Connection connection = pool.take();
-                connection.close();
-            } catch (SQLException | InterruptedException e) {
-                throw new DaoException(e);
-            }
+        try {
+            Connection connection = pool.take();
+            connection.close();
+        } catch (SQLException | InterruptedException e) {
+            throw new DaoException(e);
         }
     }
 }

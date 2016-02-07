@@ -1,21 +1,28 @@
 package com.getjavajob.web06.roldukhine.jdbc;
 
+import com.getjavajob.web06.roldukhine.api.DepartmentDao;
+import com.getjavajob.web06.roldukhine.api.EmployeeDao;
 import com.getjavajob.web06.roldukhine.entity.BaseEntity;
 import com.getjavajob.web06.roldukhine.entity.Department;
 import com.getjavajob.web06.roldukhine.entity.Employee;
-import com.getjavajob.web06.roldukhine.InitialDatabaseScript;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@ContextConfiguration(locations = {"classpath:dao-context.xml", "classpath:dao-context-override.xml"})
 public class DepartmentDaoTest {
-    private DepartmentDao departmentDao = DepartmentDao.getInstance();
-    private EmployeeDao employeeDao = EmployeeDao.getInstance();
 
-    @BeforeClass
-    public static void initScript() {
-        InitialDatabaseScript.executeScript();
-    }
+    @Autowired
+    private DepartmentDao departmentDao;
+
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @Test
     public void testInsert() {
@@ -28,10 +35,8 @@ public class DepartmentDaoTest {
         Department department = createDepartment();
         departmentDao.insert(department);
         long id = department.getId();
-        BaseEntity baseEntity = departmentDao.get(id);
-        Assert.assertNotNull(baseEntity);
         departmentDao.delete(department);
-        baseEntity = departmentDao.get(id);
+        BaseEntity baseEntity = departmentDao.get(id);
         Assert.assertNull(baseEntity);
     }
 

@@ -1,7 +1,3 @@
-DROP DATABASE phonebook;
-CREATE DATABASE IF NOT EXISTS phonebook;
-USE phonebook;
-
 CREATE TABLE IF NOT EXISTS employee (
   id            INT         NOT NULL AUTO_INCREMENT,
   first_name    VARCHAR(20),
@@ -16,6 +12,7 @@ CREATE TABLE IF NOT EXISTS employee (
   home_address  VARCHAR(200),
   manager_id    INT,
   department_id INT,
+  photo         BLOB        NULL,
   PRIMARY KEY (id)
 );
 
@@ -40,6 +37,12 @@ CREATE TABLE IF NOT EXISTS employee_to_phone (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS user (
+  id       INT         NOT NULL AUTO_INCREMENT,
+  login    VARCHAR(30) NOT NULL,
+  password VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+);
 
 ALTER TABLE employee ADD FOREIGN KEY (manager_id) REFERENCES employee (id);
 

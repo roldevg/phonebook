@@ -1,24 +1,61 @@
 package com.getjavajob.web06.roldukhine.entity;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
+import java.util.*;
+
+@Entity
+@Table(name = "employee")
 public class Employee extends BaseEntity {
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "second_name")
     private String secondName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @Column(name = "birthdate")
     private Date birthdate;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "icq")
     private String icq;
+
+    @Column(name = "skype")
     private String skype;
+
+    @Column(name = "note")
     private String note;
+
+    @Transient
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
     private Employee manager;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
     private Department department;
+
+    @Column(name = "work_address")
     private String workAddress;
+
+    @Column(name = "home_address")
     private String homeAddress;
+
+    @ManyToMany
+    @JoinTable(name = "employee_to_phone", joinColumns = @JoinColumn(name = "employee_id"),
+    inverseJoinColumns = @JoinColumn(name = "phone_id"))
     private List<Phone> phoneList = new ArrayList<>();
+
+    @Column(name = "photo")
+    private byte[] photo;
 
     public String getFirstName() {
         return firstName;
@@ -124,6 +161,14 @@ public class Employee extends BaseEntity {
         this.phoneList = phoneList;
     }
 
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -141,12 +186,13 @@ public class Employee extends BaseEntity {
                 Objects.equals(department, employee.department) &&
                 Objects.equals(workAddress, employee.workAddress) &&
                 Objects.equals(homeAddress, employee.homeAddress) &&
-                Objects.equals(phoneList, employee.phoneList);
+                Objects.equals(phoneList, employee.phoneList) &&
+                Arrays.equals(photo, employee.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, secondName, lastName, birthdate, email, icq, skype, note, manager, department, workAddress, homeAddress, phoneList);
+        return Objects.hash(firstName, secondName, lastName, birthdate, email, icq, skype, note, manager, department, workAddress, homeAddress, phoneList, photo);
     }
 
     @Override
@@ -161,11 +207,16 @@ public class Employee extends BaseEntity {
         sb.append(", skype='").append(skype).append('\'');
         sb.append(", note='").append(note).append('\'');
         sb.append(", manager=").append(manager);
-        sb.append(", department=").append(department != null ? department.getName() : null);
+        sb.append(", department=").append(department);
         sb.append(", workAddress='").append(workAddress).append('\'');
         sb.append(", homeAddress='").append(homeAddress).append('\'');
         sb.append(", phoneList=").append(phoneList);
+        sb.append(", photo=").append(Arrays.toString(photo));
         sb.append('}');
         return sb.toString();
+    }
+
+    public void addPhoneToPhoneList(Phone phone) {
+        phoneList.add(phone);
     }
 }

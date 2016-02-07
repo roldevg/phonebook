@@ -1,5 +1,15 @@
 package com.getjavajob.web06.roldukhine.entity;
 
 public enum PhoneType {
-    WORK, HOME;
+    WORK(1), HOME(2);
+
+    private int tag;
+
+    PhoneType(int tag) {
+        this.tag = tag;
+    }
+
+    public int getTag() {
+        return tag;
+    }
 }

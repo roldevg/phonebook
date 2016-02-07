@@ -1,22 +1,25 @@
 package com.getjavajob.web06.roldukhine.jdbc;
 
+import com.getjavajob.web06.roldukhine.api.EmployeeDao;
 import com.getjavajob.web06.roldukhine.entity.Employee;
-import com.getjavajob.web06.roldukhine.InitialDatabaseScript;
 import com.getjavajob.web06.roldukhine.entity.Phone;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@ContextConfiguration(locations = {"classpath:dao-context.xml", "classpath:dao-context-override.xml"})
 public class EmployeeDaoTest {
 
-    private EmployeeDao employeeDao = EmployeeDao.getInstance();
-
-    @BeforeClass
-    public static void initScript() {
-        InitialDatabaseScript.executeScript();
-    }
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @Test
     public void testGetTableName() throws Exception {
@@ -25,15 +28,23 @@ public class EmployeeDaoTest {
 
     @Test
     public void testInsert() throws Exception {
-        Employee employee = new Employee();
-        employee.setFirstName("Petrov");
-        employee.setSecondName("Petrov");
-        employee.setLastName("Petrov");
-
-        employee.setDepartment(null);
+        Employee employee = createTestEmployee();
         employeeDao.insert(employee);
-        Assert.assertEquals("Petrov", employee.getFirstName());
-        employeeDao.delete(employee);
+        Assert.assertNotEquals(0, employee.getId());
+    }
+
+    @Test
+    public void testGetAllWithHibernate() {
+        employeeDao.getAll();
+    }
+
+    @Test
+    public void testSelect() throws Exception {
+        Employee employee = createTestEmployee();
+        employee.setPhoneList(new ArrayList<Phone>());
+        employeeDao.insert(employee);
+        long id = employee.getId();
+        employeeDao.get(id);
     }
 
     @Test
@@ -60,16 +71,28 @@ public class EmployeeDaoTest {
     }
 
     @Test
-    public void testSelect() throws Exception {
+    public void testUpdatePhoto() throws Exception {
         Employee employee = new Employee();
         employee.setFirstName("Petrov");
         employee.setSecondName("Petrov");
         employee.setLastName("Petrov");
-        employee.setDepartment(null);
-        employee.setPhoneList(new ArrayList<Phone>());
         employeeDao.insert(employee);
-        long id = employee.getId();
-        Employee selectEmployee = employeeDao.get(id);
-        Assert.assertEquals(selectEmployee, employee);
+        byte[] photo = new byte[10];
+        employeeDao.updatePhoto(employee, photo);
+        Employee employeeAfterUpdate = employeeDao.get(employee.getId());
+        Assert.assertEquals(employeeAfterUpdate, employee);
+    }
+
+    private Employee createTestEmployee() {
+        Employee employee = new Employee();
+        employee.setFirstName("Ivan");
+        employee.setSecondName("Petrovich");
+        employee.setLastName("Petrov");
+        employee.setEmail("ivan@petrov.ru");
+        employee.setWorkAddress("SPB");
+        employee.setHomeAddress("Moscow");
+        employee.setSkype("petrovSkype");
+        employee.setNote("note");
+        return employee;
     }
 }

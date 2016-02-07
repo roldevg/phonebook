@@ -1,9 +1,17 @@
 package com.getjavajob.web06.roldukhine.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "department")
 public class Department extends BaseEntity {
+
+    @Column(name = "name")
     private String name;
+
+    @OneToOne
+    @JoinColumn(name = "manager_id")
     private Employee manager;
 
     public String getName() {
