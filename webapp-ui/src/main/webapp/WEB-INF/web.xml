@@ -6,6 +6,11 @@
 
     <display-name>Phonebook</display-name>
 
+    <context-param>
+        <param-name>spring.profiles.default</param-name>
+        <param-value>jdbc</param-value>
+    </context-param>
+
     <resource-ref>
         <description>DB Connection</description>
         <res-ref-name>jdbc/phonebook</res-ref-name>

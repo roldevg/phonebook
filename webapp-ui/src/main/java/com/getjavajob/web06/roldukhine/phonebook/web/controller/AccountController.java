@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping(value = "/account")
@@ -22,26 +25,57 @@ public class AccountController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@RequestParam String login,
                               @RequestParam String password,
-                              HttpServletRequest request) {
+                              String rememberMe,
+                              HttpServletRequest request,
+                              HttpServletResponse response) {
 
         ModelAndView modelAndView = new ModelAndView("login");
+
         User checkUser = userService.checkUser(login, password);
         if (checkUser == null) {
             return modelAndView;
         } else {
             HttpSession session = request.getSession();
-            session.setAttribute("user", checkUser);
+            session.setAttribute("login", login);
+
+            Cookie cookie = new Cookie("login", login);
+            Cookie cookiePass = new Cookie("password", password);
+            if ("on".equals(rememberMe)) {
+                cookie.setMaxAge((int) TimeUnit.DAYS.toSeconds(14));
+                cookiePass.setMaxAge((int) TimeUnit.DAYS.toSeconds(14));
+                cookie.setPath("/");
+                cookiePass.setPath("/");
+            }
+            response.addCookie(cookie);
+            response.addCookie(cookiePass);
+
         }
 
         return new ModelAndView("redirect:/employee/getAll");
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login() {
+        return new ModelAndView("login");
+    }
+
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public String logout(HttpServletRequest request) {
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession session = request.getSession(false);
         session.setAttribute("user", null);
         session.invalidate();
+
+        Cookie cookie = new Cookie("login", null);
+        Cookie cookiePass = new Cookie("password", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        cookiePass.setMaxAge(0);
+        cookiePass.setPath("/");
+
+        response.addCookie(cookie);
+        response.addCookie(cookiePass);
+
         return "redirect:/account/login";
     }
 }

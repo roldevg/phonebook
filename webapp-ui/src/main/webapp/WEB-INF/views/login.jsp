@@ -72,7 +72,7 @@
 </head>
 <body>
 <div class="container">
-    <form class="form-signin" action="/account/login" method="post">
+    <form class="form-signin" action="<c:url context="/" value="/account/login"/>" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="login" class="sr-only">Login</label>
         <input type="text" id="login" name="login" class="form-control loginForm" placeholder="Login" required
@@ -81,7 +81,8 @@
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
             <label>
-                <input type="checkbox" value="remember-me"> Remember me
+                <input type="checkbox" name="rememberMe" value="on"> Remember me
+                <input type="hidden" name="_rememberMe" value="off" >
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
