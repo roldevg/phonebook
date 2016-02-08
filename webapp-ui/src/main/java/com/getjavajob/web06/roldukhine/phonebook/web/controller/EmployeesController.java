@@ -1,9 +1,6 @@
 package com.getjavajob.web06.roldukhine.phonebook.web.controller;
 
-import com.getjavajob.web06.roldukhine.entity.Employee;
-import com.getjavajob.web06.roldukhine.entity.EmployeeService;
-import com.getjavajob.web06.roldukhine.entity.PhoneService;
-import com.getjavajob.web06.roldukhine.entity.UserImageService;
+import com.getjavajob.web06.roldukhine.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,7 +26,7 @@ public class EmployeesController {
     @Autowired
     private UserImageService userImageService;
 
-    @RequestMapping(value = {"/getAll", "/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/getAll"}, method = RequestMethod.GET)
     public ModelAndView getAllEmployees() {
         List<Employee> employeeList = employeeService.getAll();
         ModelAndView modelAndView = new ModelAndView("index");
@@ -41,6 +38,7 @@ public class EmployeesController {
     public ModelAndView editEmployee(@PathVariable("employeeId") long employeeId) throws IOException, URISyntaxException {
         Employee employee = employeeService.getEmployee(employeeId);
         ModelAndView modelAndView = new ModelAndView("editEmployee");
+
         modelAndView.addObject("employee", employee);
 
         String photoEmployee = userImageService.getPhotoEmployee(employee);

@@ -100,8 +100,37 @@
             });
 
             $("#addPhone").click(function () {
-                $("#phoneContainer").append("<br><input type=\"text\" name=\"phone\" value=\"\" />");
+                var length = $(".phoneContainer").size();
+                var newNumber = length;
+
+                $("#phoneContainer").append("<div id=\"phoneContainer" + newNumber + "\" class=\"phoneContainer\">"+
+                        "<input type=\"text\" id=\"phone" + newNumber + "\" name=\"phoneList[" + newNumber + "].number\" value=\"\" />" +
+                        "<input type=\"hidden\" name=\"phoneList[" + newNumber + "].id\" id=\"phone" + newNumber + "\"" + "value=\"0\">" +
+                        "<button type=\"button\" " +
+                        "class=\"btn btn-danger btn-xs glyphicon glyphicon-remove\"" +
+                        "name=\"removePhone\" id=\"remove_phone" + newNumber + "\" value=\"\"></button>" +
+                        "</div>");
+                $(document).ready(function () {
+                    $("#remove_phone" + newNumber).click(function() {
+                        $("#phoneContainer" + newNumber).remove();
+                    });
+                });
+
+
+
             });
+
+            function readImage() {
+                if ( this.files && this.files[0] ) {
+                    var FR = new FileReader();
+                    FR.onload = function(e) {
+                        $('#photo').attr( "src", e.target.result );
+                    };
+                    FR.readAsDataURL( this.files[0] );
+                }
+            }
+
+            $("#file").change( readImage );
         });
     </script>
 </head>
@@ -115,7 +144,7 @@
         <div class="row">
             <div class="col-sm-2">
                 <img src="${photo}" alt="user image"
-                     height="150" width="150">
+                     height="150" width="150" id="photo">
 
                 <div class="row" style="margin: 10px 10px">
 
@@ -123,7 +152,7 @@
                           style="display: inline">
 
                                     <span class="btn btn-default btn-file">
-                                        Browse <input type="file" name="file">
+                                        Browse <input type="file" name="file" id="file">
                                     </span>
 
                         <button type="submit" class="btn btn-success btn-xs glyphicon glyphicon-ok"
@@ -194,11 +223,23 @@
                         <button type="button" id="addPhone" class="btn btn-success btn-xs glyphicon glyphicon-plus"
                                 name="employeeId" value="Add phone"></button>
 
-                            <%--<c:forEach items="${employee.phoneList}" var="phone" varStatus="status">
-                                <input type="text" name="phoneList[${status.index}].number" id="phone"
-                                       value="${phone.number}">
-                                <input type="hidden" name="phoneList[${status.index}].id" id="phone" value="${phone.id}">
-                            </c:forEach>--%>
+                            <c:forEach items="${employee.phoneList}" var="phone" varStatus="status">
+                                <div id="phoneContainer${status.index}" class="phoneContainer">
+                                    <input type="text" name="phoneList[${status.index}].number" id="phone${status.index}"
+                                           value="${phone.number}">
+                                    <input type="hidden" name="phoneList[${status.index}].id" id="phone${status.index}" value="${phone.id}">
+                                    <button type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove" +
+                                           name="removePhone" id="remove_phone${status.index}" value="">
+
+                                    <script>
+                                        $("#remove_phone" + ${status.index}).click(function() {
+                                            $("#phoneContainer" + ${status.index}).remove();
+                                        });
+                                    </script>
+
+                                </div>
+
+                            </c:forEach>
 
                     </div>
 

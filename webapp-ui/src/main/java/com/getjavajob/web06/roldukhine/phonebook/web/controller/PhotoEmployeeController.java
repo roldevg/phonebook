@@ -32,7 +32,7 @@ public class PhotoEmployeeController {
             }
         }
 
-        return "redirect:/employee/edit?employeeId=" + employeeId;
+        return "redirect:/employee/edit/" + employeeId;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -40,6 +40,6 @@ public class PhotoEmployeeController {
         Employee employee = employeeService.getEmployee(employeeId);
         employeeService.updatePhoto(employee, null);
 
-        return "redirect:/employee/edit?employeeId=" + employeeId;
+        return "redirect:/employee/edit/" + employeeId;
     }
 }

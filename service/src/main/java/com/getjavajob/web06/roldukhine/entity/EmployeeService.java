@@ -40,6 +40,7 @@ public class EmployeeService {
         return employeeDao.get(id);
     }
 
+    @Transactional
     public void updateEmployee(Employee employee) {
         employeeDao.update(employee);
     }

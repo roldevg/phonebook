@@ -8,7 +8,7 @@
 
     <context-param>
         <param-name>spring.profiles.default</param-name>
-        <param-value>jdbc</param-value>
+        <param-value>jpa</param-value>
     </context-param>
 
     <resource-ref>

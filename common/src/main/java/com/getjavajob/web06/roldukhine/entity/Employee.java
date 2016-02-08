@@ -49,7 +49,7 @@ public class Employee extends BaseEntity {
     @Column(name = "home_address")
     private String homeAddress;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "employee_to_phone", joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "phone_id"))
     private List<Phone> phoneList = new ArrayList<>();
