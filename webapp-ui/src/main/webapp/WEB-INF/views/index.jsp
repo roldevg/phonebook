@@ -21,9 +21,13 @@
         $(document).ready(function () {
             $('.typeahead').typeahead({
                 source: function (query, process) {
-                    return $.post('/ajax/searchEmployee', {query: query}, function (data) {
-                        process(data);
-                    }, 'json');
+                    return $.post(
+                            '/ajax/search',
+                            {query: query},
+                            function (data) {
+                                process(data);
+                            },
+                            "json");
                 },
                 minLength: 3
             });

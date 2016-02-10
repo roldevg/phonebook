@@ -14,13 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/ajax")
 public class AjaxSearchController {
 
     @Autowired
     private EmployeeDao employeeDao;
 
-    @RequestMapping(value = "/searchEmployee", method = RequestMethod.POST)
+    @RequestMapping(value = {"/ajax/search"}, method = RequestMethod.POST)
     public
     @ResponseBody
     List<String> getCity(@RequestParam("query") String search) throws IOException {
