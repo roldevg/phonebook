@@ -1,6 +1,8 @@
 package com.getjavajob.web06.roldukhine.phonebook.web.controller;
 
 import com.getjavajob.web06.roldukhine.entity.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +19,8 @@ import java.util.List;
 @RequestMapping(value = "/employee")
 public class EmployeesController {
 
+    private static final Logger logger = LoggerFactory.getLogger(EmployeesController.class);
+
     @Autowired
     private EmployeeService employeeService;
 
@@ -31,11 +35,13 @@ public class EmployeesController {
         List<Employee> employeeList = employeeService.getAll();
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("employeeList", employeeList);
+        logger.info("add object: %s", employeeList);
         return modelAndView;
     }
 
     @RequestMapping(value = "/edit/{employeeId}", method = RequestMethod.GET)
     public ModelAndView editEmployee(@PathVariable("employeeId") long employeeId) throws IOException, URISyntaxException {
+        logger.info("edit employee with id %s", employeeId);
         Employee employee = employeeService.getEmployee(employeeId);
         ModelAndView modelAndView = new ModelAndView("editEmployee");
 

@@ -34,6 +34,8 @@
         <javaee-api.version>7.0</javaee-api.version>
         <hibernate-core.version>5.0.5.Final</hibernate-core.version>
         <hibernate-entitymanager.version>5.0.5.Final</hibernate-entitymanager.version>
+
+        <log4j2.version>2.5</log4j2.version>
     </properties>
 
     <modules>
@@ -44,6 +46,24 @@
     </modules>
 
     <dependencies>
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <!-- End logging -->
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
