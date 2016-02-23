@@ -2,6 +2,7 @@ package com.getjavajob.web06.roldukhine.jpa;
 
 import com.getjavajob.web06.roldukhine.api.CrudDao;
 import com.getjavajob.web06.roldukhine.entity.BaseEntity;
+import com.getjavajob.web06.roldukhine.entity.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -23,18 +24,22 @@ public abstract class AbstractDaoJpaImpl<T extends BaseEntity> implements CrudDa
     private static final Logger logger = LoggerFactory.getLogger(AbstractDaoJpaImpl.class);
 
     protected Class<T> entityClass;
+
     @PersistenceContext
     private EntityManager entityManager;
 
     @SuppressWarnings("unchecked")
     public AbstractDaoJpaImpl() {
+        logger.trace("construct AbstractDaoJpaImpl");
         ParameterizedType genericSuperclass = (ParameterizedType) (getClass().getGenericSuperclass());
+        logger.debug("genericSuperclass = {}", genericSuperclass);
         this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
     }
 
     @Override
     @Transactional
     public void insert(T entity) {
+        logger.trace("insert {}", entity);
         entityManager.persist(entity);
         entityManager.flush();
     }
@@ -42,40 +47,30 @@ public abstract class AbstractDaoJpaImpl<T extends BaseEntity> implements CrudDa
     @Override
     @Transactional
     public void update(T entity) {
+        logger.trace("update {}", entity);
         entityManager.merge(entity);
     }
 
     @Override
     @Transactional
     public void delete(T entity) {
+        logger.trace("delete {}", entity);
         entityManager.remove(entity);
     }
 
     @Override
     public T get(long id) {
+        logger.trace("get with input id {}", id);
         @SuppressWarnings("unchecked") T entity = (T) entityManager.find(entityClass, id);
         return entity;
     }
 
     @Override
-    @Transactional // TODO REMOVE
     public List<T> getAll() {
-        // TODO Simple
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-
-        CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
-        @SuppressWarnings("unchecked") Root<T> from = criteriaQuery.from(entityClass);
-
-        CriteriaQuery<Object> select = criteriaQuery.select(from);
-        TypedQuery<Object> typedQuery = entityManager.createQuery(select);
-        List<Object> resultList = typedQuery.getResultList();
-
-        List<T> allListEntity = new ArrayList<>();
-        for (Object obj : resultList) {
-            @SuppressWarnings("unchecked") T employee = (T) obj;
-            allListEntity.add(employee);
-        }
-
-        return allListEntity;
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
+        Root<T> from = criteriaQuery.from(entityClass);
+        CriteriaQuery<T> select = criteriaQuery.select(from);
+        return entityManager.createQuery(select).getResultList();
     }
 }
