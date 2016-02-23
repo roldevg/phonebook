@@ -2,6 +2,8 @@ package com.getjavajob.web06.roldukhine.jdbc;
 
 import com.getjavajob.web06.roldukhine.api.UserDao;
 import com.getjavajob.web06.roldukhine.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
@@ -11,6 +13,8 @@ import java.sql.*;
 
 @Repository
 public class UserDaoJdbcImpl extends AbstractDaoJdbcImpl<User> implements UserDao {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserDaoJdbcImpl.class);
 
     private static final String TABLE_NAME = "User";
 

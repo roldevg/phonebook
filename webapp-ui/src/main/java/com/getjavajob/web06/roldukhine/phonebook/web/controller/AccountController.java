@@ -2,6 +2,8 @@ package com.getjavajob.web06.roldukhine.phonebook.web.controller;
 
 import com.getjavajob.web06.roldukhine.entity.User;
 import com.getjavajob.web06.roldukhine.entity.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,8 @@ import java.util.concurrent.TimeUnit;
 @Controller
 @RequestMapping(value = "/account")
 public class AccountController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @Autowired
     private UserService userService;
@@ -51,7 +55,10 @@ public class AccountController {
 
         }
 
-        return new ModelAndView("redirect:/employee/getAll");
+
+
+        ModelAndView indexPage = new ModelAndView("redirect:/employee/getAll");
+        return indexPage;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

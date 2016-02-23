@@ -4,6 +4,8 @@ import com.getjavajob.web06.roldukhine.api.EmployeeDao;
 import com.getjavajob.web06.roldukhine.api.PhoneDao;
 import com.getjavajob.web06.roldukhine.entity.Employee;
 import com.getjavajob.web06.roldukhine.entity.Phone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,8 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class PhoneDaoJpaImpl extends AbstractDaoJpaImpl<Phone> implements PhoneDao {
 
+    private static final Logger logger = LoggerFactory.getLogger(PhoneDaoJpaImpl.class);
+
     @Autowired
     @Qualifier("employeeDaoJpaImpl")
     private EmployeeDao employeeDao;
@@ -22,6 +26,7 @@ public class PhoneDaoJpaImpl extends AbstractDaoJpaImpl<Phone> implements PhoneD
     @Override
     @Transactional
     public void insertPhoneToEmployee(Phone phone, Employee employee) {
+        // TODO Update - single
         employee.addPhoneToPhoneList(phone);
         employeeDao.update(employee);
     }

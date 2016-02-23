@@ -1,6 +1,8 @@
 package com.getjavajob.web06.roldukhine.pool;
 
 import com.getjavajob.web06.roldukhine.exception.DaoException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +13,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 public class ConnectionPool {
+
+    private static final Logger logger = LoggerFactory.getLogger(ConnectionPool.class);
 
     private static final int DEFAULT_SIZE = 10;
 

@@ -2,6 +2,8 @@ package com.getjavajob.web06.roldukhine.jpa;
 
 import com.getjavajob.web06.roldukhine.api.CrudDao;
 import com.getjavajob.web06.roldukhine.entity.BaseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,8 @@ import java.util.List;
 
 @Repository
 public abstract class AbstractDaoJpaImpl<T extends BaseEntity> implements CrudDao<T> {
+
+    private static final Logger logger = LoggerFactory.getLogger(AbstractDaoJpaImpl.class);
 
     protected Class<T> entityClass;
     @PersistenceContext
@@ -54,8 +58,9 @@ public abstract class AbstractDaoJpaImpl<T extends BaseEntity> implements CrudDa
     }
 
     @Override
-    @Transactional
+    @Transactional // TODO REMOVE
     public List<T> getAll() {
+        // TODO Simple
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
         CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();

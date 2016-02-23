@@ -1,5 +1,8 @@
 package com.getjavajob.web06.roldukhine.phonebook.web.filter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class AuthenticationFilter implements Filter {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
 
     public void init(FilterConfig fConfig) throws ServletException {
         ServletContext context = fConfig.getServletContext();

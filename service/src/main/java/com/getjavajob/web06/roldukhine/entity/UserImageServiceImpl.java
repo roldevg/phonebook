@@ -2,6 +2,8 @@ package com.getjavajob.web06.roldukhine.entity;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +14,8 @@ import java.io.InputStream;
 @Service
 @Transactional(readOnly = true)
 public class UserImageServiceImpl implements UserImageService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserImageServiceImpl.class);
 
     private static final String DEFAULT_USER_IMAGE = "defaultUserImage.png";
 

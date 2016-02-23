@@ -3,6 +3,8 @@ package com.getjavajob.web06.roldukhine.jdbc;
 import com.getjavajob.web06.roldukhine.api.DepartmentDao;
 import com.getjavajob.web06.roldukhine.api.EmployeeDao;
 import com.getjavajob.web06.roldukhine.entity.Department;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -13,6 +15,8 @@ import java.sql.*;
 
 @Repository
 public class DepartmentDaoJdbcImpl extends AbstractDaoJdbcImpl<Department> implements DepartmentDao {
+
+    private static final Logger logger = LoggerFactory.getLogger(DepartmentDaoJdbcImpl.class);
 
     private static final String TABLE_NAME = "Department";
     private static final String UPDATE_SQL = "UPDATE " + TABLE_NAME + " SET name = ?, manager_id = ? WHERE id = ?";

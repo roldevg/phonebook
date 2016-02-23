@@ -4,6 +4,8 @@ import com.getjavajob.web06.roldukhine.api.PhoneDao;
 import com.getjavajob.web06.roldukhine.entity.Employee;
 import com.getjavajob.web06.roldukhine.entity.Phone;
 import com.getjavajob.web06.roldukhine.entity.PhoneType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -15,6 +17,8 @@ import java.util.List;
 
 @Repository
 public class PhoneDaoJdbcImpl extends AbstractDaoJdbcImpl<Phone> implements PhoneDao {
+
+    private static final Logger logger = LoggerFactory.getLogger(PhoneDaoJdbcImpl.class);
 
     private static final String TABLE_NAME = "Phone";
 
