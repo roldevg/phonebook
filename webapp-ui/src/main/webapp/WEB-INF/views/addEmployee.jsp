@@ -26,7 +26,7 @@
 <body>
 <%@include file="/WEB-INF/views/include/menu.jsp" %>
 
-<div class="container head">
+<div class="container">
     <div class="row">
         <form action="<c:url context="/" value="/employee/insert"/>" method="post">
             <div class="employee-card" id="firstname"><label for="firstname">Firstname</label>
@@ -62,15 +62,6 @@
                 <input type="text" name="note" value="${employee.note}">
             </div>
 
-            <%--<div class="field" id="manager"><label for="manager">Manager</label>
-                <input type="text" value="${employee.manager.lastName}">
-                <input type="hidden" name="managerId" value="${employee.manager.id}" >
-            </div>
-            <div class="field" id="department"><label for="department">Department</label>
-                <input type="text" value="${employee.department.name}">
-                <input type="hidden" name="departmentId" value="${employee.department.id}">
-            </div>--%>
-
             <div class="employee-card" id="workAddress"><label for="workAddress">Work address</label>
                 <input type="text" name="workAddress" value="${employee.workAddress}">
             </div>
@@ -81,12 +72,11 @@
             <div class="employee-card" id="phoneContainer"><label for="phoneContainer">Phone</label>
                 <button type="button" id="addPhone" class="btn btn-success btn-xs glyphicon glyphicon-plus"
                         name="employeeId" value="Add phone"></button>
-
             </div>
 
             <button type="submit" class="btn btn-success" id="save">Save</button>
         </form>
-    </div>
+    </div> <!-- /row -->
 
     <hr>
     <%@include file="/WEB-INF/views/include/footer.jsp" %>

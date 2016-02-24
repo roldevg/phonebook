@@ -26,7 +26,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/include/menu.jsp" %>
-<div class="container head">
+<div class="container">
     <div class="row">
         <div class="form-group">
             <label for="sel1">Выберите отдел: </label>
@@ -36,10 +36,9 @@
                 <option>Бухгалтерия</option>
                 <option>Разработка</option>
             </select>
-        </div>
+        </div> <!-- /form-group -->
 
         <div class="col-lg-6" style="margin-top: 10px; padding-left: 0; padding-right: 0;">
-
         </div><!-- /.col-lg-6 -->
 
         <div class="col-lg-6" style="margin-top: 10px; padding-left: 0px; padding-right: 0px;">
@@ -63,7 +62,7 @@
                     <li role="separator" class="divider"></li>
                     <li><a href="#">Separated link</a></li>
                 </ul>
-            </div>
+            </div> <!-- /btn-group -->
         </div><!-- /.col-lg-6 -->
 
         <table class="table table-hover">
@@ -101,6 +100,7 @@
                     <td>${employee.lastName}</td>
                     <td>
                             ${employee.birthdate}
+                                <fmt:formatDate pattern="dd.MM.yyyy" value="${employee.birthdate}"/>
                     </td>
                     <td>${employee.email}</td>
                     <td>${employee.icq}</td>
@@ -112,10 +112,9 @@
             </c:forEach>
             </tbody>
         </table>
-    </div>
+    </div> <!-- /row -->
 
     <hr>
-
     <%@include file="/WEB-INF/views/include/footer.jsp" %>
 </div> <!-- /container -->
 </body>

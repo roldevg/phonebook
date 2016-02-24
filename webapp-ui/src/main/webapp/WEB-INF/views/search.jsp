@@ -26,12 +26,12 @@
 <body>
 <%@include file="/WEB-INF/views/include/menu.jsp" %>
 
-<div class="container head">
+<div class="container">
     <div class="row">
         <form action="<c:url context="/" value="/employee/insert"/>" method="post">
             <input type="text">
         </form>
-    </div>
+    </div> <!-- /row -->
 
     <hr>
     <%@include file="/WEB-INF/views/include/footer.jsp" %>

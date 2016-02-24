@@ -28,7 +28,7 @@
 
 <%@include file="/WEB-INF/views/include/menu.jsp" %>
 
-<div class="container head">
+<div class="container">
     <div class="row">
         <div class="col-sm-2">
             <img src="${photo}" alt="user image"
@@ -51,7 +51,7 @@
                     <button type="submit" class="btn btn-danger btn-xs glyphicon glyphicon-remove"
                             name="employeeId" value="${employee.id}"></button>
                 </form>
-            </div>
+            </div> <!-- /row -->
         </div>
 
         <div class="col-sm-10">
@@ -111,16 +111,16 @@
                                        value="${phone.id}">
                                 <button type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove remove_phone"
                                         id="remove_phone${status.index}" value="">
-                            </div>
+                            </div> <!-- /phoneItem -->
                         </c:forEach>
                     </div>
-                </div>
+                </div> <!-- /phone_container -->
 
                 <button type="submit" class="btn btn-success" id="saveEmployee">Save</button>
             </form:form>
         </div>
 
-    </div>
+    </div> <!-- /row -->
 
     <hr>
     <%@include file="/WEB-INF/views/include/footer.jsp" %>

@@ -37,9 +37,9 @@
                 <input type="checkbox" name="rememberMe" value="on"> Remember me
                 <input type="hidden" name="_rememberMe" value="off">
             </label>
-        </div>
+        </div> <!-- /checkbox -->
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
-</div>
+</div> <!-- /container -->
 </body>
 </html>
