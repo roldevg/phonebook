@@ -40,12 +40,15 @@ public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implement
 
     @Override
     public String getTableName() {
+        logger.trace("getTableName");
+        logger.debug("return TableName: " + TABLE_NAME);
         return TABLE_NAME;
     }
 
     @Transactional
     @Override
     public void insert(final Employee employee) {
+        logger.debug("insert with employee {}", employee);
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         this.jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -69,12 +72,14 @@ public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implement
             }
         }, keyHolder);
         long id = keyHolder.getKey().longValue();
+        logger.debug("return new id {}", id);
         employee.setId(id);
     }
 
     @Transactional
     @Override
     public void update(Employee employee) {
+        logger.debug("update with employee {}", employee);
         this.jdbcTemplate.update(UPDATE_SQL,
                 employee.getFirstName(),
                 employee.getSecondName(),
@@ -91,13 +96,14 @@ public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implement
                 employee.getPhoto(),
                 employee.getId());
 
-
         final List<Phone> phoneList = employee.getPhoneList();
         for (Phone phone : phoneList) {
             if (phone.getId() == 0) {
+                logger.debug("insert new phone {}", phone);
                 phoneDao.insert(phone);
                 phoneDao.insertPhoneToEmployee(phone, employee);
             } else {
+                logger.debug("update phone {}", phone);
                 phoneDao.update(phone);
             }
         }
@@ -106,6 +112,7 @@ public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implement
     @Transactional
     @Override
     public void updatePhoto(final Employee employee, final byte[] photo) {
+        logger.debug("update photo");
         LobHandler lobHandler = new DefaultLobHandler();
         this.jdbcTemplate.execute(UPDATE_PHOTO,
                 new AbstractLobCreatingPreparedStatementCallback(lobHandler) {
@@ -122,6 +129,7 @@ public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implement
 
     @Override
     protected Employee createInstanceFromResult(ResultSet resultSet) throws SQLException {
+        logger.debug("createInstanceFromResult: resultSet {}", resultSet);
         Department department = null;
         long department_id = resultSet.getLong("department_id");
         if (department_id != BaseEntity.NO_EXIST_ID_ENTITY) {

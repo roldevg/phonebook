@@ -9,12 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
-@Transactional(readOnly = true)
 public class PhoneDaoJpaImpl extends AbstractDaoJpaImpl<Phone> implements PhoneDao {
 
     private static final Logger logger = LoggerFactory.getLogger(PhoneDaoJpaImpl.class);
@@ -24,15 +22,17 @@ public class PhoneDaoJpaImpl extends AbstractDaoJpaImpl<Phone> implements PhoneD
     private EmployeeDao employeeDao;
 
     @Override
-    @Transactional
     public void insertPhoneToEmployee(Phone phone, Employee employee) {
-        // TODO Update - single
+        logger.trace("insertPhoneToEmployee - phone {}, employee {}", phone, employee);
         employee.addPhoneToPhoneList(phone);
         employeeDao.update(employee);
     }
 
     @Override
     public List<Phone> getPhoneListByEmployee(Employee employee) {
-        return employee.getPhoneList();
+        logger.debug("getPhoneListByEmployee employee {}", employee);
+        List<Phone> phoneList = employee.getPhoneList();
+        logger.debug("phoneList", phoneList);
+        return phoneList;
     }
 }

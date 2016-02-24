@@ -37,16 +37,19 @@ public class PhoneDaoJdbcImpl extends AbstractDaoJdbcImpl<Phone> implements Phon
 
     @Override
     protected String getTableName() {
+        logger.trace("getTableName");
+        logger.debug("return TableName: " + TABLE_NAME);
         return TABLE_NAME;
     }
 
-    @Transactional
     @Override
     public void insert(final Phone phone) {
+        logger.debug("insert phone {}", phone);
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         this.jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                logger.debug("createPreparedStatement connection {}", connection);
                 PreparedStatement prepareStatement = connection.prepareStatement(INSERT_SQL,
                         Statement.RETURN_GENERATED_KEYS);
                 prepareStatement.setObject(1, phone.getNumber());
@@ -58,9 +61,9 @@ public class PhoneDaoJdbcImpl extends AbstractDaoJdbcImpl<Phone> implements Phon
         phone.setId(id);
     }
 
-    @Transactional
     @Override
     public void update(Phone phone) {
+        logger.debug("update phone {}", phone);
         this.jdbcTemplate.update(UPDATE_SQL,
                 phone.getNumber(),
                 phone.getPhoneTypeTag(),
@@ -69,6 +72,7 @@ public class PhoneDaoJdbcImpl extends AbstractDaoJdbcImpl<Phone> implements Phon
 
     @Override
     protected Phone createInstanceFromResult(ResultSet resultSet) throws SQLException {
+        logger.debug("createInstanceFromResult: resultSet {}", resultSet);
         Phone phone = new Phone();
         phone.setId(resultSet.getLong("id"));
         phone.setNumber(resultSet.getString("number"));
@@ -82,6 +86,7 @@ public class PhoneDaoJdbcImpl extends AbstractDaoJdbcImpl<Phone> implements Phon
     }
 
     public List<Phone> getPhoneListByEmployee(Employee employee) {
+        logger.debug("getPhoneListByEmployee Employee: {}", employee);
         final long employeeId = employee.getId();
 
         List<Phone> phoneList = this.jdbcTemplate.query(new PreparedStatementCreator() {
@@ -101,8 +106,8 @@ public class PhoneDaoJdbcImpl extends AbstractDaoJdbcImpl<Phone> implements Phon
         return phoneList;
     }
 
-    @Transactional
     public void insertPhoneToEmployee(Phone phone, Employee employee) {
+        logger.debug("insertPhoneToEmployee phone {}, employee {}", phone, employee);
         this.jdbcTemplate.update(INSERT_PHONE_TO_EMPLOYEE,
                 phone.getId(),
                 employee.getId());

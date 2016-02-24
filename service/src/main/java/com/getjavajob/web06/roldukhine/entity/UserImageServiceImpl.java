@@ -10,22 +10,25 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 @Service
 @Transactional(readOnly = true)
 public class UserImageServiceImpl implements UserImageService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserImageServiceImpl.class);
 
+    private static final String BASE64_FIRST_PART_STRING = "data:image/png;base64,";
+
     private static final String DEFAULT_USER_IMAGE = "defaultUserImage.png";
 
     public byte[] getDefaultImageUser() {
+        logger.debug("getDefaultImageUser");
         try {
             InputStream in = getClass().getClassLoader().getResourceAsStream(DEFAULT_USER_IMAGE);
             return IOUtils.toByteArray(in);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("cannot find default user image. ", e);
         }
+        logger.debug("cannot find default image user");
         return null;
     }
 
@@ -36,6 +39,8 @@ public class UserImageServiceImpl implements UserImageService {
             photo = getDefaultImageUser();
         }
         String photoBase64 = new Base64().encodeAsString(photo);
-        return "data:image/png;base64," + photoBase64;
+        String sendByteArrayInBase64 = BASE64_FIRST_PART_STRING + photoBase64;
+        logger.debug("sendByteArrayInBase64 {}", sendByteArrayInBase64);
+        return sendByteArrayInBase64;
     }
 }

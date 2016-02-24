@@ -2,6 +2,7 @@ package com.getjavajob.web06.roldukhine.phonebook.web.controller;
 
 import com.getjavajob.web06.roldukhine.entity.Employee;
 import com.getjavajob.web06.roldukhine.entity.EmployeeService;
+import com.getjavajob.web06.roldukhine.entity.EmployeeServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Controller
 @RequestMapping(value = "/photo")
@@ -24,15 +24,14 @@ public class PhotoEmployeeController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    @RequestParam("employeeId") long employeeId) {
-        String name = ((CommonsMultipartFile) file).getFileItem().getName();
+        logger.debug("handleFileUpload file {}, employeeId {}", employeeId);
         if (!file.isEmpty()) {
             try {
                 byte[] bytesFromRequestFile = file.getBytes();
-
                 Employee employee = employeeService.getEmployee(employeeId);
                 employeeService.updatePhoto(employee, bytesFromRequestFile);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error("get bytes from multipart file ", e);
             }
         }
 
@@ -41,7 +40,9 @@ public class PhotoEmployeeController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String deleteImageForEmployee(@RequestParam("employeeId") long employeeId) {
+        logger.debug("deleteImageForEmployee, employeeId {}", employeeId);
         Employee employee = employeeService.getEmployee(employeeId);
+        logger.debug("get employee from service: {}", employee);
         employeeService.updatePhoto(employee, null);
 
         return "redirect:/employee/edit/" + employeeId;

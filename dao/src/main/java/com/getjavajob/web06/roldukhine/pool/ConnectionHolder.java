@@ -15,26 +15,36 @@ public class ConnectionHolder {
     private AtomicInteger counter = new AtomicInteger();
 
     public ConnectionHolder(Connection connection) {
+        logger.debug("create ConnectionHolder {}", connection);
         this.connection = connection;
     }
 
     public Connection getConnection() {
+        logger.debug("return getConnection {}", connection);
         return connection;
     }
 
     public int getAndDecrement() {
-        return counter.getAndDecrement();
+        int decrementValue = counter.getAndDecrement();
+        logger.debug("decrementValue {}", decrementValue);
+        return decrementValue;
     }
 
     public int getAndIncrement() {
-        return counter.getAndIncrement();
+        int incrementValue = counter.getAndIncrement();
+        logger.debug("incrementValue {}", incrementValue);
+        return incrementValue;
     }
 
     public int getCounter() {
-        return counter.get();
+        int counter = this.counter.get();
+        logger.debug("counter {}", counter);
+        return counter;
     }
 
     public int incrementAndGet() {
-        return counter.incrementAndGet();
+        int increment = counter.incrementAndGet();
+        logger.debug("increment {}", increment);
+        return increment;
     }
 }

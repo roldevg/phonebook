@@ -37,38 +37,56 @@ public abstract class AbstractDaoJdbcImpl<T extends BaseEntity> implements CrudD
     protected abstract T createInstanceFromResult(ResultSet resultSet) throws SQLException;
 
     protected String getSelectAllStatement() {
-        return "SELECT * FROM " + getTableName();
+        String query = "SELECT * FROM " + getTableName();
+        logger.debug("getSelectAllStatementQuery: " + query);
+        return query;
     }
 
     protected String getSelectByIdStatement() {
-        return getSelectAllStatement() + " WHERE id = ?";
+        String query = getSelectAllStatement() + " WHERE id = ?";
+        logger.debug("selectByIdStatementQuery: " + query);
+        return query;
     }
 
     protected String getDeleteByIdStatement() {
-        return "DELETE FROM " + getTableName() + " WHERE id = ?";
+        String query = "DELETE FROM " + getTableName() + " WHERE id = ?";
+        logger.debug("getDeleteByIdStatementQuery: " + query);
+        return query;
     }
 
     public Connection getConnectionFromDataSource() {
+        logger.trace("getConnectionFromDataSource()");
         try {
-            return dataSource.getConnection();
+            Connection connection = dataSource.getConnection();
+            logger.debug("return connection: ", connection);
+            return connection;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        logger.debug("return null connection");
         return null;
     }
 
     @Override
     public T get(long id) {
+        logger.trace("get() input param: id ", id);
         try (Connection connection = getConnectionFromDataSource()) {
-            try (PreparedStatement prepareStatement = connection.prepareStatement(getSelectByIdStatement())) {
+            logger.debug("getConnectionFromDataSource : " + connection);
+            String selectByIdStatement = getSelectByIdStatement();
+            logger.debug("selectByIdStatement: " + selectByIdStatement);
+            try (PreparedStatement prepareStatement = connection.prepareStatement(selectByIdStatement)) {
+                logger.debug("prepareStatement after create: " + prepareStatement);
                 prepareStatement.setLong(1, id);
                 try (ResultSet resultSet = prepareStatement.executeQuery()) {
+                    logger.debug("resultSet after create " + resultSet);
                     if (resultSet.next()) {
+                        logger.debug("createInstanceFromResult");
                         return createInstanceFromResult(resultSet);
                     }
                 }
             }
         } catch (SQLException e) {
+            logger.error("Exception from get()", e);
             throw new DaoException(e);
         }
 
@@ -77,19 +95,25 @@ public abstract class AbstractDaoJdbcImpl<T extends BaseEntity> implements CrudD
 
     @Override
     public void delete(T entity) {
+        logger.trace("delete Entity: " + entity);
         long id = entity.getId();
         delete(id);
     }
 
     public void delete(long id) {
-        this.jdbcTemplate.update(getDeleteByIdStatement(), id);
+        logger.trace("delete entity by id : " + id);
+        String deleteByIdStatementQuery = getDeleteByIdStatement();
+        logger.debug("deleteByIdStatementQuery: " + deleteByIdStatementQuery);
+        this.jdbcTemplate.update(deleteByIdStatementQuery, id);
     }
 
     @Override
     public List<T> getAll() {
+        logger.trace("getAll");
         return this.jdbcTemplate.query(getSelectAllStatement(), new RowMapper<T>() {
             @Override
             public T mapRow(ResultSet resultSet, int i) throws SQLException {
+                logger.trace("mapRow: resultSet, index" + resultSet + i);
                 return createInstanceFromResult(resultSet);
             }
         });

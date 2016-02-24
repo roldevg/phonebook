@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
 
@@ -24,21 +23,23 @@ public class UserDaoJdbcImpl extends AbstractDaoJdbcImpl<User> implements UserDa
 
     @Override
     protected String getTableName() {
+        logger.trace("getTableName");
+        logger.debug("return TableName: " + TABLE_NAME);
         return TABLE_NAME;
     }
 
-    @Transactional
     @Override
     public void update(User entity) {
+        logger.debug("update entity {}", entity);
         this.jdbcTemplate.update(UPDATE_SQL,
                 entity.getLogin(),
                 entity.getPassword(),
                 entity.getId());
     }
 
-    @Transactional
     @Override
     public void insert(final User entity) {
+        logger.debug("insert user {}", entity);
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         this.jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -51,15 +52,23 @@ public class UserDaoJdbcImpl extends AbstractDaoJdbcImpl<User> implements UserDa
             }
         }, keyHolder);
         long id = keyHolder.getKey().longValue();
+        logger.debug("return new id {}", id);
         entity.setId(id);
     }
 
     @Override
     protected User createInstanceFromResult(ResultSet resultSet) throws SQLException {
+        logger.debug("createInstanceFromResult: resultSet {}", resultSet);
         User user = new User();
-        user.setId(resultSet.getLong("id"));
-        user.setLogin(resultSet.getString("login"));
-        user.setPassword(resultSet.getString("password"));
+        long id = resultSet.getLong("id");
+        logger.debug("id from resultSet {}", id);
+        user.setId(id);
+        String login = resultSet.getString("login");
+        logger.debug("login from resultSet {}", login);
+        user.setLogin(login);
+        String password = resultSet.getString("password");
+        logger.debug("password from resultSet {}", password);
+        user.setPassword(password);
         return user;
     }
 }

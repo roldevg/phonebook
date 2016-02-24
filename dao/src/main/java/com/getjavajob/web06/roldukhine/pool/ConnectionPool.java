@@ -27,10 +27,12 @@ public class ConnectionPool {
     private ThreadLocal<ConnectionHolder> connectionHolder = new ThreadLocal<>();
 
     public static ConnectionPool getInstance() {
+        logger.debug("getInstance {}", instance);
         return instance;
     }
 
     public void setup(Properties properties) {
+        logger.debug("setup properties {}", properties);
         if (properties == null) {
             throw new IllegalArgumentException("Properties cannot be null");
         }
@@ -38,7 +40,9 @@ public class ConnectionPool {
         String url = properties.getProperty(PROPERTY_URL);
         String user = properties.getProperty(PROPERTY_USER);
         String password = properties.getProperty(PROPERTY_PASSWORD);
+        logger.debug("url {}, user{}, password{}", url, user, password);
 
+        logger.debug("DEFAULT_SIZE {}", DEFAULT_SIZE);
         for (int i = 0; i < DEFAULT_SIZE; i++) {
             Connection connection = createConnection(url, user, password);
             if (connection != null) {
@@ -48,6 +52,7 @@ public class ConnectionPool {
     }
 
     private Connection createConnection(String url, String user, String password) {
+        logger.debug("createConnection url {}, user {user}, password {}", url, user, password);
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, user, password);
@@ -55,39 +60,49 @@ public class ConnectionPool {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        logger.debug("return connection {}", connection);
         return connection;
     }
 
     public Connection getConnection() {
+        logger.trace("getConnection");
         if (connectionHolder.get() == null) {
             try {
                 Connection connection = pool.poll(5, TimeUnit.SECONDS);
                 ConnectionHolder holder = new ConnectionHolder(connection);
                 connectionHolder.set(holder);
             } catch (InterruptedException e) {
+                logger.error("Error after create connection", e);
                 throw new DaoException("Cannot create connection.");
             }
         }
 
         ConnectionHolder holder = this.connectionHolder.get();
+        logger.debug("ConnectionHolder {}", holder);
         holder.incrementAndGet();
         return holder.getConnection();
     }
 
     public void release() {
+        logger.trace("release");
         ConnectionHolder holder = connectionHolder.get();
+        logger.debug("ConnectionHolder {}", holder);
         if (holder == null) {
             return;
         }
 
         Connection connection = holder.getConnection();
+        logger.debug("connection", connection);
         if (connection == null) {
             return;
         }
 
         holder.getAndDecrement();
-        if (holder.getCounter() == 0 && pool.size() < DEFAULT_SIZE) {
+        int holderCounter = holder.getCounter();
+        logger.debug("holderCounter", holderCounter);
+        if (holderCounter == 0 && pool.size() < DEFAULT_SIZE) {
             try {
+                logger.debug("put connection", connection);
                 pool.put(connection);
             } catch (InterruptedException e) {
                 throw new DaoException("Error while releasing connection.");
@@ -97,10 +112,12 @@ public class ConnectionPool {
     }
 
     public void close() {
+        logger.trace("close");
         try {
             Connection connection = pool.take();
             connection.close();
         } catch (SQLException | InterruptedException e) {
+            logger.error("error after close pool", e);
             throw new DaoException(e);
         }
     }

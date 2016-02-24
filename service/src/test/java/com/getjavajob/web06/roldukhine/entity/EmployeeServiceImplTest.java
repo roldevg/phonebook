@@ -6,11 +6,11 @@ import org.mockito.Mockito;
 
 import static org.mockito.Mockito.times;
 
-public class EmployeeServiceTest {
+public class EmployeeServiceImplTest {
 
-    private EmployeeService service = new EmployeeService();
+    private EmployeeServiceImpl service = new EmployeeServiceImpl();
 
-    private PhoneService phoneService = new PhoneService();
+    private PhoneServiceImpl phoneServiceImpl = new PhoneServiceImpl();
 
     private EmployeeDao employeeDao = Mockito.mock(EmployeeDao.class);
 

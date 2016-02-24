@@ -1,6 +1,9 @@
 package com.getjavajob.web06.roldukhine.phonebook.web.controller;
 
-import com.getjavajob.web06.roldukhine.entity.*;
+import com.getjavajob.web06.roldukhine.entity.Employee;
+import com.getjavajob.web06.roldukhine.entity.EmployeeService;
+import com.getjavajob.web06.roldukhine.entity.PhoneServiceImpl;
+import com.getjavajob.web06.roldukhine.entity.UserImageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +28,16 @@ public class EmployeesController {
     private EmployeeService employeeService;
 
     @Autowired
-    private PhoneService phoneService;
+    private PhoneServiceImpl phoneServiceImpl;
 
     @Autowired
     private UserImageService userImageService;
 
     @RequestMapping(value = {"/getAll"}, method = RequestMethod.GET)
     public ModelAndView getAllEmployees() {
+        logger.debug("getAllEmployees");
         List<Employee> employeeList = employeeService.getAll();
+        logger.debug("employeeList {}", employeeList);
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("employeeList", employeeList);
         logger.info("add object: %s", employeeList);
@@ -41,13 +46,15 @@ public class EmployeesController {
 
     @RequestMapping(value = "/edit/{employeeId}", method = RequestMethod.GET)
     public ModelAndView editEmployee(@PathVariable("employeeId") long employeeId) throws IOException, URISyntaxException {
-        logger.info("edit employee with id %s", employeeId);
+        logger.info("editEmployee with id %s", employeeId);
         Employee employee = employeeService.getEmployee(employeeId);
         ModelAndView modelAndView = new ModelAndView("editEmployee");
 
         modelAndView.addObject("employee", employee);
+        logger.debug("employee {}", employee);
 
         String photoEmployee = userImageService.getPhotoEmployee(employee);
+        logger.debug("photoEmployee {}", photoEmployee);
         modelAndView.addObject("photo", photoEmployee);
 
         return modelAndView;
@@ -55,25 +62,33 @@ public class EmployeesController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public String insertEmployee(@ModelAttribute Employee employee) {
+        logger.debug("insertEmployee, employee {}", employee);
         employeeService.addEmployee(employee);
         return "redirect:/employee/getAll";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     protected String saveEmployee(@ModelAttribute Employee employee) {
+        logger.debug("saveEmployee, employee {}", employee);
         employeeService.updateEmployee(employee);
 
-        return "redirect:/employee/getAll";
+        String redirectUrl = "redirect:/employee/getAll";
+        logger.debug("redirectUrl {}", redirectUrl);
+        return redirectUrl;
     }
 
     @RequestMapping(value = "/delete/{employeeId}", method = RequestMethod.POST)
     public String deleteEmployee(@PathVariable("employeeId") long employeeId) {
+        logger.debug("deleteEmployee, employeeId {}", employeeId);
         employeeService.delete(employeeId);
-        return "redirect:/employee/getAll";
+        String redirectUrl = "redirect:/employee/getAll";
+        logger.debug("redirectUrl {}", redirectUrl);
+        return redirectUrl;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addEmployee() {
+        logger.debug("addEmployee");
         return "addEmployee";
     }
 }

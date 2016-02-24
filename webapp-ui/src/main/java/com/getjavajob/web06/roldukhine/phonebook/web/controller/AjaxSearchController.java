@@ -19,6 +19,7 @@ import java.util.List;
 public class AjaxSearchController {
 
     private static final Logger logger = LoggerFactory.getLogger(AjaxSearchController.class);
+
     @Autowired
     private EmployeeDao employeeDao;
 
@@ -26,7 +27,7 @@ public class AjaxSearchController {
     public
     @ResponseBody
     List<String> getCity(@RequestParam("query") String search) throws IOException {
-
+        logger.debug("getCity, search query {}", search);
         List<Employee> employeeList;
         List<Employee> all = employeeDao.getAll();
         if (search == null) {
@@ -44,6 +45,8 @@ public class AjaxSearchController {
         for (Employee employee : employeeList) {
             employees.add(employee.getLastName());
         }
+
+        logger.debug("return employees {}", employees);
 
         return employees;
     }

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
 
@@ -27,30 +26,34 @@ public class DepartmentDaoJdbcImpl extends AbstractDaoJdbcImpl<Department> imple
 
     @Override
     protected String getTableName() {
+        logger.trace("getTableName");
+        logger.debug("return TableName: " + TABLE_NAME);
         return TABLE_NAME;
     }
 
-    @Transactional
     @Override
     public void insert(final Department department) {
+        logger.trace("insert: Department " + department);
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         this.jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement prepareStatement = connection.prepareStatement(INSERT_SQL,
                         Statement.RETURN_GENERATED_KEYS);
+                logger.debug("department: {}", department);
                 prepareStatement.setObject(1, department.getName());
                 prepareStatement.setObject(2, department.getManager() != null ? department.getManager().getId() : null);
                 return prepareStatement;
             }
         }, keyHolder);
         long id = keyHolder.getKey().longValue();
+        logger.debug("generated id {}", id);
         department.setId(id);
     }
 
-    @Transactional
     @Override
     public void update(Department department) {
+        logger.debug("update with department{}", department);
         this.jdbcTemplate.update(UPDATE_SQL,
                 department.getName(),
                 department.getManager() != null ? department.getManager().getId() : null);
@@ -58,9 +61,12 @@ public class DepartmentDaoJdbcImpl extends AbstractDaoJdbcImpl<Department> imple
 
     @Override
     protected Department createInstanceFromResult(ResultSet resultSet) throws SQLException {
+        logger.debug("createInstanceFromResult: resultSet {}", resultSet);
         Department department = new Department();
-        department.setId(resultSet.getLong("id"));
-        department.setName(resultSet.getString("name"));
+        long id = resultSet.getLong("id");
+        department.setId(id);
+        String name = resultSet.getString("name");
+        department.setName(name);
 
         long manager_id = resultSet.getLong("manager_id");
         if (manager_id != 0) {

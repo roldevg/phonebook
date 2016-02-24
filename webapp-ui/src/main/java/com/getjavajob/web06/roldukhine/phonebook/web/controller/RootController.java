@@ -2,6 +2,7 @@ package com.getjavajob.web06.roldukhine.phonebook.web.controller;
 
 import com.getjavajob.web06.roldukhine.entity.Employee;
 import com.getjavajob.web06.roldukhine.entity.EmployeeService;
+import com.getjavajob.web06.roldukhine.entity.EmployeeServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,10 @@ public class RootController {
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public ModelAndView root() {
+        logger.debug("call root mapping");
         List<Employee> employeeList = employeeService.getAll();
         ModelAndView modelAndView = new ModelAndView("index");
+        logger.debug("employeeList {}", employeeList);
         modelAndView.addObject("employeeList", employeeList);
         return modelAndView;
     }
