@@ -39,9 +39,9 @@
                 <form action="<c:url context="/" value="/photo/upload"/>" method="post" enctype="multipart/form-data"
                       style="display: inline">
 
-                            <span class="btn btn-default btn-file">
-                                Browse <input type="file" name="file" id="file">
-                            </span>
+                    <span class="btn btn-default photo">
+                        Browse <input type="file" name="file" id="file">
+                    </span>
 
                     <button type="submit" class="btn btn-success btn-xs glyphicon glyphicon-ok"
                             name="employeeId" value="${employee.id}"></button>
@@ -55,7 +55,7 @@
         </div>
 
         <div class="col-sm-10">
-            <form:form method="post" action="/employee/save" id="saveEmployee">
+            <form:form method="post" action="/employee/save" id="employeeForm">
                 <input type="hidden" name="id" value="${employee.id}">
 
                 <div class="employee-card" id="firstname"><label for="firstname">Firstname</label>
@@ -99,25 +99,24 @@
                 </div>
 
                 <div class="employee-card phone_container" id="phoneContainer"><label for="phoneContainer">Phone</label>
-                    <button type="button" id="add" class="btn btn-success btn-xs glyphicon glyphicon-plus"
+                    <button type="button" id="addPhone" class="btn btn-success btn-xs glyphicon glyphicon-plus"
                             name="employeeId" value="Add phone"></button>
 
                     <div id="phones">
                         <c:forEach items="${employee.phoneList}" var="phone" varStatus="status">
-                            <div id="phone_item" class="phoneContainer">
+                            <div class="phoneItem phoneContainer">
                                 <input type="text" name="phoneList[${status.index}].number" class="phone"
                                        value="${phone.number}">
                                 <input type="hidden" name="phoneList[${status.index}].id" id="phone${status.index}"
                                        value="${phone.id}">
-                                <button type="button"
-                                        class="btn btn-danger btn-xs glyphicon glyphicon-remove remove_phone" +
+                                <button type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove remove_phone"
                                         id="remove_phone${status.index}" value="">
                             </div>
                         </c:forEach>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-success" id="save">Save</button>
+                <button type="submit" class="btn btn-success" id="saveEmployee">Save</button>
             </form:form>
         </div>
 

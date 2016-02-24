@@ -13,7 +13,7 @@
                 <a class="navbar-brand" href="/">Phonebook</a>
             </div>
             <div class="col-xs-8">
-                <input type="text" class="form-control search-employee" placeholder="Search for...">
+                <input type="text" class="form-control search-employee" id="searchEmployee" placeholder="Search for...">
                 <%--input-group
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">Go!</button>

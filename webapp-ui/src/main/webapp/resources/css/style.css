@@ -95,13 +95,13 @@
     margin-top: 7px;
 }
 
-.btn-file {
+.photo {
     position: relative;
     overflow: hidden;
     padding: 2px 12px;
 }
 
-.btn-file input[type=file] {
+.photo input[type=file] {
     position: absolute;
     top: 0;
     right: 0;

@@ -1,18 +1,8 @@
 "use strict";
 
-function readImage() {
-    if (this.files && this.files[0]) {
-        var fileReader = new FileReader();
-        fileReader.onload = function (e) {
-            $('#photo').attr("src", e.target.result);
-        };
-        fileReader.readAsDataURL(this.files[0]);
-    }
-}
-
-function saveConfirm(event, form) {
-    event.preventDefault();
-    bootbox.confirm("Уверены ли вы, что хотите сохранить изменения?", function (result) {
+function isConfirmSaveEmployeeByUser(event, form) {
+    var message = "Уверены ли вы, что хотите сохранить изменения?";
+    bootbox.confirm(message, function (result) {
         if (result) {
             form.submit();
         }
@@ -42,11 +32,20 @@ function recalculationIndexes() {
 }
 
 $(document).ready(function () {
-    $('.search-employee').typeahead({
+
+    $("#saveEmployee").click(function (event) {
+        event.preventDefault();
+        var form = $("#employeeForm");
+        isConfirmSaveEmployeeByUser(event, form);
+    });
+
+    $('#searchEmployee').typeahead({
         source: function (query, process) {
+            var url = '/ajax/search';
             return $.post(
-                '/ajax/search',
-                {query: query},
+                url, {
+                    query: query
+                },
                 function (data) {
                     process(data);
                 },
@@ -61,25 +60,33 @@ $(document).ready(function () {
         orientation: 'bottom'
     });
 
-    $("#saveEmployee").submit(saveConfirm(event, this));
-
-    $(document).on('change', '.btn-file :file', function() {
+    $(document).on('change', '.photo :file', function() {
         var input = this;
-        var numFiles = input.get(0).files ? input.get(0).files.length : 1;
+        var files = input.get(0).files;
+        var length = files ? files.length : 1;
         var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-        input.trigger('fileselect', [numFiles, label]);
+        input.trigger('fileselect', [length, label]);
+    });
+
+    $("#file").change(function() {
+        var files = this.files;
+        if (files && files[0]) {
+            var fileReader = new FileReader();
+            fileReader.onload = function (e) {
+                $('#photo').attr("src", e.target.result);
+            };
+            fileReader.readAsDataURL(files[0]);
+        }
     });
     
-    $(".phone_container #add").click(function () {
-        var index = $(".phone_item").size();
+    $("#addPhone").click(function () {
+        var phoneItems = $(".phoneItem");
+        var length = phoneItems.size();
         $("#phones").append("<div class=\"phone_item\">" +
-            "	<input type=\"text\" class=\"phone\" name=\"phoneList[" + index + "].number\">" +
-            "	<input type=\"button\" class=\"remove_phone\" value=\"remove\">" +
+            "<input type=\"text\" class=\"phone\" name=\"phoneList[" + length + "].number\">" +
+            "<input type=\"button\" class=\"remove_phone\" value=\"remove\">" +
             "</div>");
+
         refreshPhonesListener();
     });
-
-    $("#file").change(readImage());
-
-    $('.input-group.date').datepicker({});
 });
