@@ -13,6 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class PhoneDaoJpaImplTest {
     private EmployeeDao employeeDao;
 
     @Test
+    @Transactional
     public void insertPhoneToEmployee() {
         Employee employee = new Employee();
         employee.setLastName("Ivanov");
@@ -45,6 +47,7 @@ public class PhoneDaoJpaImplTest {
     }
 
     @Test
+    @Transactional
     public void testGetPhoneListByEmployee() {
         Employee employee = new Employee();
         employee.setLastName("Ivanov");

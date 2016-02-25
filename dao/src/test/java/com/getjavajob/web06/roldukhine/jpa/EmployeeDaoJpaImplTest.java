@@ -10,6 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -21,6 +22,7 @@ public class EmployeeDaoJpaImplTest {
     private EmployeeDao employeeDao;
 
     @Test
+    @Transactional
     public void testInsert() throws Exception {
         Employee employee = createTestEmployee();
         employeeDao.insert(employee);
@@ -28,6 +30,7 @@ public class EmployeeDaoJpaImplTest {
     }
 
     @Test
+    @Transactional
     public void testDelete() {
         Employee employee = createTestEmployee();
         employeeDao.insert(employee);
@@ -38,6 +41,7 @@ public class EmployeeDaoJpaImplTest {
     }
 
     @Test
+    @Transactional
     public void testUpdate() {
         Employee employee = createTestEmployee();
         employeeDao.insert(employee);
@@ -50,6 +54,7 @@ public class EmployeeDaoJpaImplTest {
     }
 
     @Test
+    @Transactional
     public void testUpdatePhoto() throws Exception {
         Employee employee = new Employee();
         employee.setFirstName("Petrov");
