@@ -1,5 +1,7 @@
 # Phonebook 
 
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/cd398d127ee345a4ba6e86a862c64fb7)](https://www.codacy.com/app/rodgenk/phonebook)
+
 ** Functionality: **
 
 + login/logout/remember me
