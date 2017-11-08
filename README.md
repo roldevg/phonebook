@@ -30,5 +30,3 @@ SQL ddl is located in the `dao/src/main/resources/create-data-model.sql`
 
 --  
 **Ролдухин Евгений**  
-Тренинг getJavaJob,   
-[http://www.getjavajob.com](http://www.getjavajob.com)
