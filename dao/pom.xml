@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate-entitymanager.version}</version>
+            <version>${hibernate-core.version}</version>
         </dependency>
         <!-- End hibernate -->
 
