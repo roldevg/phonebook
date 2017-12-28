@@ -33,7 +33,7 @@
 
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
-        <filter-class>com.getjavajob.web06.roldukhine.phonebook.web.filter.AuthenticationFilter</filter-class>
+        <filter-class>com.getjavajob.roldukhine.phonebook.web.filter.AuthenticationFilter</filter-class>
     </filter>
 
     <filter-mapping>

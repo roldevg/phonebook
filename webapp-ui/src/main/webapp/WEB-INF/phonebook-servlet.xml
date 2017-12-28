@@ -13,7 +13,7 @@
     <import resource="classpath:service-context.xml"/>
 
     <context:annotation-config/>
-    <context:component-scan base-package="com.getjavajob.web06.roldukhine.phonebook.web"/>
+    <context:component-scan base-package="com.getjavajob.roldukhine.phonebook.web"/>
 
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
