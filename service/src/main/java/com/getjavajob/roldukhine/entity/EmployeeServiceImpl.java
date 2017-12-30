@@ -19,15 +19,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDao employeeDao;
 
     @Autowired
-    private PhoneDao phoneDao;
-
-    @Autowired
-    private PhoneServiceImpl phoneServiceImpl;
-
-    public void setEmployeeDao(EmployeeDao employeeDao) {
-        logger.debug("setEmployeeDao {}", employeeDao);
-        this.employeeDao = employeeDao;
-    }
+    private PhoneService phoneService;
 
     @Transactional
     public void addEmployee(Employee employee) {
@@ -37,8 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Phone> phoneList = employee.getPhoneList();
         logger.debug("phoneList {}", phoneList);
         for (Phone phone : phoneList) {
-            phoneServiceImpl.addPhone(phone);
-            addPhoneToEmployee(employee, phone);
+            phoneService.addPhone(phone, employee);
         }
     }
 
@@ -65,14 +56,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Transactional
-    public void addPhoneToEmployee(Employee employee, Phone phone) {
-        logger.debug("addPhoneToEmployee, employee {}, phone {}", employee, phone);
-        phoneDao.insertPhoneToEmployee(phone, employee);
-    }
-
-    @Transactional
     public void updatePhoto(Employee employee, byte[] photo) {
         logger.debug("updatePhoto, employee {}, photo {}", employee, photo);
         employeeDao.updatePhoto(employee, photo);
+    }
+
+    public void setEmployeeDao(EmployeeDao employeeDao) {
+        this.employeeDao = employeeDao;
+    }
+
+    public void setPhoneService(PhoneService phoneService) {
+        this.phoneService = phoneService;
     }
 }

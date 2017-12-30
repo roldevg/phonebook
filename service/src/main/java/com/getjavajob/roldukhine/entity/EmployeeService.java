@@ -8,6 +8,5 @@ public interface EmployeeService {
     void updateEmployee(Employee employee);
     void delete(long id);
     List<Employee> getAll();
-    void addPhoneToEmployee(Employee employee, Phone phone);
     void updatePhoto(Employee employee, byte[] photo);
 }
