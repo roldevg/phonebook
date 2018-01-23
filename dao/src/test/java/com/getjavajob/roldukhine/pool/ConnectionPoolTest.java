@@ -18,27 +18,27 @@ public class ConnectionPoolTest {
     }
 
     @Test
-    public void testSingleton() {
+    void testSingleton() {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         ConnectionPool connectionPool2 = ConnectionPool.getInstance();
         Assert.assertEquals(connectionPool, connectionPool2);
     }
 
     @Test
-    public void testSetupWithNullProperties() {
+    void testSetupWithNullProperties() {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         Assertions.assertThrows(IllegalArgumentException.class, () -> connectionPool.setup(null));
     }
 
     @Test
-    public void testSetup() {
+    void testSetup() {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         Properties properties = getConnectionProperties();
         connectionPool.setup(properties);
     }
 
     @Test
-    public void testGetConnection() {
+    void testGetConnection() {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         Properties properties = getConnectionProperties();
         connectionPool.setup(properties);
@@ -46,7 +46,7 @@ public class ConnectionPoolTest {
     }
 
     @Test
-    public void testClose() {
+    void testClose() {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         Properties properties = getConnectionProperties();
         connectionPool.setup(properties);
@@ -54,7 +54,7 @@ public class ConnectionPoolTest {
     }
 
     @Test
-    public void testRelease() {
+    void testRelease() {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         Properties properties = getConnectionProperties();
         connectionPool.setup(properties);
@@ -63,7 +63,7 @@ public class ConnectionPoolTest {
     }
 
     @Test
-    public void testGetConnectionSingleThread() {
+    void testGetConnectionSingleThread() {
         final ConnectionPool connectionPool = ConnectionPool.getInstance();
         Properties properties = getConnectionProperties();
         connectionPool.setup(properties);
@@ -80,7 +80,7 @@ public class ConnectionPoolTest {
     }
 
     @Test
-    public void testGetConnectionMultipleThread() {
+    void testGetConnectionMultipleThread() {
         final ConnectionPool connectionPool = ConnectionPool.getInstance();
         Properties properties = getConnectionProperties();
         connectionPool.setup(properties);

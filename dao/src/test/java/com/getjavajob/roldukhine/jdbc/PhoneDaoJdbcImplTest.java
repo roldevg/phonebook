@@ -31,7 +31,7 @@ public class PhoneDaoJdbcImplTest {
     private PhoneDao phoneDao;
 
     @Test
-    public void testInsert() {
+    void testInsert() {
         Phone phone = new Phone();
         phone.setType(PhoneType.HOME);
         phone.setNumber("+78124928438");
@@ -42,7 +42,7 @@ public class PhoneDaoJdbcImplTest {
     }
 
     @Test
-    public void testDelete() {
+    void testDelete() {
         Phone phone = new Phone();
         phone.setType(PhoneType.HOME);
         phone.setNumber("+78124928438");
@@ -54,7 +54,7 @@ public class PhoneDaoJdbcImplTest {
     }
 
     @Test
-    public void testGetPhoneListByEmployee() {
+    void testGetPhoneListByEmployee() {
         Employee employee = new Employee();
         employee.setLastName("Ivanov");
         employeeDao.insert(employee);
@@ -69,7 +69,7 @@ public class PhoneDaoJdbcImplTest {
     }
 
     @Test
-    public void testAddPhoneToEmployee() {
+    void testAddPhoneToEmployee() {
         Employee employee = new Employee();
         employee.setLastName("Ivanov");
         employeeDao.insert(employee);

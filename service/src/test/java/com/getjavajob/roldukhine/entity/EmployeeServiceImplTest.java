@@ -20,7 +20,7 @@ public class EmployeeServiceImplTest {
     private PhoneDao phoneDao = mock(PhoneDao.class);
 
     @Test
-    public void testAddEmployee() throws Exception {
+    void testAddEmployee() throws Exception {
         phoneService.setPhoneDao(phoneDao);
 
         Employee employee = new Employee();

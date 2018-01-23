@@ -26,19 +26,19 @@ public class EmployeeDaoJdbcImplTest {
     private EmployeeDao employeeDao;
 
     @Test
-    public void testInsert() throws Exception {
+    void testInsert() throws Exception {
         Employee employee = createTestEmployee();
         employeeDao.insert(employee);
         Assert.assertNotEquals(0, employee.getId());
     }
 
     @Test
-    public void testGetAllWithHibernate() {
+    void testGetAllWithHibernate() {
         employeeDao.getAll();
     }
 
     @Test
-    public void testSelect() throws Exception {
+    void testSelect() throws Exception {
         Employee employee = createTestEmployee();
         employee.setPhoneList(new ArrayList<Phone>());
         employeeDao.insert(employee);
@@ -47,7 +47,7 @@ public class EmployeeDaoJdbcImplTest {
     }
 
     @Test
-    public void testDelete() throws Exception {
+    void testDelete() throws Exception {
         Employee employee = new Employee();
         employee.setFirstName("Petrov");
         employee.setSecondName("Petrov");
@@ -57,7 +57,7 @@ public class EmployeeDaoJdbcImplTest {
     }
 
     @Test
-    public void testUpdate() throws Exception {
+    void testUpdate() throws Exception {
         Employee employee = new Employee();
         employee.setFirstName("Petrov");
         employee.setSecondName("Petrov");
@@ -70,7 +70,7 @@ public class EmployeeDaoJdbcImplTest {
     }
 
     @Test
-    public void testUpdatePhoto() throws Exception {
+    void testUpdatePhoto() throws Exception {
         Employee employee = new Employee();
         employee.setFirstName("Petrov");
         employee.setSecondName("Petrov");

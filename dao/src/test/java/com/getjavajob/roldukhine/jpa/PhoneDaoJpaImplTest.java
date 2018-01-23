@@ -8,13 +8,11 @@ import com.getjavajob.roldukhine.entity.PhoneType;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -23,6 +21,7 @@ import java.util.List;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ContextConfiguration(locations = {"classpath:dao-context.xml", "classpath:dao-context-override.xml"})
 @ActiveProfiles(value = "jpa")
+@Transactional
 public class PhoneDaoJpaImplTest {
 
     @Autowired
@@ -32,7 +31,6 @@ public class PhoneDaoJpaImplTest {
     private EmployeeDao employeeDao;
 
     @Test
-    @Transactional
     public void insertPhoneToEmployee() {
         Employee employee = new Employee();
         employee.setLastName("Ivanov");
@@ -49,7 +47,6 @@ public class PhoneDaoJpaImplTest {
     }
 
     @Test
-    @Transactional
     public void testGetPhoneListByEmployee() {
         Employee employee = new Employee();
         employee.setLastName("Ivanov");

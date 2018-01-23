@@ -18,13 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ContextConfiguration(locations = {"classpath:dao-context.xml", "classpath:dao-context-override.xml"})
 @ActiveProfiles("jpa")
+@Transactional
 public class EmployeeDaoJpaImplTest {
 
     @Autowired
     private EmployeeDao employeeDao;
 
     @Test
-    @Transactional
     public void testInsert() throws Exception {
         Employee employee = createTestEmployee();
         employeeDao.insert(employee);
@@ -32,7 +32,6 @@ public class EmployeeDaoJpaImplTest {
     }
 
     @Test
-    @Transactional
     public void testDelete() {
         Employee employee = createTestEmployee();
         employeeDao.insert(employee);
@@ -43,7 +42,6 @@ public class EmployeeDaoJpaImplTest {
     }
 
     @Test
-    @Transactional
     public void testUpdate() {
         Employee employee = createTestEmployee();
         employeeDao.insert(employee);
@@ -56,7 +54,6 @@ public class EmployeeDaoJpaImplTest {
     }
 
     @Test
-    @Transactional
     public void testUpdatePhoto() throws Exception {
         Employee employee = new Employee();
         employee.setFirstName("Petrov");

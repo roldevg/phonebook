@@ -29,13 +29,13 @@ public class DepartmentDaoJdbcImplTest {
     private EmployeeDao employeeDao;
 
     @Test
-    public void testInsert() {
+    void testInsert() {
         Department department = createDepartment();
         departmentDao.insert(department);
     }
 
     @Test
-    public void testDelete() {
+    void testDelete() {
         Department department = createDepartment();
         departmentDao.insert(department);
         long id = department.getId();
