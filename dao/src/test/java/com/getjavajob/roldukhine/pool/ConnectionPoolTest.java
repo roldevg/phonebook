@@ -1,7 +1,8 @@
 package com.getjavajob.roldukhine.pool;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.util.Properties;
@@ -23,10 +24,10 @@ public class ConnectionPoolTest {
         Assert.assertEquals(connectionPool, connectionPool2);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testSetupWithNullProperties() {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
-        connectionPool.setup(null);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> connectionPool.setup(null));
     }
 
     @Test

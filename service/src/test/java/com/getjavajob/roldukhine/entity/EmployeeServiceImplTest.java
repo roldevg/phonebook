@@ -2,7 +2,7 @@ package com.getjavajob.roldukhine.entity;
 
 import com.getjavajob.roldukhine.api.EmployeeDao;
 import com.getjavajob.roldukhine.api.PhoneDao;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
