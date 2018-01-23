@@ -23,7 +23,7 @@ Profile:
 
 
 ** Tools: **  
-JDK 8, Spring 4, JPA/ Hibernate 5, jQuery, Bootstrap, JUnit 4.12, Mockito, slf4j/log4j2, Maven, Tomcat 8, MySql / H2
+JDK 8, Spring 4, JPA/ Hibernate 5, jQuery, Bootstrap, JUnit 5, Mockito, slf4j/log4j2, Maven, Tomcat 8, MySql / H2
 
 ** Notes: **  
 SQL ddl is located in the `dao/src/main/resources/create-data-model.sql`

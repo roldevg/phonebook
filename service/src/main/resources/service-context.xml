@@ -10,6 +10,6 @@
     <import resource="classpath:dao-context.xml"/>
 
     <context:annotation-config/>
-    <context:component-scan base-package="com.getjavajob.roldukhine.entity"/>
+    <context:component-scan base-package="com.roldukhine.entity"/>
 
 </beans>

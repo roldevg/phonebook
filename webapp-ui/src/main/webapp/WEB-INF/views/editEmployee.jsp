@@ -1,4 +1,4 @@
-<jsp:useBean id="employee" scope="request" type="com.getjavajob.roldukhine.entity.Employee"/>
+<jsp:useBean id="employee" scope="request" type="com.roldukhine.entity.Employee"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
