@@ -5,7 +5,6 @@ import com.roldukhine.api.PhoneDao;
 import com.roldukhine.entity.Employee;
 import com.roldukhine.entity.Phone;
 import com.roldukhine.entity.PhoneType;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +36,7 @@ public class PhoneDaoJdbcImplTest {
         phoneDao.insert(phone);
         long id = phone.getId();
         Phone searchPhone = phoneDao.get(id);
-        Assert.assertEquals(searchPhone, phone);
+        Assertions.assertEquals(searchPhone, phone);
     }
 
     @Test
@@ -49,7 +48,7 @@ public class PhoneDaoJdbcImplTest {
         long id = phone.getId();
         phoneDao.delete(phone);
         Phone searchPhone = phoneDao.get(id);
-        Assert.assertNull(searchPhone);
+        Assertions.assertNull(searchPhone);
     }
 
     @Test
@@ -64,7 +63,7 @@ public class PhoneDaoJdbcImplTest {
         phoneDao.insert(phone);
 
         List<Phone> phoneListByEmployee = phoneDao.getPhoneListByEmployee(employee);
-        Assert.assertEquals(0, phoneListByEmployee.size());
+        Assertions.assertEquals(0, phoneListByEmployee.size());
     }
 
     @Test
@@ -80,6 +79,6 @@ public class PhoneDaoJdbcImplTest {
 
         phoneDao.insertPhoneToEmployee(phone, employee);
         List<Phone> phoneListByEmployee = phoneDao.getPhoneListByEmployee(employee);
-        Assert.assertEquals(1, phoneListByEmployee.size());
+        Assertions.assertEquals(1, phoneListByEmployee.size());
     }
 }

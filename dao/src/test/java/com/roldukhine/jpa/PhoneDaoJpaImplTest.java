@@ -5,7 +5,7 @@ import com.roldukhine.api.PhoneDao;
 import com.roldukhine.entity.Employee;
 import com.roldukhine.entity.Phone;
 import com.roldukhine.entity.PhoneType;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class PhoneDaoJpaImplTest {
 
         phoneDao.insertPhoneToEmployee(phone, employee);
         List<Phone> phoneListByEmployee = phoneDao.getPhoneListByEmployee(employee);
-        Assert.assertEquals(1, phoneListByEmployee.size());
+        Assertions.assertEquals(1, phoneListByEmployee.size());
     }
 
     @Test
@@ -58,6 +58,6 @@ public class PhoneDaoJpaImplTest {
         phoneDao.insert(phone);
 
         List<Phone> phoneListByEmployee = phoneDao.getPhoneListByEmployee(employee);
-        Assert.assertEquals(0, phoneListByEmployee.size());
+        Assertions.assertEquals(0, phoneListByEmployee.size());
     }
 }

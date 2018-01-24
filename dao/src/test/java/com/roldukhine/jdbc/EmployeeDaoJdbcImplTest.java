@@ -3,7 +3,7 @@ package com.roldukhine.jdbc;
 import com.roldukhine.api.EmployeeDao;
 import com.roldukhine.entity.Employee;
 import com.roldukhine.entity.Phone;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class EmployeeDaoJdbcImplTest {
     void testInsert() throws Exception {
         Employee employee = createTestEmployee();
         employeeDao.insert(employee);
-        Assert.assertNotEquals(0, employee.getId());
+        Assertions.assertNotEquals(0, employee.getId());
     }
 
     @Test
@@ -62,7 +62,7 @@ public class EmployeeDaoJdbcImplTest {
         employee.setLastName("Petrov");
         employee.setDepartment(null);
         employeeDao.insert(employee);
-        Assert.assertEquals("Petrov", employee.getLastName());
+        Assertions.assertEquals("Petrov", employee.getLastName());
         employeeDao.update(employee);
         employeeDao.delete(employee);
     }
@@ -77,7 +77,7 @@ public class EmployeeDaoJdbcImplTest {
         byte[] photo = new byte[10];
         employeeDao.updatePhoto(employee, photo);
         Employee employeeAfterUpdate = employeeDao.get(employee.getId());
-        Assert.assertEquals(employeeAfterUpdate, employee);
+        Assertions.assertEquals(employeeAfterUpdate, employee);
     }
 
     private Employee createTestEmployee() {

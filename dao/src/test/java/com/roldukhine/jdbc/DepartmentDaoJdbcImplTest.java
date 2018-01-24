@@ -5,7 +5,7 @@ import com.roldukhine.api.EmployeeDao;
 import com.roldukhine.entity.BaseEntity;
 import com.roldukhine.entity.Department;
 import com.roldukhine.entity.Employee;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class DepartmentDaoJdbcImplTest {
         long id = department.getId();
         departmentDao.delete(department);
         BaseEntity baseEntity = departmentDao.get(id);
-        Assert.assertNull(baseEntity);
+        Assertions.assertNull(baseEntity);
     }
 
     private Department createDepartment() {

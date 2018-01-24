@@ -2,7 +2,7 @@ package com.roldukhine.jdbc;
 
 import com.roldukhine.api.UserDao;
 import com.roldukhine.entity.User;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +24,14 @@ public class UserDaoImplTest {
     void testInsert() throws Exception {
         User user = createTestUser();
         userDao.insert(user);
-        Assert.assertNotEquals(0, user.getId());
+        Assertions.assertNotEquals(0, user.getId());
     }
 
     @Test
     void testSelect() throws Exception {
         User user = createTestUser();
         userDao.insert(user);
-        Assert.assertEquals(userDao.get(user.getId()), user);
+        Assertions.assertEquals(userDao.get(user.getId()), user);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class UserDaoImplTest {
         User user = createTestUser();
         userDao.insert(user);
         userDao.delete(user);
-        Assert.assertNull(userDao.get(user.getId()));
+        Assertions.assertNull(userDao.get(user.getId()));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class UserDaoImplTest {
         user.setLogin("admin");
         userDao.update(user);
         User userById = userDao.get(user.getId());
-        Assert.assertEquals(user.getLogin(), userById.getLogin());
+        Assertions.assertEquals(user.getLogin(), userById.getLogin());
     }
 
     private User createTestUser() {

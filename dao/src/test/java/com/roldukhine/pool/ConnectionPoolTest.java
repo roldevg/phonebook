@@ -1,6 +1,5 @@
 package com.roldukhine.pool;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +20,7 @@ public class ConnectionPoolTest {
     void testSingleton() {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         ConnectionPool connectionPool2 = ConnectionPool.getInstance();
-        Assert.assertEquals(connectionPool, connectionPool2);
+        Assertions.assertEquals(connectionPool, connectionPool2);
     }
 
     @Test
@@ -73,7 +72,7 @@ public class ConnectionPoolTest {
             public void run() {
                 Connection connection = connectionPool.getConnection();
                 Connection connection2 = connectionPool.getConnection();
-                Assert.assertEquals(connection, connection2);
+                Assertions.assertEquals(connection, connection2);
             }
         });
         thread.start();
@@ -91,7 +90,7 @@ public class ConnectionPoolTest {
             @Override
             public void run() {
                 Connection connection2 = connectionPool.getConnection();
-                Assert.assertNotEquals(connection, connection2);
+                Assertions.assertNotEquals(connection, connection2);
             }
         });
         thread.start();
