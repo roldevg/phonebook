@@ -1,7 +1,5 @@
 package com.roldukhine.entity;
 
-import java.util.List;
-
 public interface UserService {
     void addUser(User user);
 
@@ -10,8 +8,6 @@ public interface UserService {
     void updateUser(User user);
 
     void deleteUser(User user);
-
-    List<User> getAll();
 
     User checkUser(String login, String password);
 }

@@ -40,23 +40,21 @@ public class UserServiceImpl implements UserService {
         userDao.delete(user);
     }
 
-    public List<User> getAll() {
-        logger.debug("getAll");
-        return userDao.getAll();
-    }
-
     public User checkUser(String login, String password) {
         logger.debug("checkUser, login {}, password {}");
-        List<User> userList = getAll();
-        for (User user : userList) {
-            if (user.getLogin().equals(login) &&
-                    user.getPassword().equals(password)) {
-                logger.debug("user by login and password {}", user);
-                return user;
-            }
-        }
 
-        logger.debug("cannot find user by login and password");
-        return null;
+        List<User> userList = userDao.getAll();
+        logger.debug("getAll {}", userList);
+
+        User user = userList.stream()
+                .filter(userItem -> userItem.getLogin().equals(login) && userItem.getPassword().equals(password))
+                .findFirst()
+                .orElse(null);
+        logger.debug("user by login and password {}", user);
+        return user;
+    }
+
+    void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
     }
 }
