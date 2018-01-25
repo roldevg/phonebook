@@ -2,34 +2,37 @@ package com.roldukhine.entity;
 
 import com.roldukhine.api.UserDao;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.mockito.Mockito;
 
 import java.util.Collections;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 public class UserServiceImplTest {
+
+    private User admin = createUser("admin", "admin");
 
     @Test
     public void shouldExistUser() {
-        UserServiceImpl userService = new UserServiceImpl();
-        UserDao userDaoMock = Mockito.mock(UserDao.class);
-        userService.setUserDao(userDaoMock);
+        UserDao userDaoMock = mock(UserDao.class);
+        UserService userService = new UserServiceImpl(userDaoMock);
 
-        Mockito.when(userDaoMock.getAll()).thenReturn(Collections.singletonList(createUser("admin", "admin")));
+        when(userDaoMock.getAll()).thenReturn(Collections.singletonList(admin));
 
-        Assertions.assertNotNull(userService.checkUser("admin", "admin"));
+        assertNotNull(userService.checkUser(admin.getLogin(), admin.getPassword()));
     }
 
     @Test
     public void shouldNotExistUser() {
-        UserServiceImpl userService = new UserServiceImpl();
-        UserDao userDaoMock = Mockito.mock(UserDao.class);
-        userService.setUserDao(userDaoMock);
+        UserDao userDaoMock = mock(UserDao.class);
+        UserService userService = new UserServiceImpl(userDaoMock);
 
-        Assertions.assertNull(userService.checkUser("admin", "admin"));
+        assertNull(userService.checkUser(admin.getLogin(), admin.getPassword()));
     }
 
-    private User createUser(String login, String password) {
+    private static User createUser(String login, String password) {
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);

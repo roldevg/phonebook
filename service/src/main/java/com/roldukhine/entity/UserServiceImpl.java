@@ -14,8 +14,12 @@ public class UserServiceImpl implements UserService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
+    private final UserDao userDao;
+
     @Autowired
-    private UserDao userDao;
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Transactional
     public void addUser(User user) {
@@ -52,9 +56,5 @@ public class UserServiceImpl implements UserService {
                 .orElse(null);
         logger.debug("user by login and password {}", user);
         return user;
-    }
-
-    void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
     }
 }
