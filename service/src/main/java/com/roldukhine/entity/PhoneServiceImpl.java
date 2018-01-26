@@ -12,8 +12,12 @@ public class PhoneServiceImpl implements PhoneService {
 
     private static final Logger logger = LoggerFactory.getLogger(PhoneServiceImpl.class);
 
+    private final PhoneDao phoneDao;
+
     @Autowired
-    private PhoneDao phoneDao;
+    public PhoneServiceImpl(PhoneDao phoneDao) {
+        this.phoneDao = phoneDao;
+    }
 
     @Transactional
     public void addPhone(Phone phone) {
