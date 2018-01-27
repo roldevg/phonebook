@@ -11,16 +11,12 @@ import static org.mockito.Mockito.*;
 
 public class EmployeeServiceImplTest {
 
-    private EmployeeServiceImpl service = new EmployeeServiceImpl();
-
-    private PhoneService phoneService = mock(PhoneService.class);
-
     private EmployeeDao employeeDao = mock(EmployeeDao.class);
     private PhoneDao phoneDao = mock(PhoneDao.class);
 
     @Test
     void testAddEmployee() throws Exception {
-        phoneService.setPhoneDao(phoneDao);
+        PhoneService phoneService = new PhoneServiceImpl(phoneDao);
 
         Employee employee = new Employee();
         employee.setLastName("Ivanov");
@@ -32,11 +28,10 @@ public class EmployeeServiceImplTest {
         phoneList.add(phone);
         employee.setPhoneList(phoneList);
 
-        service.setEmployeeDao(employeeDao);
-        service.setPhoneService(phoneService);
+        EmployeeService service = new EmployeeServiceImpl(employeeDao, phoneService);
         service.addEmployee(employee);
 
         verify(employeeDao, times(1)).insert(employee);
-        verify(phoneService, times(1)).addPhone(phone, employee);
+        verify(phoneDao, times(1)).insertPhoneToEmployee(phone, employee);
     }
 }

@@ -14,11 +14,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
-    @Autowired
-    private EmployeeDao employeeDao;
+    private final EmployeeDao employeeDao;
+
+    private final PhoneService phoneService;
 
     @Autowired
-    private PhoneService phoneService;
+    public EmployeeServiceImpl(EmployeeDao employeeDao, PhoneService phoneService) {
+        this.employeeDao = employeeDao;
+        this.phoneService = phoneService;
+    }
 
     @Transactional
     public void addEmployee(Employee employee) {
@@ -58,13 +62,5 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void updatePhoto(Employee employee, byte[] photo) {
         logger.debug("updatePhoto, employee {}, photo {}", employee, photo);
         employeeDao.updatePhoto(employee, photo);
-    }
-
-    public void setEmployeeDao(EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
-    }
-
-    public void setPhoneService(PhoneService phoneService) {
-        this.phoneService = phoneService;
     }
 }

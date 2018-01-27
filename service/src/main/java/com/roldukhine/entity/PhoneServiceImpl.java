@@ -38,9 +38,4 @@ public class PhoneServiceImpl implements PhoneService {
         logger.debug("getPhone {}", id);
         return phoneDao.get(id);
     }
-
-    @Override
-    public void setPhoneDao(PhoneDao phoneDao) {
-        this.phoneDao = phoneDao;
-    }
 }
