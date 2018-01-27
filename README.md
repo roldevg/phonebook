@@ -1,6 +1,6 @@
 # Phonebook 
 
-[![Codacy Badge](https://api.codacy.com/project/badge/grade/cd398d127ee345a4ba6e86a862c64fb7)](https://www.codacy.com/app/rodgenk/phonebook)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/297a8adb85224fc7a6dc2b8fdf2c5232)](https://www.codacy.com/app/evgeniy/Phonebook)
 
 ** Functionality: **
 
