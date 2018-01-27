@@ -30,33 +30,13 @@ public class ConnectionPoolTest {
     }
 
     @Test
-    void testSetup() {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        Properties properties = getConnectionProperties();
-        connectionPool.setup(properties);
-    }
-
-    @Test
     void testGetConnection() {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         Properties properties = getConnectionProperties();
         connectionPool.setup(properties);
-        connectionPool.getConnection();
-    }
+        Connection connection = connectionPool.getConnection();
+        Assertions.assertNotNull(connection);
 
-    @Test
-    void testClose() {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        Properties properties = getConnectionProperties();
-        connectionPool.setup(properties);
-        connectionPool.close();
-    }
-
-    @Test
-    void testRelease() {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        Properties properties = getConnectionProperties();
-        connectionPool.setup(properties);
         connectionPool.release();
         connectionPool.close();
     }
