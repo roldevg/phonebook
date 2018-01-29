@@ -39,9 +39,9 @@ $(document).ready(function () {
         isConfirmSaveEmployeeByUser(event, form);
     });
 
-    $('#searchEmployee').typeahead({
+    $("#searchEmployee").typeahead({
         source: function (query, process) {
-            var url = '/ajax/search';
+            var url = "/ajax/search";
             return $.post(
                 url, {
                     query: query
@@ -55,17 +55,17 @@ $(document).ready(function () {
     });
 
     $("#datepicker").datepicker({
-        format: 'dd.mm.yyyy',
-        language: 'ru',
-        orientation: 'bottom'
+        format: "dd.mm.yyyy",
+        language: "ru",
+        orientation: "bottom"
     });
 
-    $(document).on('change', '.photo :file', function() {
+    $(document).on("change", ".photo :file", function() {
         var input = this;
         var files = input.get(0).files;
         var length = files ? files.length : 1;
         var label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-        input.trigger('fileselect', [length, label]);
+        input.trigger("fileselect", [length, label]);
     });
 
     $("#file").change(function() {
@@ -73,12 +73,12 @@ $(document).ready(function () {
         if (files && files[0]) {
             var fileReader = new FileReader();
             fileReader.onload = function (e) {
-                $('#photo').attr("src", e.target.result);
+                $("#photo").attr("src", e.target.result);
             };
             fileReader.readAsDataURL(files[0]);
         }
     });
-    
+
     $("#addPhone").click(function () {
         var phoneItems = $(".phoneItem");
         var length = phoneItems.size();
