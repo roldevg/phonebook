@@ -2,7 +2,6 @@ package com.roldukhine.phonebook.web.controller;
 
 import com.roldukhine.entity.Employee;
 import com.roldukhine.entity.EmployeeService;
-import com.roldukhine.entity.PhoneServiceImpl;
 import com.roldukhine.entity.UserImageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +25,6 @@ public class EmployeesController {
 
     @Autowired
     private EmployeeService employeeService;
-
-    @Autowired
-    private PhoneServiceImpl phoneServiceImpl;
 
     @Autowired
     private UserImageService userImageService;
