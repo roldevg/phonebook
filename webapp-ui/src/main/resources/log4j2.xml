@@ -23,7 +23,7 @@
         <Logger name="RollingLogger" level="debug" additivity="false">
             <AppenderRef ref="RollingFile"/>
         </Logger>
-        <Logger name="com.getjavajob" level="trace" additivity="false">
+        <Logger name="com.roldukhine" level="trace" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>
         </Logger>
