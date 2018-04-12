@@ -2,6 +2,7 @@ package com.roldukhine.jpa;
 
 import com.roldukhine.api.EmployeeDao;
 import com.roldukhine.entity.Employee;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -9,10 +10,9 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+@Slf4j
 @Repository("employeeDaoJpaImpl")
 public class EmployeeDaoJpaImpl extends AbstractDaoJpaImpl<Employee> implements EmployeeDao {
-
-    private static final Logger logger = LoggerFactory.getLogger(EmployeeDaoJpaImpl.class);
 
     @PersistenceContext
     private EntityManager entityManager;

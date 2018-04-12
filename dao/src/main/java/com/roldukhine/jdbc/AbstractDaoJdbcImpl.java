@@ -3,6 +3,7 @@ package com.roldukhine.jdbc;
 import com.roldukhine.api.CrudDao;
 import com.roldukhine.entity.BaseEntity;
 import com.roldukhine.exception.DaoException;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Slf4j
 @Repository("abstractDao")
 public abstract class AbstractDaoJdbcImpl<T extends BaseEntity> implements CrudDao<T> {
-
-    private static final Logger logger = LoggerFactory.getLogger(AbstractDaoJdbcImpl.class);
 
     @Autowired
     protected JdbcTemplate jdbcTemplate;

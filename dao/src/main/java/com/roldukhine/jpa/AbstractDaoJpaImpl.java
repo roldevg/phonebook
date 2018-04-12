@@ -2,6 +2,7 @@ package com.roldukhine.jpa;
 
 import com.roldukhine.api.CrudDao;
 import com.roldukhine.entity.BaseEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -14,10 +15,9 @@ import javax.persistence.criteria.Root;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+@Slf4j
 @Repository
 public abstract class AbstractDaoJpaImpl<T extends BaseEntity> implements CrudDao<T> {
-
-    private static final Logger logger = LoggerFactory.getLogger(AbstractDaoJpaImpl.class);
 
     protected Class<T> entityClass;
 

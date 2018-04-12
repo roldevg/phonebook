@@ -1,5 +1,6 @@
 package com.roldukhine.entity;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -10,11 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
 
+@Slf4j
 @Service
 @Transactional(readOnly = true)
 public class UserImageServiceImpl implements UserImageService {
-
-    private static final Logger logger = LoggerFactory.getLogger(UserImageServiceImpl.class);
 
     private static final String BASE64_FIRST_PART_STRING = "data:image/png;base64,";
 

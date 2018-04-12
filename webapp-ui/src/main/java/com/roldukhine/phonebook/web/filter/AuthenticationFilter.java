@@ -1,5 +1,6 @@
 package com.roldukhine.phonebook.web.filter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,9 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
 
+@Slf4j
 public class AuthenticationFilter implements Filter {
-
-    private static final Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
 
     private static final String FILES_WITHOUT_FILTER = ".*(css|jpg|png|gif|js)";
     private static final String LOGIN = "login";

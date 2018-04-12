@@ -3,6 +3,7 @@ package com.roldukhine.phonebook.web.controller;
 import com.roldukhine.entity.Employee;
 import com.roldukhine.entity.EmployeeService;
 import com.roldukhine.entity.UserImageService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping(value = "/employee")
 public class EmployeesController {
-
-    private static final Logger logger = LoggerFactory.getLogger(EmployeesController.class);
 
     @Autowired
     private EmployeeService employeeService;

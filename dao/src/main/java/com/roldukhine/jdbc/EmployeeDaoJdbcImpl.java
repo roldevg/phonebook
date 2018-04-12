@@ -7,6 +7,7 @@ import com.roldukhine.entity.BaseEntity;
 import com.roldukhine.entity.Department;
 import com.roldukhine.entity.Employee;
 import com.roldukhine.entity.Phone;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.*;
 import java.util.List;
 
+@Slf4j
 @Repository
 public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implements EmployeeDao {
-
-    private static final Logger logger = LoggerFactory.getLogger(EmployeeDaoJdbcImpl.class);
 
     private static final String TABLE_NAME = "Employee";
     private static final String INSERT_SQL = "INSERT INTO " + TABLE_NAME + " (first_name, second_name, last_name, birthdate, email, icq, " +

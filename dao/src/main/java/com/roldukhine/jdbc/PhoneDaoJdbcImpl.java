@@ -4,6 +4,7 @@ import com.roldukhine.api.PhoneDao;
 import com.roldukhine.entity.Employee;
 import com.roldukhine.entity.Phone;
 import com.roldukhine.entity.PhoneType;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -14,10 +15,9 @@ import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.List;
 
+@Slf4j
 @Repository
 public class PhoneDaoJdbcImpl extends AbstractDaoJdbcImpl<Phone> implements PhoneDao {
-
-    private static final Logger logger = LoggerFactory.getLogger(PhoneDaoJdbcImpl.class);
 
     private static final String TABLE_NAME = "Phone";
 

@@ -2,6 +2,7 @@ package com.roldukhine.phonebook.web.controller;
 
 import com.roldukhine.entity.Employee;
 import com.roldukhine.entity.EmployeeService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+@Slf4j
 @Controller
 @RequestMapping(value = "/photo")
 public class PhotoEmployeeController {
-
-    private static final Logger logger = LoggerFactory.getLogger(PhotoEmployeeController.class);
 
     @Autowired
     private EmployeeService employeeService;

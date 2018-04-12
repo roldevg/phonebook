@@ -1,16 +1,16 @@
 package com.roldukhine.entity;
 
 import com.roldukhine.api.PhoneDao;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 public class PhoneServiceImpl implements PhoneService {
-
-    private static final Logger logger = LoggerFactory.getLogger(PhoneServiceImpl.class);
 
     private final PhoneDao phoneDao;
 

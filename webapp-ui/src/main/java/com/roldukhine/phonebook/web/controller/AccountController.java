@@ -2,6 +2,7 @@ package com.roldukhine.phonebook.web.controller;
 
 import com.roldukhine.entity.User;
 import com.roldukhine.entity.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Controller
 @RequestMapping(value = "/account")
 public class AccountController {
-
-    private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @Autowired
     private UserService userService;

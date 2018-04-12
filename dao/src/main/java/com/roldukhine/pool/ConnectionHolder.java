@@ -1,14 +1,14 @@
 package com.roldukhine.pool;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Slf4j
 public class ConnectionHolder {
-
-    private static final Logger logger = LoggerFactory.getLogger(ConnectionHolder.class);
 
     private Connection connection;
 

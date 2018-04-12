@@ -1,6 +1,7 @@
 package com.roldukhine.pool;
 
 import com.roldukhine.exception.DaoException;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,9 +13,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class ConnectionPool {
-
-    private static final Logger logger = LoggerFactory.getLogger(ConnectionPool.class);
 
     private static final int DEFAULT_SIZE = 10;
 
