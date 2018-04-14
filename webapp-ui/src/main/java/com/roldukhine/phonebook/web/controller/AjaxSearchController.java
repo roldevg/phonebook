@@ -20,8 +20,12 @@ import java.util.List;
 @Controller
 public class AjaxSearchController {
 
+    private final EmployeeDao employeeDao;
+
     @Autowired
-    private EmployeeDao employeeDao;
+    public AjaxSearchController(EmployeeDao employeeDao) {
+        this.employeeDao = employeeDao;
+    }
 
     @RequestMapping(value = {"/ajax/search"}, method = RequestMethod.POST)
     public

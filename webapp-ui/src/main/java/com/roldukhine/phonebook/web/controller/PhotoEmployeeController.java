@@ -17,8 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(value = "/photo")
 public class PhotoEmployeeController {
 
+    private final EmployeeService employeeService;
+
     @Autowired
-    private EmployeeService employeeService;
+    public PhotoEmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String handleFileUpload(@RequestParam("file") MultipartFile file,

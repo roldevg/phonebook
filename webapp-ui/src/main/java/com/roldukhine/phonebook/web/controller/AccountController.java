@@ -23,8 +23,12 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping(value = "/account")
 public class AccountController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public AccountController(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@RequestParam String login,

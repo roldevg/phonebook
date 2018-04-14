@@ -23,11 +23,15 @@ import java.util.List;
 @RequestMapping(value = "/employee")
 public class EmployeesController {
 
-    @Autowired
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
+
+    private final UserImageService userImageService;
 
     @Autowired
-    private UserImageService userImageService;
+    public EmployeesController(EmployeeService employeeService, UserImageService userImageService) {
+        this.employeeService = employeeService;
+        this.userImageService = userImageService;
+    }
 
     @RequestMapping(value = {"/getAll"}, method = RequestMethod.GET)
     public ModelAndView getAllEmployees() {

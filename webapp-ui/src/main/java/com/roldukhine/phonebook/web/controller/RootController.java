@@ -17,8 +17,12 @@ import java.util.List;
 @Controller
 public class RootController {
 
+    private final EmployeeService employeeService;
+
     @Autowired
-    private EmployeeService employeeService;
+    public RootController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public ModelAndView root() {
