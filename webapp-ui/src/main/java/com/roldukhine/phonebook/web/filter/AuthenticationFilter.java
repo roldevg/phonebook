@@ -24,17 +24,18 @@ public class AuthenticationFilter implements Filter {
         logger.debug("init AuthenticationFilter FilterConfig {}", filterConfig);
     }
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         logger.debug("doFilter request {}, response {}, chain {}", request, response, chain);
 
         HttpServletRequest req = (HttpServletRequest) request;
 
-        String requestURI = ((HttpServletRequest) request).getRequestURI();
-        if (requestURI.matches(FILES_WITHOUT_FILTER)) {
+        String requestUri = ((HttpServletRequest) request).getRequestURI();
+        if (requestUri.matches(FILES_WITHOUT_FILTER)) {
             logger.debug("requestURI matches files without filter");
             chain.doFilter(request, response);
             return;
-        } else if (requestURI.contains(LOGIN)) {
+        } else if (requestUri.contains(LOGIN)) {
             logger.debug("requestURI contains login page url");
             chain.doFilter(request, response);
             return;

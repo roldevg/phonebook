@@ -28,9 +28,8 @@ public class AjaxSearchController {
     }
 
     @RequestMapping(value = {"/ajax/search"}, method = RequestMethod.POST)
-    public
     @ResponseBody
-    List<String> getCity(@RequestParam("query") String search) throws IOException {
+    public List<String> getCity(@RequestParam("query") String search) throws IOException {
         logger.debug("getCity, search query {}", search);
         List<Employee> employeeList;
         List<Employee> all = employeeDao.getAll();

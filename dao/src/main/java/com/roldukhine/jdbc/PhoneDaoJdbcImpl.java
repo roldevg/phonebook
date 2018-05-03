@@ -32,7 +32,8 @@ public class PhoneDaoJdbcImpl extends AbstractDaoJdbcImpl<Phone> implements Phon
                     " WHERE PHONE.id = ETP.phone_id" +
                     "   AND ETP.employee_id = ?";
 
-    private static final String INSERT_PHONE_TO_EMPLOYEE = "INSERT INTO employee_to_phone (phone_id, employee_id) VALUES (?, ?)";
+    private static final String INSERT_PHONE_TO_EMPLOYEE = "INSERT INTO employee_to_phone (phone_id, employee_id) " +
+            "VALUES (?, ?)";
 
     @Override
     protected String getTableName() {
@@ -97,7 +98,7 @@ public class PhoneDaoJdbcImpl extends AbstractDaoJdbcImpl<Phone> implements Phon
             }
         }, new RowMapper<Phone>() {
             @Override
-            public Phone mapRow(ResultSet resultSet, int i) throws SQLException {
+            public Phone mapRow(ResultSet resultSet, int index) throws SQLException {
                 return createInstanceFromResult(resultSet);
             }
         });

@@ -16,8 +16,6 @@ public class EmployeeServiceImplTest {
 
     @Test
     void testAddEmployee() throws Exception {
-        PhoneService phoneService = new PhoneServiceImpl(phoneDao);
-
         Employee employee = new Employee();
         employee.setLastName("Ivanov");
         employee.setEmail("ivanov@gmail.com");
@@ -28,6 +26,7 @@ public class EmployeeServiceImplTest {
         phoneList.add(phone);
         employee.setPhoneList(phoneList);
 
+        PhoneService phoneService = new PhoneServiceImpl(phoneDao);
         EmployeeService service = new EmployeeServiceImpl(employeeDao, phoneService);
         service.addEmployee(employee);
 

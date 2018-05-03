@@ -112,8 +112,8 @@ public abstract class AbstractDaoJdbcImpl<T extends BaseEntity> implements CrudD
         logger.trace("getAll");
         return this.jdbcTemplate.query(getSelectAllStatement(), new RowMapper<T>() {
             @Override
-            public T mapRow(ResultSet resultSet, int i) throws SQLException {
-                logger.trace("mapRow: resultSet, index" + resultSet + i);
+            public T mapRow(ResultSet resultSet, int index) throws SQLException {
+                logger.trace("mapRow: resultSet, index" + resultSet + index);
                 return createInstanceFromResult(resultSet);
             }
         });

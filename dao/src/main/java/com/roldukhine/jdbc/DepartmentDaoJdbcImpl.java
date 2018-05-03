@@ -68,9 +68,9 @@ public class DepartmentDaoJdbcImpl extends AbstractDaoJdbcImpl<Department> imple
         String name = resultSet.getString("name");
         department.setName(name);
 
-        long manager_id = resultSet.getLong("manager_id");
-        if (manager_id != 0) {
-            department.setManager(employeeDao.get(manager_id));
+        long managerId = resultSet.getLong("manager_id");
+        if (managerId != 0) {
+            department.setManager(employeeDao.get(managerId));
         }
 
         return department;

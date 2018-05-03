@@ -28,10 +28,15 @@ import java.util.List;
 public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implements EmployeeDao {
 
     private static final String TABLE_NAME = "Employee";
-    private static final String INSERT_SQL = "INSERT INTO " + TABLE_NAME + " (first_name, second_name, last_name, birthdate, email, icq, " +
-            "skype, note, manager_id, department_id, work_address, home_address, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_SQL = "UPDATE " + TABLE_NAME + " SET first_name = ?, second_name = ?, last_name = ?, birthdate = ?, email = ?, icq = ?, " +
-            "skype = ?, note = ?, manager_id = ?, department_id = ?, work_address = ?, home_address = ?, photo = ? WHERE id = ?";
+
+    private static final String INSERT_SQL = "INSERT INTO " +
+            TABLE_NAME + " (first_name, second_name, last_name, birthdate, email, icq, " +
+            "skype, note, manager_id, department_id, work_address, home_address, photo) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String UPDATE_SQL = "UPDATE " + TABLE_NAME +
+            " SET first_name = ?, second_name = ?, last_name = ?, birthdate = ?, email = ?, icq = ?, " +
+            "skype = ?, note = ?, manager_id = ?, department_id = ?, work_address = ?, home_address = ?, photo = ? " +
+            "WHERE id = ?";
     private static final String UPDATE_PHOTO = "UPDATE " + TABLE_NAME + " SET PHOTO = ? WHERE id = ?";
     @Autowired
     private PhoneDao phoneDao;
@@ -63,8 +68,10 @@ public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implement
                 prepareStatement.setObject(6, employee.getIcq());
                 prepareStatement.setObject(7, employee.getSkype());
                 prepareStatement.setObject(8, employee.getNote());
-                prepareStatement.setObject(9, employee.getManager() != null ? employee.getManager().getId() : null);
-                prepareStatement.setObject(10, employee.getDepartment() != null ? employee.getDepartment().getId() : null);
+                prepareStatement.setObject(9, employee.getManager() != null ?
+                        employee.getManager().getId() : null);
+                prepareStatement.setObject(10, employee.getDepartment() != null ?
+                        employee.getDepartment().getId() : null);
                 prepareStatement.setObject(11, employee.getWorkAddress());
                 prepareStatement.setObject(12, employee.getHomeAddress());
                 prepareStatement.setObject(13, employee.getPhoto());
@@ -131,15 +138,15 @@ public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implement
     protected Employee createInstanceFromResult(ResultSet resultSet) throws SQLException {
         logger.debug("createInstanceFromResult: resultSet {}", resultSet);
         Department department = null;
-        long department_id = resultSet.getLong("department_id");
-        if (department_id != BaseEntity.NO_EXIST_ID_ENTITY) {
-            department = departmentDao.get(department_id);
+        long departmentId = resultSet.getLong("department_id");
+        if (departmentId != BaseEntity.NO_EXIST_ID_ENTITY) {
+            department = departmentDao.get(departmentId);
         }
 
         Employee manager = null;
-        long manager_id = resultSet.getLong("manager_id");
-        if (manager_id != BaseEntity.NO_EXIST_ID_ENTITY) {
-            manager = get(manager_id);
+        long managerId = resultSet.getLong("manager_id");
+        if (managerId != BaseEntity.NO_EXIST_ID_ENTITY) {
+            manager = get(managerId);
         }
 
         Employee employee = new Employee();
