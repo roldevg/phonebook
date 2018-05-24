@@ -39,15 +39,12 @@ public class UserDaoJdbcImpl extends AbstractDaoJdbcImpl<User> implements UserDa
     public void insert(final User entity) {
         logger.debug("insert user {}", entity);
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        this.jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement prepareStatement = connection.prepareStatement(INSERT_SQL,
-                        Statement.RETURN_GENERATED_KEYS);
-                prepareStatement.setObject(1, entity.getLogin());
-                prepareStatement.setObject(2, entity.getPassword());
-                return prepareStatement;
-            }
+        this.jdbcTemplate.update(connection -> {
+            PreparedStatement prepareStatement = connection.prepareStatement(INSERT_SQL,
+                    Statement.RETURN_GENERATED_KEYS);
+            prepareStatement.setObject(1, entity.getLogin());
+            prepareStatement.setObject(2, entity.getPassword());
+            return prepareStatement;
         }, keyHolder);
         long id = keyHolder.getKey().longValue();
         logger.debug("return new id {}", id);

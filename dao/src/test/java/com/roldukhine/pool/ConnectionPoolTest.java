@@ -47,13 +47,10 @@ public class ConnectionPoolTest {
         Properties properties = getConnectionProperties();
         connectionPool.setup(properties);
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Connection connection = connectionPool.getConnection();
-                Connection connection2 = connectionPool.getConnection();
-                Assertions.assertEquals(connection, connection2);
-            }
+        Thread thread = new Thread(() -> {
+            Connection connection = connectionPool.getConnection();
+            Connection connection2 = connectionPool.getConnection();
+            Assertions.assertEquals(connection, connection2);
         });
         thread.start();
     }
@@ -66,12 +63,9 @@ public class ConnectionPoolTest {
 
         final Connection connection = connectionPool.getConnection();
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Connection connection2 = connectionPool.getConnection();
-                Assertions.assertNotEquals(connection, connection2);
-            }
+        Thread thread = new Thread(() -> {
+            Connection connection2 = connectionPool.getConnection();
+            Assertions.assertNotEquals(connection, connection2);
         });
         thread.start();
     }

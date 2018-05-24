@@ -44,16 +44,13 @@ public class PhoneDaoJdbcImpl extends AbstractDaoJdbcImpl<Phone> implements Phon
     public void insert(final Phone phone) {
         logger.debug("insert phone {}", phone);
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        this.jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                logger.debug("createPreparedStatement connection {}", connection);
-                PreparedStatement prepareStatement = connection.prepareStatement(INSERT_SQL,
-                        Statement.RETURN_GENERATED_KEYS);
-                prepareStatement.setObject(1, phone.getNumber());
-                prepareStatement.setObject(2, phone.getPhoneTypeTag());
-                return prepareStatement;
-            }
+        this.jdbcTemplate.update(connection -> {
+            logger.debug("createPreparedStatement connection {}", connection);
+            PreparedStatement prepareStatement = connection.prepareStatement(INSERT_SQL,
+                    Statement.RETURN_GENERATED_KEYS);
+            prepareStatement.setObject(1, phone.getNumber());
+            prepareStatement.setObject(2, phone.getPhoneTypeTag());
+            return prepareStatement;
         }, keyHolder);
         long id = keyHolder.getKey().longValue();
         phone.setId(id);
@@ -87,19 +84,11 @@ public class PhoneDaoJdbcImpl extends AbstractDaoJdbcImpl<Phone> implements Phon
         logger.debug("getPhoneListByEmployee Employee: {}", employee);
         final long employeeId = employee.getId();
 
-        List<Phone> phoneList = this.jdbcTemplate.query(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement preparedStatement = connection.prepareStatement(GET_PHONE_LIST_BY_EMPLOYEE);
-                preparedStatement.setObject(1, employeeId);
-                return preparedStatement;
-            }
-        }, new RowMapper<Phone>() {
-            @Override
-            public Phone mapRow(ResultSet resultSet, int index) throws SQLException {
-                return createInstanceFromResult(resultSet);
-            }
-        });
+        List<Phone> phoneList = this.jdbcTemplate.query(connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_PHONE_LIST_BY_EMPLOYEE);
+            preparedStatement.setObject(1, employeeId);
+            return preparedStatement;
+        }, (resultSet, index) -> createInstanceFromResult(resultSet));
 
         return phoneList;
     }

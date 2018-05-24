@@ -53,28 +53,25 @@ public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implement
     public void insert(final Employee employee) {
         logger.debug("insert with employee {}", employee);
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        this.jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement prepareStatement = connection.prepareStatement(INSERT_SQL,
-                        Statement.RETURN_GENERATED_KEYS);
-                prepareStatement.setObject(1, employee.getFirstName());
-                prepareStatement.setObject(2, employee.getSecondName());
-                prepareStatement.setObject(3, employee.getLastName());
-                prepareStatement.setObject(4, employee.getBirthdate());
-                prepareStatement.setObject(5, employee.getEmail());
-                prepareStatement.setObject(6, employee.getIcq());
-                prepareStatement.setObject(7, employee.getSkype());
-                prepareStatement.setObject(8, employee.getNote());
-                prepareStatement.setObject(9, employee.getManager() != null ?
-                        employee.getManager().getId() : null);
-                prepareStatement.setObject(10, employee.getDepartment() != null ?
-                        employee.getDepartment().getId() : null);
-                prepareStatement.setObject(11, employee.getWorkAddress());
-                prepareStatement.setObject(12, employee.getHomeAddress());
-                prepareStatement.setObject(13, employee.getPhoto());
-                return prepareStatement;
-            }
+        this.jdbcTemplate.update(connection -> {
+            PreparedStatement prepareStatement = connection.prepareStatement(INSERT_SQL,
+                    Statement.RETURN_GENERATED_KEYS);
+            prepareStatement.setObject(1, employee.getFirstName());
+            prepareStatement.setObject(2, employee.getSecondName());
+            prepareStatement.setObject(3, employee.getLastName());
+            prepareStatement.setObject(4, employee.getBirthdate());
+            prepareStatement.setObject(5, employee.getEmail());
+            prepareStatement.setObject(6, employee.getIcq());
+            prepareStatement.setObject(7, employee.getSkype());
+            prepareStatement.setObject(8, employee.getNote());
+            prepareStatement.setObject(9, employee.getManager() != null ?
+                    employee.getManager().getId() : null);
+            prepareStatement.setObject(10, employee.getDepartment() != null ?
+                    employee.getDepartment().getId() : null);
+            prepareStatement.setObject(11, employee.getWorkAddress());
+            prepareStatement.setObject(12, employee.getHomeAddress());
+            prepareStatement.setObject(13, employee.getPhoto());
+            return prepareStatement;
         }, keyHolder);
         long id = keyHolder.getKey().longValue();
         logger.debug("return new id {}", id);

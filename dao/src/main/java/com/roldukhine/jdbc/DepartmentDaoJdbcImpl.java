@@ -33,16 +33,13 @@ public class DepartmentDaoJdbcImpl extends AbstractDaoJdbcImpl<Department> imple
     public void insert(final Department department) {
         logger.trace("insert: Department " + department);
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        this.jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement prepareStatement = connection.prepareStatement(INSERT_SQL,
-                        Statement.RETURN_GENERATED_KEYS);
-                logger.debug("department: {}", department);
-                prepareStatement.setObject(1, department.getName());
-                prepareStatement.setObject(2, department.getManager() != null ? department.getManager().getId() : null);
-                return prepareStatement;
-            }
+        this.jdbcTemplate.update(connection -> {
+            PreparedStatement prepareStatement = connection.prepareStatement(INSERT_SQL,
+                    Statement.RETURN_GENERATED_KEYS);
+            logger.debug("department: {}", department);
+            prepareStatement.setObject(1, department.getName());
+            prepareStatement.setObject(2, department.getManager() != null ? department.getManager().getId() : null);
+            return prepareStatement;
         }, keyHolder);
         long id = keyHolder.getKey().longValue();
         logger.debug("generated id {}", id);
