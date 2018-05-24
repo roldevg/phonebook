@@ -3,8 +3,6 @@ package com.roldukhine.jpa;
 import com.roldukhine.api.CrudDao;
 import com.roldukhine.entity.BaseEntity;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
