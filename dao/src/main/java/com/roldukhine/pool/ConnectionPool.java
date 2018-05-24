@@ -20,9 +20,9 @@ public class ConnectionPool {
     private static final String PROPERTY_USER = "user";
     private static final String PROPERTY_PASSWORD = "password";
 
-    private static ConnectionPool instance = new ConnectionPool();
-    private BlockingQueue<Connection> pool = new LinkedBlockingQueue<>(DEFAULT_SIZE);
-    private ThreadLocal<ConnectionHolder> connectionHolder = new ThreadLocal<>();
+    private static final ConnectionPool instance = new ConnectionPool();
+    private final BlockingQueue<Connection> pool = new LinkedBlockingQueue<>(DEFAULT_SIZE);
+    private final ThreadLocal<ConnectionHolder> connectionHolder = new ThreadLocal<>();
 
     public static ConnectionPool getInstance() {
         logger.debug("getInstance {}", instance);

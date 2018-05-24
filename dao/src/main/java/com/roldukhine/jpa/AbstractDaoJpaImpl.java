@@ -17,7 +17,7 @@ import java.util.List;
 @Repository
 public abstract class AbstractDaoJpaImpl<T extends BaseEntity> implements CrudDao<T> {
 
-    protected Class<T> entityClass;
+    protected final Class<T> entityClass;
 
     @PersistenceContext
     private EntityManager entityManager;

@@ -8,9 +8,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public class ConnectionHolder {
 
-    private Connection connection;
+    private final Connection connection;
 
-    private AtomicInteger counter = new AtomicInteger();
+    private final AtomicInteger counter = new AtomicInteger();
 
     public ConnectionHolder(Connection connection) {
         logger.debug("create ConnectionHolder {}", connection);
