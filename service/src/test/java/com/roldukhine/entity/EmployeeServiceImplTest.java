@@ -15,7 +15,7 @@ public class EmployeeServiceImplTest {
     private PhoneDao phoneDao = mock(PhoneDao.class);
 
     @Test
-    void testAddEmployee() throws Exception {
+    void testAddEmployee() {
         Employee employee = new Employee();
         employee.setLastName("Ivanov");
         employee.setEmail("ivanov@gmail.com");

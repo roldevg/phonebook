@@ -23,7 +23,7 @@ public class EmployeeDaoJpaImplTest {
     private EmployeeDao employeeDao;
 
     @Test
-    public void testInsert() throws Exception {
+    public void testInsert() {
         Employee employee = createTestEmployee();
         employeeDao.insert(employee);
         Assertions.assertNotEquals(0, employee.getId());
@@ -52,7 +52,7 @@ public class EmployeeDaoJpaImplTest {
     }
 
     @Test
-    public void testUpdatePhoto() throws Exception {
+    public void testUpdatePhoto() {
         Employee employee = new Employee();
         employee.setFirstName("Petrov");
         employee.setSecondName("Petrov");

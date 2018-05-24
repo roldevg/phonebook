@@ -43,8 +43,7 @@ public class EmployeesController {
     }
 
     @RequestMapping(value = "/edit/{employeeId}", method = RequestMethod.GET)
-    public ModelAndView editEmployee(@PathVariable("employeeId") long employeeId)
-            throws IOException, URISyntaxException {
+    public ModelAndView editEmployee(@PathVariable("employeeId") long employeeId) {
         logger.info("editEmployee with id %s", employeeId);
         Employee employee = employeeService.getEmployee(employeeId);
         ModelAndView modelAndView = new ModelAndView("editEmployee");

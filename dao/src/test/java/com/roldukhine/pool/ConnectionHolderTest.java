@@ -9,14 +9,14 @@ import java.sql.Connection;
 public class ConnectionHolderTest {
 
     @Test
-    void getConnection() throws Exception {
+    void getConnection() {
         Connection connection = Mockito.mock(Connection.class);
         ConnectionHolder connectionHolder = new ConnectionHolder(connection);
         Assertions.assertEquals(connection, connectionHolder.getConnection());
     }
 
     @Test
-    void getAndDecrement() throws Exception {
+    void getAndDecrement() {
         Connection connection = Mockito.mock(Connection.class);
         ConnectionHolder connectionHolder = new ConnectionHolder(connection);
         Assertions.assertEquals(0, connectionHolder.getAndDecrement());
@@ -24,7 +24,7 @@ public class ConnectionHolderTest {
     }
 
     @Test
-    void getAndIncrement() throws Exception {
+    void getAndIncrement() {
         Connection connection = Mockito.mock(Connection.class);
         ConnectionHolder connectionHolder = new ConnectionHolder(connection);
         Assertions.assertEquals(0, connectionHolder.getAndIncrement());
@@ -32,7 +32,7 @@ public class ConnectionHolderTest {
     }
 
     @Test
-    void incrementAndGet() throws Exception {
+    void incrementAndGet() {
         Connection connection = Mockito.mock(Connection.class);
         ConnectionHolder connectionHolder = new ConnectionHolder(connection);
         Assertions.assertEquals(1, connectionHolder.incrementAndGet());
@@ -40,7 +40,7 @@ public class ConnectionHolderTest {
     }
 
     @Test
-    void getCounter() throws Exception {
+    void getCounter() {
         Connection connection = Mockito.mock(Connection.class);
         ConnectionHolder connectionHolder = new ConnectionHolder(connection);
         Assertions.assertEquals(1, connectionHolder.incrementAndGet());

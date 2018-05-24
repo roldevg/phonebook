@@ -21,21 +21,21 @@ public class UserDaoImplTest {
     private UserDao userDao;
 
     @Test
-    void testInsert() throws Exception {
+    void testInsert() {
         User user = createTestUser();
         userDao.insert(user);
         Assertions.assertNotEquals(0, user.getId());
     }
 
     @Test
-    void testSelect() throws Exception {
+    void testSelect() {
         User user = createTestUser();
         userDao.insert(user);
         Assertions.assertEquals(userDao.get(user.getId()), user);
     }
 
     @Test
-    void testDelete() throws Exception {
+    void testDelete() {
         User user = createTestUser();
         userDao.insert(user);
         userDao.delete(user);
@@ -43,7 +43,7 @@ public class UserDaoImplTest {
     }
 
     @Test
-    void testUpdate() throws Exception {
+    void testUpdate() {
         User user = createTestUser();
         userDao.insert(user);
         user.setLogin("admin");

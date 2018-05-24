@@ -24,7 +24,7 @@ public class EmployeeDaoJdbcImplTest {
     private EmployeeDao employeeDao;
 
     @Test
-    void testInsert() throws Exception {
+    void testInsert() {
         Employee employee = createTestEmployee();
         employeeDao.insert(employee);
         Assertions.assertNotEquals(0, employee.getId());
@@ -36,7 +36,7 @@ public class EmployeeDaoJdbcImplTest {
     }
 
     @Test
-    void testSelect() throws Exception {
+    void testSelect() {
         Employee employee = createTestEmployee();
         employee.setPhoneList(new ArrayList<Phone>());
         employeeDao.insert(employee);
@@ -45,7 +45,7 @@ public class EmployeeDaoJdbcImplTest {
     }
 
     @Test
-    void testDelete() throws Exception {
+    void testDelete() {
         Employee employee = new Employee();
         employee.setFirstName("Petrov");
         employee.setSecondName("Petrov");
@@ -55,7 +55,7 @@ public class EmployeeDaoJdbcImplTest {
     }
 
     @Test
-    void testUpdate() throws Exception {
+    void testUpdate() {
         Employee employee = new Employee();
         employee.setFirstName("Petrov");
         employee.setSecondName("Petrov");
@@ -68,7 +68,7 @@ public class EmployeeDaoJdbcImplTest {
     }
 
     @Test
-    void testUpdatePhoto() throws Exception {
+    void testUpdatePhoto() {
         Employee employee = new Employee();
         employee.setFirstName("Petrov");
         employee.setSecondName("Petrov");
