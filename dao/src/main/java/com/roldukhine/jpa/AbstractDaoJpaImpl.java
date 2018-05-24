@@ -52,7 +52,7 @@ public abstract class AbstractDaoJpaImpl<T extends BaseEntity> implements CrudDa
     @Override
     public T get(long id) {
         logger.trace("get with input id {}", id);
-        @SuppressWarnings("unchecked") T entity = (T) entityManager.find(entityClass, id);
+        @SuppressWarnings("unchecked") T entity = entityManager.find(entityClass, id);
         return entity;
     }
 
