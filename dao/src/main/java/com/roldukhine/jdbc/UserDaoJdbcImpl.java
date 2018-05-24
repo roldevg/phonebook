@@ -3,7 +3,6 @@ package com.roldukhine.jdbc;
 import com.roldukhine.api.UserDao;
 import com.roldukhine.entity.User;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 

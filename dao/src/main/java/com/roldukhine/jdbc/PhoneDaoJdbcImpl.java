@@ -5,8 +5,6 @@ import com.roldukhine.entity.Employee;
 import com.roldukhine.entity.Phone;
 import com.roldukhine.entity.PhoneType;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
