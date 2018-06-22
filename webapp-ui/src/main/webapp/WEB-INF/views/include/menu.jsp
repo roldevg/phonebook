@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>--%>
-                <a class="navbar-brand" href="/">Phonebook</a>
+                <a class="navbar-brand" href="<c:url value="/"/>">Phonebook</a>
             </div>
             <div class="col-xs-8">
                 <input type="text" class="form-control search-employee" id="searchEmployee" placeholder="Search for...">
@@ -20,7 +20,7 @@
                 </span>--%>
             </div><!-- /input-group -->
             <div id="navbar" class="col-xs-2 navbar-collapse collapse">
-                <form class="navbar-form navbar-right" action="<c:url context="/" value="/account/logout"/>"
+                <form class="navbar-form navbar-right" action="<c:url  value="/account/logout"/>"
                       method="post">
                     <span class="navbar-username">${sessionScope.login}</span>
                     <button type="submit" class="btn btn-default">Logout</button>

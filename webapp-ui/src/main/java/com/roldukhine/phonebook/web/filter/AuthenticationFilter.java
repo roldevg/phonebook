@@ -79,7 +79,7 @@ public class AuthenticationFilter implements Filter {
         }
 
         logger.debug("loginPageUrlRedirect {}", LOGIN_PAGE_URL);
-        ((HttpServletResponse) response).sendRedirect(LOGIN_PAGE_URL);
+        ((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + LOGIN_PAGE_URL);
     }
 
     public void destroy() {

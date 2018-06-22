@@ -7,21 +7,21 @@
 <head>
     <title>Phonebook</title>
 
-    <link rel="stylesheet" href="<c:url context="/" value="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>">
+    <link rel="stylesheet" href="<c:url  value="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>">
     <link rel="stylesheet"
-          href="<c:url context="/" value="/webjars/bootstrap-3-datepicker/1.5.0/dist/css/bootstrap-datepicker3.min.css"/>"/>
-    <link rel="stylesheet" href="<c:url context="/" value="/resources/css/style.css"/>">
+          href="<c:url  value="/webjars/bootstrap-3-datepicker/1.5.0/dist/css/bootstrap-datepicker3.min.css"/>"/>
+    <link rel="stylesheet" href="<c:url  value="/resources/css/style.css"/>">
 
-    <script src="<c:url context="/" value="/webjars/jquery/1.12.4/jquery.min.js"/>"></script>
-    <script src="<c:url context="/" value="/webjars/bootstrap/3.3.7/js/bootstrap.js"/>"></script>
+    <script src="<c:url  value="/webjars/jquery/1.12.4/jquery.min.js"/>"></script>
+    <script src="<c:url  value="/webjars/bootstrap/3.3.7/js/bootstrap.js"/>"></script>
 
-    <script src="<c:url context="/" value="/webjars/bootstrap-3-datepicker/1.5.0/dist/js/bootstrap-datepicker.min.js"/>"></script>
-    <script src="<c:url context="/" value="/webjars/bootstrap-3-datepicker/1.5.0/dist/locales/bootstrap-datepicker.ru.min.js"/>"></script>
+    <script src="<c:url  value="/webjars/bootstrap-3-datepicker/1.5.0/dist/js/bootstrap-datepicker.min.js"/>"></script>
+    <script src="<c:url  value="/webjars/bootstrap-3-datepicker/1.5.0/dist/locales/bootstrap-datepicker.ru.min.js"/>"></script>
 
-    <script src="<c:url context="/" value="/webjars/bootstrap3-typeahead/3.1.1/bootstrap3-typeahead.js"/>"></script>
+    <script src="<c:url  value="/webjars/bootstrap3-typeahead/3.1.1/bootstrap3-typeahead.js"/>"></script>
 
-    <script src="<c:url context="/" value="/webjars/bootbox/4.4.0/bootbox.js"/>"></script>
-    <script src="<c:url context="/" value="/resources/js/phonebook.js"/>"></script>
+    <script src="<c:url  value="/webjars/bootbox/4.4.0/bootbox.js"/>"></script>
+    <script src="<c:url  value="/resources/js/phonebook.js"/>"></script>
 
 </head>
 <body>
@@ -42,7 +42,7 @@
         </div><!-- /.col-lg-6 -->
 
         <div class="col-lg-6" style="margin-top: 10px; padding-left: 0px; padding-right: 0px;">
-            <form action="<c:url context="/" value="/employee/add"/>" method="get" style="display: inline;">
+            <form action="<c:url value="/employee/add"/>" method="get" style="display: inline;">
                 <button type="submit" class="btn btn-primary">
                     <i class="icon-user icon-white"></i> Добавить
                 </button>
@@ -85,12 +85,12 @@
             <c:forEach items="${employeeList}" var="employee">
                 <tr>
                     <td>
-                        <form action="<c:url context="/" value="/employee/edit/${employee.id}"/>" method="get"
+                        <form action="<c:url  value="/employee/edit/${employee.id}"/>" method="get"
                               style="display: inline;">
                             <button type="submit"
                                     class="btn btn-success btn-xs glyphicon glyphicon-pencil"></button>
                         </form>
-                        <form action="<c:url context="/" value="/employee/delete/${employee.id}"/>" method="post"
+                        <form action="<c:url  value="/employee/delete/${employee.id}"/>" method="post"
                               style="display: inline;">
                             <button type="submit" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button>
                         </form>
