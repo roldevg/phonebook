@@ -30,6 +30,3 @@ Tomcat 8, MySql / H2, Lombok
 
 ** Notes: **  
 SQL ddl is located in the `dao/src/main/resources/create-data-model.sql`
-
---  
-**Ролдухин Евгений**  
