@@ -3,7 +3,6 @@ package com.roldukhine.entity;
 import com.roldukhine.api.EmployeeDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +10,6 @@ import java.util.List;
 
 @Slf4j
 @Service
-@Lazy
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeDao employeeDao;

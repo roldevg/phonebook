@@ -14,7 +14,6 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@Lazy
 public class RootController {
 
     private final EmployeeService employeeService;

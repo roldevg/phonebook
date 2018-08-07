@@ -37,10 +37,15 @@ public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implement
             "skype = ?, note = ?, manager_id = ?, department_id = ?, work_address = ?, home_address = ?, photo = ? " +
             "WHERE id = ?";
     private static final String UPDATE_PHOTO = "UPDATE " + TABLE_NAME + " SET PHOTO = ? WHERE id = ?";
-    @Autowired
+
     private PhoneDao phoneDao;
 
     private DepartmentDao departmentDao;
+
+    @Autowired
+    public void setPhoneDao(PhoneDao phoneDao) {
+        this.phoneDao = phoneDao;
+    }
 
     @Autowired
     public void setDepartmentDao(DepartmentDao departmentDao) {

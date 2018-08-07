@@ -1,6 +1,7 @@
 package com.roldukhine.phonebook.web.filter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 @Slf4j
+@Component
 public class AuthenticationFilter implements Filter {
 
     private static final String FILES_WITHOUT_FILTER = ".*(css|jpg|png|gif|js)";

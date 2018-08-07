@@ -44,6 +44,7 @@
         <junit-jupiter-engine.version>5.0.2</junit-jupiter-engine.version>
         <jacoco-maven-plugin.version>0.8.0</jacoco-maven-plugin.version>
         <lombok.version>1.16.20</lombok.version>
+        <javax.el.version>3.0.1-b08</javax.el.version>
     </properties>
 
     <modules>
@@ -222,4 +223,16 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>1.5.14.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

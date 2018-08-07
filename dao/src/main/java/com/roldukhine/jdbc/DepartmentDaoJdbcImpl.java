@@ -13,19 +13,13 @@ import java.sql.*;
 
 @Slf4j
 @Repository
+@Lazy
 public class DepartmentDaoJdbcImpl extends AbstractDaoJdbcImpl<Department> implements DepartmentDao {
 
     private static final String TABLE_NAME = "Department";
     private static final String UPDATE_SQL = "UPDATE " + TABLE_NAME + " SET name = ?, manager_id = ? WHERE id = ?";
     private static final String INSERT_SQL = "INSERT INTO " + TABLE_NAME + " (name, manager_id) VALUES (?, ?)";
 
-    private EmployeeDao employeeDao;
-
-    /*@Autowired
-    public void setEmployeeDao(EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
-    }
-*/
     @Override
     protected String getTableName() {
         logger.trace("getTableName");
@@ -66,11 +60,6 @@ public class DepartmentDaoJdbcImpl extends AbstractDaoJdbcImpl<Department> imple
         department.setId(id);
         String name = resultSet.getString("name");
         department.setName(name);
-
-        long managerId = resultSet.getLong("manager_id");
-        if (managerId != 0) {
-            department.setManager(employeeDao.get(managerId));
-        }
 
         return department;
     }

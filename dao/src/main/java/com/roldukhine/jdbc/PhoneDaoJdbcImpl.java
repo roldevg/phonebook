@@ -14,7 +14,6 @@ import java.util.List;
 
 @Slf4j
 @Repository
-@Lazy
 public class PhoneDaoJdbcImpl extends AbstractDaoJdbcImpl<Phone> implements PhoneDao {
 
     private static final String TABLE_NAME = "Phone";

@@ -5,7 +5,6 @@ import com.roldukhine.entity.EmployeeService;
 import com.roldukhine.entity.UserImageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +16,6 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@Lazy
 @RequestMapping(value = "/employee")
 public class EmployeesController {
 
@@ -38,13 +36,13 @@ public class EmployeesController {
         logger.debug("employeeList {}", employeeList);
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("employeeList", employeeList);
-        logger.info("add object: {}", employeeList);
+        logger.info("get object: {}", employeeList);
         return modelAndView;
     }
 
     @RequestMapping(value = "/edit/{employeeId}", method = RequestMethod.GET)
     public ModelAndView editEmployee(@PathVariable("employeeId") long employeeId) {
-        logger.info("editEmployee with id %s", employeeId);
+        logger.info("editEmployee with id {}", employeeId);
         Employee employee = employeeService.getEmployee(employeeId);
         ModelAndView modelAndView = new ModelAndView("editEmployee");
 

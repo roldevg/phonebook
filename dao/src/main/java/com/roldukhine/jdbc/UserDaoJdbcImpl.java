@@ -11,7 +11,6 @@ import java.sql.*;
 
 @Slf4j
 @Repository
-@Lazy
 public class UserDaoJdbcImpl extends AbstractDaoJdbcImpl<User> implements UserDao {
 
     private static final String TABLE_NAME = "User";
