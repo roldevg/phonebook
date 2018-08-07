@@ -1,6 +1,9 @@
 package com.roldukhine.jdbc;
 
 import com.roldukhine.api.UserDao;
+import com.roldukhine.configuration.DaoConfiguration;
+import com.roldukhine.configuration.DaoConfigurationTest;
+import com.roldukhine.configuration.JdbcConfiguration;
 import com.roldukhine.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@ContextConfiguration(locations = {"classpath:dao-context.xml", "classpath:dao-context-override.xml"})
+@ContextConfiguration(classes = {DaoConfiguration.class, DaoConfigurationTest.class, JdbcConfiguration.class})
 @ActiveProfiles("jdbc")
 public class UserDaoImplTest {
 

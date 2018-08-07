@@ -5,11 +5,13 @@ import com.roldukhine.entity.Employee;
 import com.roldukhine.entity.Phone;
 import com.roldukhine.entity.PhoneType;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 @Slf4j
