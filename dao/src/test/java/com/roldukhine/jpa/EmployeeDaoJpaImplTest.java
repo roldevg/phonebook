@@ -1,6 +1,9 @@
 package com.roldukhine.jpa;
 
 import com.roldukhine.api.EmployeeDao;
+import com.roldukhine.configuration.DaoConfiguration;
+import com.roldukhine.configuration.DaoConfigurationTest;
+import com.roldukhine.configuration.JpaConfiguration;
 import com.roldukhine.entity.Employee;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@ContextConfiguration(locations = {"classpath:dao-context.xml", "classpath:dao-context-override.xml"})
+@ContextConfiguration(classes = {DaoConfiguration.class, DaoConfigurationTest.class, JpaConfiguration.class})
 @ActiveProfiles("jpa")
 @Transactional
 public class EmployeeDaoJpaImplTest {

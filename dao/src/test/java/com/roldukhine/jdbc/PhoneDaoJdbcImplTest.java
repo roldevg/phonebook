@@ -2,6 +2,9 @@ package com.roldukhine.jdbc;
 
 import com.roldukhine.api.EmployeeDao;
 import com.roldukhine.api.PhoneDao;
+import com.roldukhine.configuration.DaoConfiguration;
+import com.roldukhine.configuration.DaoConfigurationTest;
+import com.roldukhine.configuration.JdbcConfiguration;
 import com.roldukhine.entity.Employee;
 import com.roldukhine.entity.Phone;
 import com.roldukhine.entity.PhoneType;
@@ -18,7 +21,7 @@ import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@ContextConfiguration(locations = {"classpath:dao-context.xml", "classpath:dao-context-override.xml"})
+@ContextConfiguration(classes = {DaoConfiguration.class, DaoConfigurationTest.class, JdbcConfiguration.class})
 @ActiveProfiles("jdbc")
 public class PhoneDaoJdbcImplTest {
 

@@ -1,15 +1,16 @@
 package com.roldukhine.jdbc;
 
 import com.roldukhine.api.DepartmentDao;
-import com.roldukhine.api.EmployeeDao;
 import com.roldukhine.entity.Department;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 @Slf4j
 @Repository
