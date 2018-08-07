@@ -25,7 +25,7 @@ Profile:
 
 
 ** Tools: **  
-JDK 8, Spring 4, JPA/ Hibernate 5, jQuery, Bootstrap, JUnit 5, Mockito, slf4j/log4j2, Maven, 
+JDK 8, Spring Boot 1.x, JPA/Hibernate 5, jQuery, Bootstrap, JUnit 5, Mockito, Maven, Logging
 Tomcat 8, MySql / H2, Lombok
 
 ** Notes: **  
