@@ -9,6 +9,7 @@ import com.roldukhine.entity.Employee;
 import com.roldukhine.entity.Phone;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.support.AbstractLobCreatingPreparedStatementCallback;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
@@ -22,6 +23,7 @@ import java.util.List;
 
 @Slf4j
 @Repository
+@Lazy
 public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implements EmployeeDao {
 
     private static final String TABLE_NAME = "Employee";
@@ -37,8 +39,13 @@ public class EmployeeDaoJdbcImpl extends AbstractDaoJdbcImpl<Employee> implement
     private static final String UPDATE_PHOTO = "UPDATE " + TABLE_NAME + " SET PHOTO = ? WHERE id = ?";
     @Autowired
     private PhoneDao phoneDao;
-    @Autowired
+
     private DepartmentDao departmentDao;
+
+    @Autowired
+    public void setDepartmentDao(DepartmentDao departmentDao) {
+        this.departmentDao = departmentDao;
+    }
 
     @Override
     public String getTableName() {

@@ -18,7 +18,7 @@
         <h2.version>1.4.196</h2.version>
         <dbcp.version>2.0</dbcp.version>
         <commons-lang3>3.0</commons-lang3>
-        <spring.version>4.3.15.RELEASE</spring.version>
+        <spring.version>4.3.18.RELEASE</spring.version>
 
         <bootstrap.version>3.3.7</bootstrap.version>
         <jquery.version>1.12.4</jquery.version>

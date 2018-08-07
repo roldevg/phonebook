@@ -5,6 +5,7 @@ import com.roldukhine.api.EmployeeDao;
 import com.roldukhine.entity.Department;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
@@ -18,9 +19,13 @@ public class DepartmentDaoJdbcImpl extends AbstractDaoJdbcImpl<Department> imple
     private static final String UPDATE_SQL = "UPDATE " + TABLE_NAME + " SET name = ?, manager_id = ? WHERE id = ?";
     private static final String INSERT_SQL = "INSERT INTO " + TABLE_NAME + " (name, manager_id) VALUES (?, ?)";
 
-    @Autowired
     private EmployeeDao employeeDao;
 
+    /*@Autowired
+    public void setEmployeeDao(EmployeeDao employeeDao) {
+        this.employeeDao = employeeDao;
+    }
+*/
     @Override
     protected String getTableName() {
         logger.trace("getTableName");

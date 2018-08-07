@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<c:url  value="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>">
     <link rel="stylesheet"
           href="<c:url  value="/webjars/bootstrap-3-datepicker/1.5.0/dist/css/bootstrap-datepicker3.min.css"/>"/>
-    <link rel="stylesheet" href="<c:url  value="/resources/css/style.css"/>">
+    <link rel="stylesheet" href="<c:url  value="/css/style.css"/>">
 
     <script src="<c:url  value="/webjars/jquery/1.12.4/jquery.min.js"/>"></script>
     <script src="<c:url  value="/webjars/bootstrap/3.3.7/js/bootstrap.js"/>"></script>
@@ -21,10 +21,10 @@
     <script src="<c:url  value="/webjars/bootstrap3-typeahead/3.1.1/bootstrap3-typeahead.js"/>"></script>
 
     <script src="<c:url  value="/webjars/bootbox/4.4.0/bootbox.js"/>"></script>
-    <script src="<c:url  value="/resources/js/phonebook.js"/>"></script>
+    <script src="<c:url  value="/js/phonebook.js"/>"></script>
 </head>
 <body>
-<%@include file="/WEB-INF/views/include/menu.jsp" %>
+<%@include file="/WEB-INF/jsp/include/menu.jsp" %>
 
 <div class="container">
     <div class="row">
@@ -79,7 +79,7 @@
     </div> <!-- /row -->
 
     <hr>
-    <%@include file="/WEB-INF/views/include/footer.jsp" %>
+    <%@include file="/WEB-INF/jsp/include/footer.jsp" %>
 </div> <!-- /container -->
 </body>
 </html>

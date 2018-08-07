@@ -5,6 +5,7 @@ import com.roldukhine.entity.EmployeeService;
 import com.roldukhine.entity.UserImageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,12 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
 @Slf4j
 @Controller
+@Lazy
 @RequestMapping(value = "/employee")
 public class EmployeesController {
 
@@ -38,7 +38,7 @@ public class EmployeesController {
         logger.debug("employeeList {}", employeeList);
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("employeeList", employeeList);
-        logger.info("add object: %s", employeeList);
+        logger.info("add object: {}", employeeList);
         return modelAndView;
     }
 
