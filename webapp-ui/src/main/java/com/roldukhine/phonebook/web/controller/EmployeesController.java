@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
 @Slf4j
@@ -38,13 +36,13 @@ public class EmployeesController {
         logger.debug("employeeList {}", employeeList);
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("employeeList", employeeList);
-        logger.info("add object: %s", employeeList);
+        logger.info("get object: {}", employeeList);
         return modelAndView;
     }
 
     @RequestMapping(value = "/edit/{employeeId}", method = RequestMethod.GET)
     public ModelAndView editEmployee(@PathVariable("employeeId") long employeeId) {
-        logger.info("editEmployee with id %s", employeeId);
+        logger.info("editEmployee with id {}", employeeId);
         Employee employee = employeeService.getEmployee(employeeId);
         ModelAndView modelAndView = new ModelAndView("editEmployee");
 

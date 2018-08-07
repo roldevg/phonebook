@@ -29,9 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         List<Phone> phoneList = employee.getPhoneList();
         logger.debug("phoneList {}", phoneList);
-        for (Phone phone : phoneList) {
-            phoneService.addPhone(phone, employee);
-        }
+        phoneList.forEach(phone -> phoneService.addPhone(phone, employee));
     }
 
     public Employee getEmployee(long id) {

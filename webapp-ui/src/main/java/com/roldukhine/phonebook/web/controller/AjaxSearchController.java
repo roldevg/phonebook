@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -29,26 +28,27 @@ public class AjaxSearchController {
     @ResponseBody
     public List<String> getCity(@RequestParam("query") String search) {
         logger.debug("getCity, search query {}", search);
-        List<Employee> employeeList;
-        List<Employee> all = employeeDao.getAll();
-        if (search == null) {
-            employeeList = employeeDao.getAll();
-        } else {
-            employeeList = new ArrayList<>();
-            for (Employee employee : all) {
-                if (employee.getLastName().toLowerCase().contains(search.toLowerCase())) {
-                    employeeList.add(employee);
-                }
-            }
-        }
 
-        List<String> employees = new ArrayList<>();
-        for (Employee employee : employeeList) {
-            employees.add(employee.getLastName());
-        }
+        List<Employee> employeeList = findEmployeeList(search);
+
+        List<String> employees = employeeList.stream()
+                .map(Employee::getLastName)
+                .collect(Collectors.toList());
 
         logger.debug("return employees {}", employees);
 
         return employees;
+    }
+
+    private List<Employee> findEmployeeList(String search) {
+        List<Employee> all = employeeDao.getAll();
+
+        if (search == null) {
+            return all;
+        }
+
+        return all.stream()
+                    .filter(it -> it.getLastName().toLowerCase().contains(search.toLowerCase()))
+                    .collect(Collectors.toList());
     }
 }

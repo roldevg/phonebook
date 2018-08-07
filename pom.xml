@@ -18,7 +18,7 @@
         <h2.version>1.4.196</h2.version>
         <dbcp.version>2.0</dbcp.version>
         <commons-lang3>3.0</commons-lang3>
-        <spring.version>4.3.15.RELEASE</spring.version>
+        <spring.version>4.3.18.RELEASE</spring.version>
 
         <bootstrap.version>3.3.7</bootstrap.version>
         <jquery.version>1.12.4</jquery.version>
@@ -44,6 +44,7 @@
         <junit-jupiter-engine.version>5.0.2</junit-jupiter-engine.version>
         <jacoco-maven-plugin.version>0.8.0</jacoco-maven-plugin.version>
         <lombok.version>1.16.20</lombok.version>
+        <javax.el.version>3.0.1-b08</javax.el.version>
     </properties>
 
     <modules>
@@ -222,4 +223,16 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>1.5.14.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
