@@ -8,8 +8,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class ResourcesWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
-        registry.addResourceHandler("/images/*").addResourceLocations("/images/");
+        registry.addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/");
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("/webjars/");
+        registry.addResourceHandler("/images/*")
+                .addResourceLocations("/images/");
+
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }
