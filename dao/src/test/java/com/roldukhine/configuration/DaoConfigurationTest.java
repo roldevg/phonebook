@@ -24,8 +24,8 @@ public class DaoConfigurationTest {
     @Value("${url}")
     private String url;
 
-    @Value("${username}")
-    private String user;
+    @Value("${db.username}")
+    private String dbUsername;
 
     @Value("${password}")
     private String password;
@@ -41,7 +41,7 @@ public class DaoConfigurationTest {
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setDriverClassName(driverClassName);
         basicDataSource.setUrl(url);
-        basicDataSource.setUsername(user);
+        basicDataSource.setUsername(dbUsername);
         basicDataSource.setPassword(password);
         basicDataSource.setDefaultAutoCommit(true);
         basicDataSource.setDefaultTransactionIsolation(Isolation.READ_COMMITTED.value());
