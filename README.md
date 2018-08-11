@@ -32,6 +32,10 @@ SQL ddl is located in the `dao/src/main/resources/create-data-model.sql`
 
 ** Swagger UI **
 
-[REST Documentation](http://host:8080/swagger-ui.html)
+REST Documentation
 
-[Api Docs End Point](http://host:8080/v2/api-docs)
+http://host:8080/swagger-ui.html
+
+Api Docs End Point
+
+http://host:8080/v2/api-docs
