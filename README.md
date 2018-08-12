@@ -25,10 +25,7 @@ Profile:
 
 
 ** Tools: **  
-JDK 8, Spring Boot 1.x, JPA/Hibernate 5, jQuery, Bootstrap, JUnit 5, Mockito, Maven, Logging, Tomcat 8, MySql / H2, Lombok, Swagger
-
-** Notes: **  
-SQL ddl is located in the `dao/src/main/resources/create-data-model.sql`
+JDK 8, Spring Boot 1.x, JPA/Hibernate 5, jQuery, Bootstrap, JUnit 5, Mockito, Maven, Logging, Tomcat 8, MySql / H2, Lombok, Swagger, Flyway
 
 ** Swagger UI **
 
