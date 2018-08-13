@@ -24,8 +24,11 @@ Profile:
 ![Image](https://i.gyazo.com/c25878f30dd2d5bde4decc5cd48f8d88.png)
 
 
-** Tools: **  
-JDK 8, Spring Boot 1.x, JPA/Hibernate 5, jQuery, Bootstrap, JUnit 5, Mockito, Maven, Logging, Tomcat 8, MySql / H2, Lombok, Swagger, Flyway
+** Tools: **
+
+JDK 8, Spring Boot 1.x (Core, MVC, Data, Actuator),
+JPA/Hibernate 5, jQuery, Bootstrap, JUnit 5, Mockito, Maven, Logging,
+Tomcat 8, MySql / H2, Lombok, Swagger, Flyway
 
 ** Swagger UI **
 
