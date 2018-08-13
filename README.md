@@ -24,7 +24,7 @@ Profile:
 ![Image](https://i.gyazo.com/c25878f30dd2d5bde4decc5cd48f8d88.png)
 
 
-** Tools: **  
+** Tools: **
 
 JDK 8, Spring Boot 1.x (Core, MVC, Data, Actuator),
 JPA/Hibernate 5, jQuery, Bootstrap, JUnit 5, Mockito, Maven, Logging,
@@ -32,6 +32,10 @@ Tomcat 8, MySql / H2, Lombok, Swagger, Flyway
 
 ** Swagger UI **
 
-[REST Documentation](http://host:8080/swagger-ui.html)
+REST Documentation
 
-[Api Docs End Point](http://host:8080/v2/api-docs)
+http://host:8080/swagger-ui.html
+
+Api Docs End Point
+
+http://host:8080/v2/api-docs
