@@ -43,6 +43,12 @@
             <artifactId>flyway-core</artifactId>
         </dependency>
 
+        <!-- Spring Boot Actuator(Metrics) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <!-- Frontend libraries -->
         <dependency>
             <groupId>org.webjars</groupId>
