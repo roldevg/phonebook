@@ -27,8 +27,8 @@ public class DaoConfiguration {
     @Value("${db.username}")
     private String dbUsername;
 
-    @Value("${password}")
-    private String password;
+    @Value("${db.password}")
+    private String dbPassword;
 
     @Value("classpath:create-data-model.sql")
     private Resource dataScript;
@@ -39,7 +39,7 @@ public class DaoConfiguration {
         basicDataSource.setDriverClassName(driverClassName);
         basicDataSource.setUrl(url);
         basicDataSource.setUsername(dbUsername);
-        basicDataSource.setPassword(password);
+        basicDataSource.setPassword(dbPassword);
         basicDataSource.setDefaultAutoCommit(true);
         basicDataSource.setDefaultTransactionIsolation(Isolation.READ_COMMITTED.value());
         return basicDataSource;

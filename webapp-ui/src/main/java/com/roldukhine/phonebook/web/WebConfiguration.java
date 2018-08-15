@@ -1,6 +1,5 @@
 package com.roldukhine.phonebook.web;
 
-import com.roldukhine.phonebook.web.filter.AuthenticationFilter;
 import com.roldukhine.services.configuration.ServicesConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,11 +11,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 @ComponentScan("com.roldukhine.phonebook.web")
 @Import(ServicesConfiguration.class)
 public class WebConfiguration {
-
-    @Bean
-    public AuthenticationFilter authenticationFilter() {
-        return new AuthenticationFilter();
-    }
 
     @Bean
     public CommonsMultipartResolver multipartResolver() {
