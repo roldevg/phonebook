@@ -26,7 +26,7 @@ Profile:
 
 ** Tools: **
 
-JDK 8, Spring Boot 1.x (Core, MVC, Data, Actuator),
+JDK 8, Spring Boot 1.x (Core, MVC, Data, Actuator, Security),
 JPA/Hibernate 5, jQuery, Bootstrap, JUnit 5, Mockito, Maven, Logging,
 Tomcat 8, MySql / H2, Lombok, Swagger, Flyway
 
@@ -39,3 +39,8 @@ http://host:8080/swagger-ui.html
 Api Docs End Point
 
 http://host:8080/v2/api-docs
+
+** Default Users **
+
+- login: admin
+- pass: admin
