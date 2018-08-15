@@ -27,8 +27,8 @@
 <div class="container">
     <form class="form-signin" action="<c:url value="/account/login"/>" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="login" class="sr-only">Login</label>
-        <input type="text" id="login" name="login" class="form-control form-signin-login" placeholder="Login" required
+        <label for="username" class="sr-only">Login</label>
+        <input type="text" id="username" name="username" class="form-control form-signin-login" placeholder="Login" required
                autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>

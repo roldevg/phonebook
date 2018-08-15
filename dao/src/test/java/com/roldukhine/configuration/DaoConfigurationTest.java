@@ -27,7 +27,7 @@ public class DaoConfigurationTest {
     @Value("${db.username}")
     private String dbUsername;
 
-    @Value("${password}")
+    @Value("${db.password}")
     private String password;
 
     @Value("classpath:h2_create_data_model.sql")

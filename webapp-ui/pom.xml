@@ -49,6 +49,12 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <!--Spring Security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
         <!-- Frontend libraries -->
         <dependency>
             <groupId>org.webjars</groupId>
@@ -162,6 +168,7 @@
     </dependencies>
 
     <build>
+        <finalName>phonebook</finalName>
         <plugins>
             <!-- Package as an executable jar/war -->
             <plugin>

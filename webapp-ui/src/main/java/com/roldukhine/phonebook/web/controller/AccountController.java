@@ -29,7 +29,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam String login,
+    public ModelAndView login(@RequestParam String username,
                               @RequestParam String password,
                               String rememberMe,
                               HttpServletRequest request,
@@ -38,16 +38,16 @@ public class AccountController {
 
         ModelAndView modelAndView = new ModelAndView("login");
 
-        User checkUser = userService.checkUser(login, password);
+        User checkUser = userService.checkUser(username, password);
         logger.debug("checkUser: {}", checkUser);
         if (checkUser == null) {
             logger.debug("return view {}", modelAndView);
             return modelAndView;
         } else {
             HttpSession session = request.getSession();
-            session.setAttribute("login", login);
+            session.setAttribute("username", username);
 
-            Cookie cookie = new Cookie("login", login);
+            Cookie cookie = new Cookie("username", username);
             Cookie cookiePass = new Cookie("password", password);
             boolean rememberBeOn = "on".equals(rememberMe);
             logger.debug("rememberBeOn {}", rememberBeOn);
