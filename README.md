@@ -28,7 +28,7 @@ Profile:
 
 JDK 8, Spring Boot 1.x (Core, MVC, Data, Actuator, Security),
 JPA/Hibernate 5, jQuery, Bootstrap, JUnit 5, Mockito, Maven, Logging,
-Tomcat 8, MySql / H2, Lombok, Swagger, Flyway
+Tomcat 8, MySql / H2, Lombok, Swagger, Flyway, Docker
 
 ** Swagger UI **
 
@@ -44,3 +44,25 @@ http://host:8080/v2/api-docs
 
 - login: admin
 - pass: admin
+
+** Docker **
+
+Build:
+
+docker build -t phonebook:demo .
+
+Run:
+
+docker run phonebook::demo
+
+Stop:
+
+docker stop {container_id}
+
+Monitoring containers:
+
+docker ps
+
+IP address:
+
+docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" {container_id)
