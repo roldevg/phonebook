@@ -53,7 +53,7 @@ docker build -t phonebook:demo .
 
 Run:
 
-docker run phonebook::demo
+docker run -p 8080:8080 phonebook:demo
 
 Stop:
 
