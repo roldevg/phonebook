@@ -9,7 +9,7 @@
 - Backend: 
 
 JDK 8, Spring Boot 1.x (Core, MVC, Data, Actuator, Security),
-JPA/Hibernate 5, JUnit 5, Mockito, Maven, Tomcat 8, MySql / H2, Lombok, 
+JPA/Hibernate 5, JUnit 5, Mockito, Maven, Tomcat 8, MySql/H2, Lombok, 
 Swagger, Flyway, Docker, Checkstyle, Logging
 
 - Frontend:
