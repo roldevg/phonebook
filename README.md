@@ -1,5 +1,6 @@
 # Phonebook 
 
+## Build status
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/297a8adb85224fc7a6dc2b8fdf2c5232)](https://www.codacy.com/app/evgeniy/Phonebook)
 [![Build Status](https://travis-ci.org/roldevg/phonebook.svg?branch=master)](https://travis-ci.org/roldevg/phonebook)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
