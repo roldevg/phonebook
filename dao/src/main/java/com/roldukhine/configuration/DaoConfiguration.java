@@ -15,19 +15,18 @@ import org.springframework.transaction.annotation.Isolation;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:connection.properties")
 public class DaoConfiguration {
 
-    @Value("${driver}")
+    @Value("#{systemProperties['db.driver']}")
     private String driverClassName;
 
-    @Value("${url}")
+    @Value("#{systemProperties['db.url']}")
     private String url;
 
-    @Value("${db.username}")
+    @Value("#{systemProperties['db.username']}")
     private String dbUsername;
 
-    @Value("${db.password}")
+    @Value("#{systemProperties['db.password']}")
     private String dbPassword;
 
     @Value("classpath:create-data-model.sql")

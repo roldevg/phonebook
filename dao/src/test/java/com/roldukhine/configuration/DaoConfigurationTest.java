@@ -18,10 +18,10 @@ import javax.sql.DataSource;
 @PropertySource("classpath:connection.properties")
 public class DaoConfigurationTest {
 
-    @Value("${driver}")
+    @Value("${db.driver}")
     private String driverClassName;
 
-    @Value("${url}")
+    @Value("${db.url}")
     private String url;
 
     @Value("${db.username}")
