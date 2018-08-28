@@ -114,9 +114,6 @@
             <id>heroku</id>
             <properties>
                 <db.driver>org.postgresql.Driver</db.driver>
-                <db.url>jdbc:postgresql://${JDBC_DATABASE_URL}?sslmode=require</db.url>
-                <db.username>${JDBC_DATABASE_USERNAME}</db.username>
-                <db.password>${JDBC_DATABASE_PASSWORD}</db.password>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
