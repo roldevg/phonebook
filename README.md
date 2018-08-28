@@ -44,23 +44,33 @@ Profile:
 
 - Build:
 
+```
 docker build -t phonebook:demo .
+```
 
 - Run:
 
+```
 docker run -p 8080:8080 phonebook:demo
+```
 
 - Stop:
 
+```
 docker stop {container_id}
+```
 
 ## Local build
 
+```
 mvn clean install
+```
 
 ## Local run 
 
+```
 mvn spring-boot:run -f ./webpp-ui
+```
 
 ## Swagger UI Urls
 
