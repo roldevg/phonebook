@@ -107,7 +107,7 @@
                 <db.password>mySuperSecretPassword</db.password>
             </properties>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
         <profile>
@@ -116,7 +116,9 @@
                 <db.driver>org.postgresql.Driver</db.driver>
             </properties>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>env.DYNO</name>
+                </property>
             </activation>
         </profile>
     </profiles>
