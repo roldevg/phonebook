@@ -1,1 +1,1 @@
-web: java -jar .\webapp-ui\phonebook.war
+web: java -jar ./webapp-ui/target/phonebook.war
