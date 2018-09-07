@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -54,5 +55,14 @@ public class UserServiceImpl implements UserService {
                 .orElse(null);
         logger.debug("user by login and password {}", user);
         return user;
+    }
+
+    @Override
+    public Optional<User> findByLogin(String login) {
+        List<User> users = userDao.getAll();
+
+        return users.stream()
+                .filter(it -> it.getLogin().equals(login))
+                .findFirst();
     }
 }
