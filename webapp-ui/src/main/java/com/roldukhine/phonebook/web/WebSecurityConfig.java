@@ -1,5 +1,6 @@
 package com.roldukhine.phonebook.web;
 
+import com.roldukhine.phonebook.web.role.UserRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(".*(css|jpg|png|gif|js)", "/css/**", "/js/**", "/webjars/**").permitAll()
                 .antMatchers("/account/login").permitAll()
-                .anyRequest().hasRole("USER")
+                .anyRequest().hasRole(UserRoles.USER.name())
                 .and().formLogin().loginPage("/account/login").failureUrl("/account/login")
                 .and().logout().logoutSuccessUrl("/account/login")
                 .and().exceptionHandling().accessDeniedPage("/account/login?accessDenied")
