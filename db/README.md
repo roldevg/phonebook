@@ -2,7 +2,7 @@
 
 ### Build
 
-> docker build -t phonebook:db
+> docker build -t phonebook:db . 
 
 ### Run
 
