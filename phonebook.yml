@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  backend:
+    image: phonebook:demo
+      ports:
+        - "8080:8080"
+
+  db:
+    image: phonebok:db
+    environment:
+      MYSQL_ROOT_PASSWORD: mySuperSecretPassword
+    ports:
+      - "3306:3306"
