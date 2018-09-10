@@ -41,24 +41,14 @@ Profile:
 - login: admin
 - pass: admin
 
-## Docker
-
-- Build:
+## Docker run 
 
 ```
-docker build -t phonebook:demo .
+docker-compose up
 ```
 
-- Run:
-
 ```
-docker run -p 8080:8080 phonebook:demo
-```
-
-- Stop:
-
-```
-docker stop {container_id}
+docker-compose stop
 ```
 
 ## Local build
