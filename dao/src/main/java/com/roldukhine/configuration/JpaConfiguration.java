@@ -30,9 +30,9 @@ public class JpaConfiguration {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setPersistenceXmlLocation("classpath:persistence.xml");
         entityManagerFactoryBean.setDataSource(dataSource);
-        entityManagerFactoryBean.setPackagesToScan("com.roldukhine.entity.*");
+        entityManagerFactoryBean.setPackagesToScan("com.roldukhine.entity");
+        entityManagerFactoryBean.setPersistenceUnitName("myPersistenceUnit");
 
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setShowSql(true);
