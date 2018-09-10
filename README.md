@@ -83,10 +83,6 @@ http://host:8080/swagger-ui.html
 
 http://host:8080/v2/api-docs
 
-### Demo on the Heroku
-
-https://web-phonebook.herokuapp.com
-
 ## Have a question?
 
 Feel free to ask me by the email (on the profile page).
