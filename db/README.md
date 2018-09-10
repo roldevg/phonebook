@@ -6,4 +6,4 @@
 
 ### Run
 
-> docker run -p 8080:8080 -e MYSQL_ROOT_PASSWORD=mySuperSecretPassword phonebook:db
+> docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mySuperSecretPassword phonebook:db
