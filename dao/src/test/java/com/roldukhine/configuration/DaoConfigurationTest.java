@@ -33,7 +33,7 @@ public class DaoConfigurationTest {
     @Value("classpath:h2_create_data_model.sql")
     private Resource dataScriptModel;
 
-    @Value("classpath:create-data-model.sql")
+    @Value("classpath:V2__Initial_version.sql")
     private Resource dataScriptData;
 
     @Bean(destroyMethod = "")
