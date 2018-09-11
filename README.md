@@ -63,6 +63,10 @@ mvn clean install
 mvn spring-boot:run -f ./webpp-ui
 ```
 
+```
+http://locahost:8080
+```
+
 ## Swagger UI Urls
 
 - REST Documentation
