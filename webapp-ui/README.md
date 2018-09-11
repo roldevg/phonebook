@@ -17,6 +17,6 @@ docker run -p 8080:8080 phonebook:demo
 - Stop:
 
 ```
-docker stop {container_id}
+docker stop $(docker ps | grep phonebook:db | awk '{print $1'})
 ```
 
