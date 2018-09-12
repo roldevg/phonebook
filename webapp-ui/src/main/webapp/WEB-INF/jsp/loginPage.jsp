@@ -39,7 +39,49 @@
             </label>
         </div> <!-- /checkbox -->
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+        <div align="center">
+            <div class="unauthenticated">
+                <h3>Login using facebook  </h3>
+                <a class="btn btn-primary" href="/login">Facebook Login</a>
+                <br><br>
+            </div>
+            <div class="authenticated" style="display: none">
+                <h2>You have successfully logged in using Facebook.</h2> <br> Logged in as: <strong><span id="user"></span></strong><br> User ID: <strong><span id="id"></span></strong>
+                <div>
+                    <br>
+                    <button onClick="logout()" class="btn btn-warning">Logout</button>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+
+
     </form>
 </div> <!-- /container -->
+
+<script>
+    if (window.location.hash == '#_=_') {
+        history.replaceState ?
+            history.replaceState(null, null, window.location.href.split('#')[0]) :
+            window.location.hash = '';
+    }
+    $.get("/user", function (data) {
+        $("#user").html(data.userAuthentication.details.name);
+        $("#id").html(data.userAuthentication.details.id);
+        $(".unauthenticated").hide()
+        $(".authenticated").show()
+    });
+    const logout = function () {
+        $.post("/logout", function () {
+            $("#user").html('');
+            $("#id").html('');
+            $(".unauthenticated").show();
+            $(".authenticated").hide();
+        });
+        return true;
+    };
+</script>
+
 </body>
 </html>

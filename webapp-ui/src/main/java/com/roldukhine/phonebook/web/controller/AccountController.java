@@ -1,24 +1,20 @@
 package com.roldukhine.phonebook.web.controller;
 
-import com.roldukhine.entity.User;
 import com.roldukhine.entity.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.concurrent.TimeUnit;
+import java.util.LinkedHashMap;
 
 @Slf4j
 @Controller
-@RequestMapping(value = "/account")
 public class AccountController {
 
     private final UserService userService;
@@ -28,7 +24,7 @@ public class AccountController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@RequestParam String username,
                               @RequestParam String password,
                               String rememberMe,
@@ -63,14 +59,15 @@ public class AccountController {
         String redirectAddress = "redirect:/employee/getAll";
         logger.debug("return view {}", redirectAddress);
         return new ModelAndView(redirectAddress);
-    }
+    }*/
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
     public ModelAndView login() {
-        logger.debug("/login");
-        return new ModelAndView("login");
+        logger.debug("/loginPage");
+        return new ModelAndView("loginPage");
     }
 
+    /*
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         logger.debug("/logout");
@@ -96,5 +93,5 @@ public class AccountController {
         String redirectAddress = "redirect:/account/login";
         logger.debug("redirect view {}", redirectAddress);
         return redirectAddress;
-    }
+    }*/
 }

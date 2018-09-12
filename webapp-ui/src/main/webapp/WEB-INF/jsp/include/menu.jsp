@@ -20,7 +20,7 @@
                 </span>--%>
             </div><!-- /input-group -->
             <div id="navbar" class="col-xs-2 navbar-collapse collapse">
-                <form class="navbar-form navbar-right" action="<c:url  value="/account/logout"/>"
+                <form class="navbar-form navbar-right" action="<c:url  value="/logout"/>"
                       method="post">
                     <span class="navbar-username">${sessionScope.login}</span>
                     <button type="submit" class="btn btn-default">Logout</button>
