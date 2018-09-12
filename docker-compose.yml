@@ -6,6 +6,9 @@ services:
     ports:
       - "8080:8080"
     network_mode: bridge
+    depends_on:
+      - db
+      - redis
 
   db:
     image: phonebook:db
@@ -13,4 +16,10 @@ services:
       MYSQL_ROOT_PASSWORD: mySuperSecretPassword
     ports:
       - "3306:3306"
+    network_mode: bridge
+
+  redis:
+    image: phonebook:redis
+    ports:
+      - "6379:6379"
     network_mode: bridge
