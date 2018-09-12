@@ -95,6 +95,12 @@
             <version>${commons-lang3}</version>
         </dependency>
         <!-- End utils -->
+
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>2.2.0.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>

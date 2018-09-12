@@ -1,17 +1,17 @@
 package com.roldukhine.phonebook.web;
 
-import com.roldukhine.phonebook.web.role.UserRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
+@EnableOAuth2Sso
 @Configuration
-@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -19,14 +19,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers(".*(css|jpg|png|gif|js)", "/css/**", "/js/**", "/webjars/**").permitAll()
-                .antMatchers("/account/login").permitAll()
-                .anyRequest().hasRole(UserRoles.USER.name())
-                .and().formLogin().loginPage("/account/login").failureUrl("/account/login")
-                .and().logout().logoutSuccessUrl("/account/login")
-                .and().exceptionHandling().accessDeniedPage("/account/login?accessDenied")
-                .and().csrf().disable();
+        http
+                .authorizeRequests()
+                    .antMatchers(".*(css|jpg|png|gif|js)", "/css/**", "/js/**", "/webjars/**", "/loginPage").permitAll()
+                    .anyRequest().authenticated()
+                    .and()
+                .formLogin()
+                    .loginPage("/loginPage")
+                    .permitAll()
+                    .and()
+                .logout()
+                    .logoutSuccessUrl("/loginPage").and()
+                .exceptionHandling()
+                    .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/loginPage"))
+                    .and()
+                .csrf().disable();
     }
 
     @Override
