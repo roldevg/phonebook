@@ -9,7 +9,7 @@
 
 - Backend: 
 
-JDK 8, Spring Boot 1.x (Core, MVC, Data, Actuator, Security),
+JDK 8, Spring Boot 1.x (Core, MVC, Data, Actuator, Security, Oauth2),
 JPA/Hibernate 5, JUnit 5, Mockito, Maven, Tomcat 8, MySql/H2, Lombok, 
 Swagger, Flyway, Docker, Checkstyle, Logging
 
@@ -29,6 +29,7 @@ Profile:
 
 ## Functionality
 
+- Single Sign On with Facebook API (Oauth2)
 + login/logout/remember me
 + ajax search of employees 
 + display profile employee 
