@@ -11,15 +11,6 @@ function isConfirmSaveEmployeeByUser(event, form) {
     });
 }
 
-function refreshPhonesListener() {
-    const phones = $("#phones").find(".remove_phone");
-    phones.off();
-    phones.on("click", function () {
-        const removeBtn = $(this);
-        removePhone(removeBtn);
-    });
-}
-
 function removePhone(removeBtn) {
     const parent = removeBtn.parent();
     parent.remove();
@@ -30,6 +21,15 @@ function recalculationIndexes() {
     $("phoneList[index].number").each(function () {
         const $this = $(this);
         $this.attr("index", $this.attr("index").match(/\[\d+]/g, "[" + index + "]"));
+    });
+}
+
+function refreshPhonesListener() {
+    const phones = $("#phones").find(".remove_phone");
+    phones.off();
+    phones.on("click", function () {
+        const removeBtn = $(this);
+        removePhone(removeBtn);
     });
 }
 
