@@ -42,11 +42,11 @@ $(document).ready(function () {
     });
 
     $("#searchEmployee").typeahead({
-        source: function (query, process) {
+        source(query, process) {
             const url = "/ajax/search";
             return $.post(
                 url, {
-                    query: query
+                    query
                 },
                 function (data) {
                     process(data);

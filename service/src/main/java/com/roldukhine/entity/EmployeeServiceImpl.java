@@ -3,6 +3,8 @@ package com.roldukhine.entity;
 import com.roldukhine.api.EmployeeDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Transactional
+    @CacheEvict("allEmployees")
     public void addEmployee(Employee employee) {
         logger.debug("addEmployee {}", employee);
         employeeDao.insert(employee);
@@ -38,23 +41,27 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Transactional
+    @CacheEvict("allEmployees")
     public void updateEmployee(Employee employee) {
         logger.debug("updateEmployee {}", employee);
         employeeDao.update(employee);
     }
 
     @Transactional
+    @CacheEvict("allEmployees")
     public void delete(long id) {
         logger.debug("delete by id {}", id);
         employeeDao.delete(id);
     }
 
+    @Cacheable("allEmployees")
     public List<Employee> getAll() {
         logger.debug("getAll");
         return employeeDao.getAll();
     }
 
     @Transactional
+    @CacheEvict("allEmployees")
     public void updatePhoto(Employee employee, byte[] photo) {
         logger.debug("updatePhoto, employee {}, photo {}", employee, photo);
         employeeDao.updatePhoto(employee, photo);

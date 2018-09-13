@@ -11,7 +11,7 @@
 
 JDK 8, Spring Boot 1.x (Core, MVC, Data, Actuator, Security, Oauth2),
 JPA/Hibernate 5, JUnit 5, Mockito, Maven, Tomcat 8, MySql/H2, Lombok, 
-Swagger, Flyway, Docker, Checkstyle, Logging
+Swagger, Flyway, Docker, Checkstyle, Logging, Redis
 
 - Frontend:
 
