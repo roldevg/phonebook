@@ -1,28 +1,14 @@
 package com.roldukhine.phonebook.web.controller;
 
-import com.roldukhine.entity.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.LinkedHashMap;
-
 @Slf4j
 @Controller
 public class AccountController {
-
-    private final UserService userService;
-
-    @Autowired
-    public AccountController(UserService userService) {
-        this.userService = userService;
-    }
 
     /*@RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@RequestParam String username,
