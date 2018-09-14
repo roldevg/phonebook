@@ -37,11 +37,6 @@ Profile:
 + add/delete a profile
 + upload and download avatar
 
-## Default Users
-
-- login: admin
-- pass: admin
-
 ## Docker run 
 
 ```
