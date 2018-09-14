@@ -1,6 +1,7 @@
 package com.roldukhine.entity;
 
 import com.roldukhine.api.UserDao;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void addUser(User user) {
+    public void addUser(@NonNull User user) {
         logger.debug("addUser {}", user);
         userDao.insert(user);
     }
@@ -32,18 +33,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void updateUser(User user) {
+    public void updateUser(@NonNull User user) {
         logger.debug("updateUser {}", user);
         userDao.update(user);
     }
 
     @Transactional
-    public void deleteUser(User user) {
+    public void deleteUser(@NonNull User user) {
         logger.debug("deleteUser {}", user);
         userDao.delete(user);
     }
 
-    public User checkUser(String login, String password) {
+    public User checkUser(@NonNull String login, @NonNull String password) {
         logger.debug("checkUser, login {}, password {}");
 
         List<User> userList = userDao.getAll();
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findByLogin(String login) {
+    public Optional<User> findByLogin(@NonNull String login) {
         List<User> users = userDao.getAll();
 
         return users.stream()

@@ -1,6 +1,7 @@
 package com.roldukhine.entity;
 
 import com.roldukhine.api.EmployeeDao;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -26,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @CacheEvict("allEmployees")
-    public void addEmployee(Employee employee) {
+    public void addEmployee(@NonNull Employee employee) {
         logger.debug("addEmployee {}", employee);
         employeeDao.insert(employee);
 
@@ -42,7 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @CacheEvict("allEmployees")
-    public void updateEmployee(Employee employee) {
+    public void updateEmployee(@NonNull Employee employee) {
         logger.debug("updateEmployee {}", employee);
         employeeDao.update(employee);
     }
