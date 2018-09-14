@@ -1,5 +1,6 @@
 package com.roldukhine.entity;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
@@ -31,7 +32,7 @@ public class UserImageServiceImpl implements UserImageService {
     }
 
     @Override
-    public String getPhotoEmployee(Employee employee) {
+    public String getPhotoEmployee(@NonNull Employee employee) {
         byte[] photo = employee.getPhoto();
         if (photo == null) {
             photo = getDefaultImageUser();

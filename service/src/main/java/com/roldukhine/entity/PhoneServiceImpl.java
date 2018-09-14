@@ -1,6 +1,7 @@
 package com.roldukhine.entity;
 
 import com.roldukhine.api.PhoneDao;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class PhoneServiceImpl implements PhoneService {
 
     @Transactional
     @Override
-    public void addPhone(Phone phone, Employee employee) {
+    public void addPhone(@NonNull Phone phone, @NonNull Employee employee) {
         addPhone(phone);
 
         logger.debug("addPhoneToEmployee, employee {}, phone {}", employee, phone);
