@@ -29,12 +29,12 @@
 <div class="container">
     <div class="row">
         <div class="form-group">
-            <label for="sel1">Выберите отдел: </label>
+            <label for="sel1">Choose department: </label>
             <select class="form-control" id="sel1">
-                <option>Все</option>
-                <option>Руководство</option>
-                <option>Бухгалтерия</option>
-                <option>Разработка</option>
+                <option>All</option>
+                <option>Head</option>
+                <option>Finance</option>
+                <option>Development</option>
             </select>
         </div> <!-- /form-group -->
 
@@ -44,7 +44,7 @@
         <div class="col-lg-6" style="margin-top: 10px; padding-left: 0px; padding-right: 0px;">
             <form action="<c:url value="/employee/add"/>" method="get" style="display: inline;">
                 <button type="submit" class="btn btn-primary">
-                    <i class="icon-user icon-white"></i> Добавить
+                    <i class="icon-user icon-white"></i> Add
                 </button>
             </form>
 

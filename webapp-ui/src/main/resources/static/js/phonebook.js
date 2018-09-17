@@ -3,7 +3,7 @@
 import * as bootbox from "./bootbox";
 
 function isConfirmSaveEmployeeByUser(event, form) {
-    const message = "Уверены ли вы, что хотите сохранить изменения?";
+    const message = "Are you sure?";
     bootbox.confirm(message, function (result) {
         if (result) {
             form.submit();
