@@ -11,17 +11,17 @@ function isConfirmSaveEmployeeByUser(event, form) {
     });
 }
 
+function recalculationIndexes() {
+    $("phoneList[index].number").each(function (index) {
+        const $this = $(this);
+        $this.attr("index", $this.attr("index").match(/\[\d+]/g, "[" + index + "]"));
+    });
+}
+
 function removePhone(removeBtn) {
     const parent = removeBtn.parent();
     parent.remove();
     recalculationIndexes();
-}
-
-function recalculationIndexes() {
-    $("phoneList[index].number").each(function () {
-        const $this = $(this);
-        $this.attr("index", $this.attr("index").match(/\[\d+]/g, "[" + index + "]"));
-    });
 }
 
 function refreshPhonesListener() {
