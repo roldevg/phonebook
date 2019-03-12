@@ -37,16 +37,6 @@ Profile:
 + add/delete a profile
 + upload and download avatar
 
-## Docker run 
-
-```
-docker-compose up
-```
-
-```
-docker-compose stop
-```
-
 ## Local build
 
 ```
@@ -61,6 +51,16 @@ mvn spring-boot:run -f ./webpp-ui
 
 ```
 http://locahost:8080
+```
+
+## Docker run 
+
+```
+docker-compose up --build -d 
+```
+
+```
+docker-compose stop
 ```
 
 ## Swagger UI Urls

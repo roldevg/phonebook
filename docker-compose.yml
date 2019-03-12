@@ -1,25 +1,33 @@
 version: '3'
 
 services:
-  backend:
-    image: phonebook:demo
+  webapp:
+    build:
+      context: ./webapp-ui/
+    container_name: webapp
     ports:
       - "8080:8080"
-    network_mode: bridge
+    restart: always
+    environment:
+      URL: jdbc:mysql://db:3306/phonebook?useUnicode=yes&characterEncoding=UTF-8
     depends_on:
       - db
       - redis
 
   db:
-    image: phonebook:db
+    build:
+      context: ./db
+    container_name: db
     environment:
       MYSQL_ROOT_PASSWORD: mySuperSecretPassword
+    restart: always
     ports:
       - "3306:3306"
-    network_mode: bridge
 
+  # Cache implementation
   redis:
-    image: phonebook:redis
+    image: "redis:4.0"
+    container_name: redis
+    restart: always
     ports:
       - "6379:6379"
-    network_mode: bridge
