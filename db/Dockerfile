@@ -1,6 +1,5 @@
-LABEL maintainer="Evgeniy Roldukhin<evgeniy@roldukhin.ru>"
-
 FROM mysql:5.7.21
+LABEL maintainer="Evgeniy Roldukhin<evgeniy@roldukhin.ru>"
 
 COPY . db
 
