@@ -37,30 +37,27 @@ Profile:
 + add/delete a profile
 + upload and download avatar
 
-## Local build
+## Local execution 
 
 ```
 mvn clean install
-```
+mvn spring-boot:run -f ./webapp-ui
 
-## Local run 
-
-```
-mvn spring-boot:run -f ./webpp-ui
-```
-
-```
-http://locahost:8080
+Try:
+curl http://locahost:8080
 ```
 
 ## Docker run 
 
 ```
 docker-compose up --build -d 
+docker-compose stop
 ```
 
+## Docker monitoring
 ```
-docker-compose stop
+docker compose up -f ./monitoring/docker-compose-yaml -d
+docker compose stop -f ./monitoring/docker-compose-yaml 
 ```
 
 ## Swagger UI Urls
