@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  grafana:
+    image: grafana/grafana:5.1.0
+    container_name: grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: grafana
+      GF_SECURITY_ADMIN_PASSWORD: grafana
+    ports:
+      - "${GRAFANA_LOCAL_PORT:-3000}:3000"
+    volumes:
+      - ./etc/grafana/provisioning/datasources/influx-datasource.yaml:/etc/grafana/provisioning/datasources/influx-datasource.yaml:ro
+      - ./etc/grafana/provisioning/dashboards/dashboard.json:/etc/grafana/provisioning/dashboards/dashboard.json:ro
+      - ./etc/grafana/provisioning/dashboard-config.yaml:/etc/grafana/provisioning/dashboards/dashboard-config.yaml:ro
+    depends_on:
+      - influxdb
+    restart: always
+
+  influxdb:
+    image: influxdb:1.5-alpine
+    container_name: influxdb
+    environment:
+      INFLUXDB_ADMIN_USER: influxdb
+      INFLUXDB_ADMIN_PASSWORD: influxdb
+    ports:
+      - "${INFLUXDB_API_LOCAL_PORT:-8086}:8086"
+    restart: always
+
+  # Define a service for using the influx CLI tool.
+  # docker-compose -f docker-compose.yaml run influxdb-cli
+  influxdb-cli:
+    image: influxdb:1.3.5
+    container_name: influxdb-cli
+    entrypoint:
+      - influx
+      - -host
+      - influxdb
+    volumes:
+      - ./data/influxdb:/var/lib/influxdb
+    depends_on:
+      - influxdb
+
+  # Send some test metric from linked container (for example being in container): echo "foo:1|c" | nc -u -w3 telegraf 8125
+  telegraf:
+    image: telegraf:1.8.3-alpine
+    container_name: telegraf
+    #    Default exposed ports:
+    ports:
+      - "8092:8092/udp"
+      - "8094:8094"
+      - "8125:8125/udp"
+    volumes:
+      - ./etc/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+      # To provide access to some credentials (for example, AWS)
+      # - ./etc/telegraf/credentials:/etc/telegraf/credentials
+      # To monitor other docker containers, you can use the docker plugin
+      # and mount the docker socket into the container
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - influxdb
+    restart: always

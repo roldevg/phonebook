@@ -16,6 +16,10 @@ Swagger, Flyway, Docker, Checkstyle, Logging, Redis
 - Frontend:
 
 JSP, Bootstrap, jQuery
+
+- Monitoring
+
+Telegraf, InfluxDb, Grafana
   
 ## Screenshots
 
@@ -27,6 +31,10 @@ Profile:
 
 ![Image](https://i.gyazo.com/c25878f30dd2d5bde4decc5cd48f8d88.png)
 
+Monitoring:
+
+![Image](https://i.gyazo.com/469674e5091d931878c4a47c102f27bb.png)
+
 ## Functionality
 
 - Single Sign On with Facebook API (Oauth2)
@@ -37,41 +45,38 @@ Profile:
 + add/delete a profile
 + upload and download avatar
 
-## Local build
+## Local execution 
 
 ```
 mvn clean install
+mvn spring-boot:run -f ./webapp-ui
+
+Try:
+curl http://locahost:8080
 ```
 
-## Local run 
-
-```
-mvn spring-boot:run -f ./webpp-ui
-```
-
-```
-http://locahost:8080
-```
-
-## Docker run 
+## Docker run application 
 
 ```
 docker-compose up --build -d 
+docker-compose stop
 ```
 
+## Run monitoring
 ```
-docker-compose stop
+docker compose up -f ./monitoring/docker-compose-yaml -d
+docker compose stop -f ./monitoring/docker-compose-yaml 
 ```
 
 ## Swagger UI Urls
 
 - REST Documentation
 
-http://host:8080/swagger-ui.html
+http://localhost:8080/swagger-ui.html
 
 - Api Docs End Point
 
-http://host:8080/v2/api-docs
+http://localhost:8080/v2/api-docs
 
 ## Have a question?
 
