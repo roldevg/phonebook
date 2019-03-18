@@ -16,6 +16,10 @@ Swagger, Flyway, Docker, Checkstyle, Logging, Redis
 - Frontend:
 
 JSP, Bootstrap, jQuery
+
+- Monitoring
+
+Telegraf, InfluxDb, Grafana
   
 ## Screenshots
 
@@ -26,6 +30,10 @@ Index:
 Profile: 
 
 ![Image](https://i.gyazo.com/c25878f30dd2d5bde4decc5cd48f8d88.png)
+
+Monitoring:
+
+![Image](https://i.gyazo.com/469674e5091d931878c4a47c102f27bb.png)
 
 ## Functionality
 
@@ -47,14 +55,14 @@ Try:
 curl http://locahost:8080
 ```
 
-## Docker run 
+## Docker run application 
 
 ```
 docker-compose up --build -d 
 docker-compose stop
 ```
 
-## Docker monitoring
+## Run monitoring
 ```
 docker compose up -f ./monitoring/docker-compose-yaml -d
 docker compose stop -f ./monitoring/docker-compose-yaml 
@@ -64,11 +72,11 @@ docker compose stop -f ./monitoring/docker-compose-yaml
 
 - REST Documentation
 
-http://host:8080/swagger-ui.html
+http://localhost:8080/swagger-ui.html
 
 - Api Docs End Point
 
-http://host:8080/v2/api-docs
+http://localhost:8080/v2/api-docs
 
 ## Have a question?
 
