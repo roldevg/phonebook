@@ -56,14 +56,10 @@ public abstract class AbstractDaoJdbcImpl<T extends BaseEntity> implements CrudD
     public Connection getConnectionFromDataSource() {
         logger.trace("getConnectionFromDataSource()");
         try {
-            Connection connection = dataSource.getConnection();
-            logger.debug("return connection");
-            return connection;
+            return dataSource.getConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DaoException(e);
         }
-        logger.debug("return null connection");
-        return null;
     }
 
     @Override

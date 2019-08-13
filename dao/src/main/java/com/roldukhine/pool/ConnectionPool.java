@@ -1,6 +1,7 @@
 package com.roldukhine.pool;
 
 import com.roldukhine.exception.DaoException;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
@@ -56,7 +57,7 @@ public class ConnectionPool {
             connection = DriverManager.getConnection(url, user, password);
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DaoException(e);
         }
         logger.debug("return connection {}", connection);
         return connection;
