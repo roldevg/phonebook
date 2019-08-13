@@ -1,6 +1,7 @@
 package com.roldukhine.pool;
 
 import com.roldukhine.exception.DaoException;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
@@ -50,13 +51,13 @@ public class ConnectionPool {
     }
 
     private Connection createConnection(String url, String user, String password) {
-        logger.debug("createConnection url {}, user {user}, password {}", url, user, password);
+        logger.debug("createConnection url {}, user {}, password {}", url, user, password);
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, user, password);
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DaoException(e);
         }
         logger.debug("return connection {}", connection);
         return connection;
@@ -90,17 +91,14 @@ public class ConnectionPool {
         }
 
         Connection connection = holder.getConnection();
-        logger.debug("connection", connection);
-        if (connection == null) {
-            return;
-        }
+        logger.debug("connection: {}", connection.toString());
 
         holder.getAndDecrement();
         int holderCounter = holder.getCounter();
-        logger.debug("holderCounter", holderCounter);
+        logger.debug("holderCounter={}", holderCounter);
         if (holderCounter == 0 && pool.size() < DEFAULT_SIZE) {
             try {
-                logger.debug("put connection", connection);
+                logger.debug("put connection={}", connection);
                 pool.put(connection);
             } catch (InterruptedException e) {
                 throw new DaoException("Error while releasing connection.");

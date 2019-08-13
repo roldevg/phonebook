@@ -25,7 +25,7 @@ public class PhotoEmployeeController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    @RequestParam("employeeId") long employeeId) {
-        logger.debug("handleFileUpload file {}, employeeId {}", employeeId);
+        logger.debug("handleFileUpload file {}, employeeId {}", file.getName(), employeeId);
         if (!file.isEmpty()) {
             try {
                 byte[] bytesFromRequestFile = file.getBytes();
