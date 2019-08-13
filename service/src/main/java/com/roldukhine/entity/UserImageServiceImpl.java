@@ -16,7 +16,6 @@ import java.io.InputStream;
 public class UserImageServiceImpl implements UserImageService {
 
     private static final String BASE64_FIRST_PART_STRING = "data:image/png;base64,";
-
     private static final String DEFAULT_USER_IMAGE = "defaultUserImage.png";
 
     public byte[] getDefaultImageUser() {

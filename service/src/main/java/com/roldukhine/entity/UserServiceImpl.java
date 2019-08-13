@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User checkUser(@NonNull String login, @NonNull String password) {
-        logger.debug("checkUser, login {}, password {}");
+        logger.debug("checkUser, login {}, password {}", login, password);
 
         List<User> userList = userDao.getAll();
         logger.debug("getAll {}", userList);

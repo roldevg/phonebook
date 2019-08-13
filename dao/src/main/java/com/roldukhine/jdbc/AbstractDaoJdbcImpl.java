@@ -3,6 +3,7 @@ package com.roldukhine.jdbc;
 import com.roldukhine.api.CrudDao;
 import com.roldukhine.entity.BaseEntity;
 import com.roldukhine.exception.DaoException;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -51,11 +52,12 @@ public abstract class AbstractDaoJdbcImpl<T extends BaseEntity> implements CrudD
         return query;
     }
 
+    @SneakyThrows
     public Connection getConnectionFromDataSource() {
         logger.trace("getConnectionFromDataSource()");
         try {
             Connection connection = dataSource.getConnection();
-            logger.debug("return connection: ", connection);
+            logger.debug("return connection");
             return connection;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,7 +68,7 @@ public abstract class AbstractDaoJdbcImpl<T extends BaseEntity> implements CrudD
 
     @Override
     public T get(long id) {
-        logger.trace("get() input param: id ", id);
+        logger.trace("get() input param: id={}", id);
         try (Connection connection = getConnectionFromDataSource()) {
             logger.debug("getConnectionFromDataSource : " + connection);
             String selectByIdStatement = getSelectByIdStatement();

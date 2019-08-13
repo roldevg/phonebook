@@ -7,7 +7,6 @@ public class DaoException extends RuntimeException {
 
     public DaoException(Exception cause) {
         super(cause);
-        logger.debug("create dao exception {} with cause", cause);
     }
 
     public DaoException(String message) {

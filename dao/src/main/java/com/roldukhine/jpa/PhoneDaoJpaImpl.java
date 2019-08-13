@@ -30,7 +30,7 @@ public class PhoneDaoJpaImpl extends AbstractDaoJpaImpl<Phone> implements PhoneD
     public List<Phone> getPhoneListByEmployee(Employee employee) {
         logger.debug("getPhoneListByEmployee employee {}", employee);
         List<Phone> phoneList = employee.getPhoneList();
-        logger.debug("phoneList", phoneList);
+        logger.debug("phoneList={}", phoneList);
         return phoneList;
     }
 }
